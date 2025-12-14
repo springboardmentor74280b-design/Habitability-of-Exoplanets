@@ -1,6 +1,4 @@
-# ==============================
-# EXOPLANET HABITABILITY PROJECT
-# Complete Python Script
+
 # ==============================
 
 # 1. Import Libraries
@@ -134,4 +132,5 @@ output_path = "exoplanet_cleaned_final.csv"
 df.to_csv(output_path, index=False)
 
 print(f"\nCleaned dataset saved as {output_path}")
-print("\nPROJECT EXECUTION COMPLETED SUCCESSFULLY 🎉")
+print("\nPROJECT EXECUTION COMPLETED SUCCESSFULLY ")
+
