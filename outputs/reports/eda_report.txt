@@ -1,0 +1,63 @@
+================================================================================
+EXPLORATORY DATA ANALYSIS (EDA) REPORT
+Exoplanet Habitability Classification
+================================================================================
+
+1. DATASET OVERVIEW
+--------------------------------------------------------------------------------
+Total Samples: 4,048
+Total Features: 85
+Numerical Features: 77
+Target Variable: P_HABITABLE
+
+2. CLASS IMBALANCE
+--------------------------------------------------------------------------------
+Class 0:  3993 samples (98.64%)
+Class 1:    21 samples ( 0.52%)
+Class 2:    34 samples ( 0.84%)
+
+3. CORRELATION ANALYSIS
+--------------------------------------------------------------------------------
+Highly Correlated Feature Pairs (|r| > 0.9): 49
+
+Top 5 Highly Correlated Pairs:
+  1. P_PERIOD_ERROR_MIN <-> P_PERIOD_ERROR_MAX : r = -0.919
+  2. S_RA <-> S_RA_H : r = 1.000
+  3. S_RADIUS <-> S_RADIUS_EST : r = 0.974
+  4. P_DISTANCE <-> P_APASTRON : r = 0.921
+  5. P_DISTANCE <-> P_DISTANCE_EFF : r = 0.988
+
+4. STATISTICAL SIGNIFICANCE
+--------------------------------------------------------------------------------
+Features with Significant Difference (p < 0.05): 48
+
+Top 10 Most Significant Features:
+  P_MASS_ERROR_MIN                         : p = 0.00e+00
+  P_SEMI_MAJOR_AXIS_ERROR_MIN              : p = 0.00e+00
+  P_SEMI_MAJOR_AXIS_ERROR_MAX              : p = 0.00e+00
+  S_AGE                                    : p = 0.00e+00
+  S_HZ_CON0_MAX                            : p = 6.64e-20
+  S_HZ_CON1_MAX                            : p = 6.64e-20
+  S_HZ_CON_MAX                             : p = 6.64e-20
+  S_HZ_OPT_MAX                             : p = 6.64e-20
+  S_HZ_CON0_MIN                            : p = 3.21e-19
+  S_HZ_CON1_MIN                            : p = 3.32e-19
+
+5. KEY FINDINGS
+--------------------------------------------------------------------------------
+✓ Severe class imbalance detected - standard ML will fail
+✓ Multiple redundant features identified (high correlation)
+✓ 48 features show significant relationship with habitability
+✓ Feature distributions show overlap between classes
+
+6. RECOMMENDATIONS
+--------------------------------------------------------------------------------
+1. Use SMOTE or other sampling techniques to handle imbalance
+2. Consider removing highly correlated features to reduce dimensionality
+3. Focus on statistically significant features for modeling
+4. Use appropriate metrics (F1, Recall, Precision) instead of Accuracy
+5. Apply stratified sampling for train/test split
+
+================================================================================
+END OF EDA REPORT
+================================================================================
