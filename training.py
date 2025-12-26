@@ -126,6 +126,37 @@ plt.ylabel("Kernel PC 2")
 plt.title("Kernel PCA 2D Projection of Exoplanets (Classification)")
 plt.savefig("plots/kernel_pca_2d_class.png", dpi=300, bbox_inches="tight")
 plt.show()
+# -----------------------------
+# 10A. t-SNE 2D Scatter Plot
+# -----------------------------
+from sklearn.manifold import TSNE
+
+# Scale features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Apply t-SNE
+tsne = TSNE(
+    n_components=2,
+    perplexity=30,
+    learning_rate=200,
+    random_state=42
+)
+
+X_tsne = tsne.fit_transform(X_scaled)
+
+# Plot t-SNE
+plt.figure(figsize=(8,6))
+plt.scatter(X_tsne[:, 0], X_tsne[:, 1], c=y, cmap='coolwarm', alpha=0.7)
+plt.colorbar(label="Habitability Class")
+plt.xlabel("t-SNE Component 1")
+plt.ylabel("t-SNE Component 2")
+plt.title("t-SNE 2D Projection of Exoplanets")
+plt.savefig("plots/tsne_2d_projection.png", dpi=300, bbox_inches="tight")
+plt.show()
+
+print("t-SNE plot saved successfully")
+
 
 # -----------------------------
 # 11. Habitability Class Distribution
