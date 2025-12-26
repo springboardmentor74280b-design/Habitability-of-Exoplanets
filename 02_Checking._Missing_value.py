@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # basic info
-df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\INFOSYS PROJECT DOC\exoplanet_habitable_pres_dataset.csv")
+df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\exoplanet_habitable_pres_dataset.csv")
 #df.info()
 
 # count missing per column (sorted)

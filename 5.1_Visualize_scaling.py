@@ -24,7 +24,7 @@ def save_scaling_plot(
 
     # Save figure
     file_path = os.path.join(save_dir, f"{feature_name}_scaling.png")
-    plt.savefig(r"C:\Users\Menaka\OneDrive\Desktop\INFOSYS_SPRINGBOARD_PROJECT\plot", dpi=300)
+    plt.savefig(r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\outputs\plots", dpi=300)
     plt.close()   # VERY important
 
     print(f"Plot saved at: {file_path}")

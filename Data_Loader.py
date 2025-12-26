@@ -9,7 +9,7 @@ def load_and_split_data(
     test_size=0.2,
     random_state=42
 ):
-    df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\INFOSYS_SPRINGBOARD_PROJECT\cleaned_exoplanet_dataset.csv")
+    df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\cleaned_exoplanet_dataset.csv")
 
     X = df.drop(columns=["P_HABITABLE"])
     y = df["P_HABITABLE"]

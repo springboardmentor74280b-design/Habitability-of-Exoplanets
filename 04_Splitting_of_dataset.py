@@ -2,7 +2,7 @@ from sklearn.model_selection import train_test_split
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\INFOSYS_SPRINGBOARD_PROJECT\cleaned_exoplanet_dataset.csv")
+df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\cleaned_exoplanet_dataset.csv")
 X = df.drop(columns=["P_HABITABLE"])
 y = df["P_HABITABLE"]
 

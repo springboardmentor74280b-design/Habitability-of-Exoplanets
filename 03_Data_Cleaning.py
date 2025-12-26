@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\INFOSYS PROJECT DOC\exoplanet_habitable_pres_dataset.csv")
+df = pd.read_csv(r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\exoplanet_habitable_pres_dataset.csv")
 
 def drop_high_missing(df, threshold=40):
     missing_percent = (df.isnull().sum() / len(df)) * 100

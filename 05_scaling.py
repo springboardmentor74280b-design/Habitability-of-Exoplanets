@@ -1,7 +1,7 @@
 from Data_Loader import load_and_split_data
 
 X_train, X_test, y_train, y_test = load_and_split_data(
-    "cleaned_exoplanet_dataset.csv",
+    r"C:\Users\Menaka\OneDrive\Desktop\Habitability-of-Exoplanets\cleaned_exoplanet_dataset.csv",
     target_col="P_HABITABLE"
 )
 
