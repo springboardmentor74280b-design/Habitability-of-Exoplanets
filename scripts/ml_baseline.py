@@ -17,45 +17,32 @@ from sklearn.metrics import classification_report, confusion_matrix, roc_auc_sco
 df_raw = pd.read_csv("data/exoplanets_validated.csv")
 
 # --------------------------------------------------
-# 2️⃣ Create Habitability Label (RELAXED BASELINE HEURISTIC)
+# 2️⃣ Create Habitability Label (RELAXED BASELINE)
 # --------------------------------------------------
 df_raw["habitable"] = (
-    (df_raw["pl_rade"] < 2.5) &              # relaxed radius
-    (df_raw["pl_eqt"] > 180) &               # relaxed temperature
+    (df_raw["pl_rade"] < 2.5) &
+    (df_raw["pl_eqt"] > 180) &
     (df_raw["pl_eqt"] < 400)
 ).astype(int)
 
-print("\nHabitability Distribution (RAW):")
+print("\nHabitability Distribution:")
 print(df_raw["habitable"].value_counts())
 
-# 🚨 Safety check (VERY IMPORTANT)
 if df_raw["habitable"].nunique() < 2:
-    raise ValueError(
-        "❌ Only one class detected. Relax habitability thresholds further."
-    )
+    raise ValueError("❌ Only one class found. Relax thresholds.")
 
 # --------------------------------------------------
-# 3️⃣ Load CLEANED data (for ML)
+# 3️⃣ Load CLEANED data
 # --------------------------------------------------
 df = pd.read_csv("data/exoplanets_cleaned.csv")
-print("\nDataset Loaded:", df.shape)
-
-# Attach label to cleaned dataset
 df["habitable"] = df_raw["habitable"].values
 
 # --------------------------------------------------
-# 4️⃣ Select Features
+# 4️⃣ Feature Selection
 # --------------------------------------------------
 features = [
-    "pl_rade",
-    "pl_bmasse",
-    "pl_eqt",
-    "pl_orbper",
-    "pl_dens",
-    "st_teff",
-    "st_rad",
-    "st_mass",
-    "st_lum"
+    "pl_rade", "pl_bmasse", "pl_eqt", "pl_orbper",
+    "pl_dens", "st_teff", "st_rad", "st_mass", "st_lum"
 ]
 
 X = df[features]
@@ -65,28 +52,28 @@ y = df["habitable"]
 # 5️⃣ Train-Test Split (STRATIFIED)
 # --------------------------------------------------
 X_train, X_test, y_train, y_test = train_test_split(
-    X,
-    y,
+    X, y,
     test_size=0.2,
     stratify=y,
     random_state=42
 )
 
-print("\nTrain size:", X_train.shape)
-print("Test size:", X_test.shape)
-
 # --------------------------------------------------
-# 6️⃣ BASELINE MODEL 1: Logistic Regression
+# 6️⃣ Logistic Regression (BASELINE)
 # --------------------------------------------------
-logreg_pipeline = Pipeline([
+lr_pipeline = Pipeline([
     ("scaler", StandardScaler()),
-    ("model", LogisticRegression(class_weight="balanced", max_iter=1000))
+    ("model", LogisticRegression(
+        class_weight="balanced",
+        max_iter=1000,
+        random_state=42
+    ))
 ])
 
-logreg_pipeline.fit(X_train, y_train)
+lr_pipeline.fit(X_train, y_train)
 
-y_pred_lr = logreg_pipeline.predict(X_test)
-y_prob_lr = logreg_pipeline.predict_proba(X_test)[:, 1]
+y_pred_lr = lr_pipeline.predict(X_test)
+y_prob_lr = lr_pipeline.predict_proba(X_test)[:, 1]
 
 print("\n--- Logistic Regression ---")
 print(confusion_matrix(y_test, y_pred_lr))
@@ -94,10 +81,10 @@ print(classification_report(y_test, y_pred_lr))
 print("ROC-AUC:", roc_auc_score(y_test, y_prob_lr))
 
 # --------------------------------------------------
-# 7️⃣ BASELINE MODEL 2: Random Forest
+# 7️⃣ Random Forest (BASELINE)
 # --------------------------------------------------
 rf = RandomForestClassifier(
-    n_estimators=200,
+    n_estimators=300,
     class_weight="balanced",
     random_state=42
 )
@@ -113,12 +100,12 @@ print(classification_report(y_test, y_pred_rf))
 print("ROC-AUC:", roc_auc_score(y_test, y_prob_rf))
 
 # --------------------------------------------------
-# 8️⃣ BASELINE MODEL 3: XGBoost
+# 8️⃣ XGBOOST (FIXED & CORRECT)
 # --------------------------------------------------
 scale_pos_weight = (y_train == 0).sum() / (y_train == 1).sum()
 
 xgb = XGBClassifier(
-    n_estimators=200,
+    n_estimators=300,
     max_depth=4,
     learning_rate=0.1,
     scale_pos_weight=scale_pos_weight,
