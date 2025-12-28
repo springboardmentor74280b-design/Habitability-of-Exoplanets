@@ -71,13 +71,18 @@ print("Logistic Regression:\n", classification_report(y_test, y_lr_pred))
 print("KNN:\n", classification_report(y_test, y_knn_pred))
 print("Naive Bayes:\n", classification_report(y_test, y_nb_pred))
 
-from visualize_baseline import plot_baseline_confusion_matrices
+#from visualize_confusion_matrices import plot_baseline_confusion_matrices
 
-predictions = {
+from visualize_confusion_matrices import plot_confusion_matrices
+
+baseline_preds = {
     "Logistic Regression": y_lr_pred,
     "KNN": y_knn_pred,
     "Naive Bayes": y_nb_pred
 }
 
-plot_baseline_confusion_matrices(y_test, predictions)
-
+plot_confusion_matrices(
+    y_test,
+    baseline_preds,
+    experiment_name="baseline_before_smote"
+)
