@@ -6,18 +6,40 @@ import os
 # -----------------------------
 # Paths
 # -----------------------------
-BASE_DIR = os.path.dirname(os.path.dirname(__file__))
-DATA_PATH = os.path.join(BASE_DIR, "data", "exoplanets_cleaned.csv")
-MODEL_PATH = os.path.join(BASE_DIR, "artifacts", "final_model.pkl")
-OUTPUT_PATH = os.path.join(BASE_DIR, "artifacts", "ranked_exoplanets.csv")
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+DATA_DIR = os.path.join(BASE_DIR, "data")
+ARTIFACTS_DIR = os.path.join(BASE_DIR, "artifacts")
+
+RAW_PATH = os.path.join(DATA_DIR, "exoplanets_validated.csv")
+CLEAN_PATH = os.path.join(DATA_DIR, "exoplanets_cleaned.csv")
+MODEL_PATH = os.path.join(ARTIFACTS_DIR, "final_model.pkl")
+OUTPUT_PATH = os.path.join(ARTIFACTS_DIR, "ranked_exoplanets.csv")
 
 # -----------------------------
-# 1️⃣ Load cleaned data
+# Load datasets
 # -----------------------------
-df = pd.read_csv(DATA_PATH)
+df_raw = pd.read_csv(RAW_PATH)
+df_clean = pd.read_csv(CLEAN_PATH)
 
 # -----------------------------
-# 2️⃣ Feature list (EXACTLY what model was trained on)
+# Ensure planet name exists
+# -----------------------------
+if "pl_name" not in df_raw.columns:
+    raise ValueError("❌ pl_name column missing in raw dataset")
+
+# -----------------------------
+# Reset index to align rows safely
+# -----------------------------
+df_raw = df_raw.reset_index(drop=True)
+df_clean = df_clean.reset_index(drop=True)
+
+# -----------------------------
+# Load trained model
+# -----------------------------
+model = joblib.load(MODEL_PATH)
+
+# -----------------------------
+# EXACT features used in training
 # -----------------------------
 FEATURES = [
     "pl_rade",
@@ -27,37 +49,38 @@ FEATURES = [
     "pl_dens"
 ]
 
-# Safety check
-missing = [f for f in FEATURES if f not in df.columns]
-if missing:
-    raise ValueError(f"Missing required features: {missing}")
+# -----------------------------
+# Predict habitability score
+# -----------------------------
+df_clean["habitability_score"] = model.predict_proba(
+    df_clean[FEATURES]
+)[:, 1]
 
 # -----------------------------
-# 3️⃣ Load trained model
+# Attach planet names SAFELY (INDEX-ALIGNED)
 # -----------------------------
-model = joblib.load(MODEL_PATH)
+df_clean["pl_name"] = df_raw.loc[df_clean.index, "pl_name"].values
 
 # -----------------------------
-# 4️⃣ Predict habitability score
+# Sort by habitability
 # -----------------------------
-df["habitability_score"] = model.predict_proba(df[FEATURES])[:, 1]
-
-# -----------------------------
-# 5️⃣ Rank exoplanets
-# -----------------------------
-df_ranked = df.sort_values("habitability_score", ascending=False)
-df_ranked.insert(0, "rank", range(1, len(df_ranked) + 1))
-
-# -----------------------------
-# 6️⃣ Save ranking
-# -----------------------------
-df_ranked.to_csv(OUTPUT_PATH, index=False)
-
-print("✔ Exoplanets ranked successfully")
-print(f"✔ Saved to {OUTPUT_PATH}")
-
-print("\nTop 5 ranked exoplanets:")
-print(
-    df_ranked[["rank", "pl_rade", "pl_eqt", "habitability_score"]]
-    .head()
+df_ranked = df_clean.sort_values(
+    by="habitability_score",
+    ascending=False
 )
+
+# -----------------------------
+# Final UI-ready output
+# FRONTEND EXPECTS: pl_name
+# -----------------------------
+df_ranked_ui = df_ranked[
+    ["pl_name", "pl_rade", "pl_eqt", "habitability_score"]
+]
+
+# -----------------------------
+# Save
+# -----------------------------
+df_ranked_ui.to_csv(OUTPUT_PATH, index=False)
+
+print("✅ Ranked exoplanets saved successfully")
+print("📁", OUTPUT_PATH)

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExoHabitAI | Ranking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">ExoHabitAI</a>
+        <div class="navbar-nav">
+            <a class="nav-link" href="index.html">Prediction</a>
+            <a class="nav-link active" href="ranking.html">Ranking</a>
+            <a class="nav-link" href="visualization.html">Visualization</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <h2 class="text-center mb-4">🏆 Top 10 Habitable Exoplanets</h2>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Radius</th>
+                <th>Temperature</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody id="rankingTable"></tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="js/ranking.js"></script>
+</body>
+</html>
