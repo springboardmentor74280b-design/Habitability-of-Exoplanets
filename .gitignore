@@ -1,6 +1,7 @@
 __pycache__/
 *.pyc
-instance/
+instance/*
+!instance/exoplanets.db
 .pytest_cache/
 .venv/
 env/

@@ -19,4 +19,12 @@ def create_app():
     from .routes import main
     app.register_blueprint(main)
     
+    # Ensure instance folder exists
+    try:
+        os.makedirs(os.path.join(app.instance_path), exist_ok=True)
+        # Also ensure the ../instance path relative to here works as expected by other parts
+        os.makedirs(os.path.join(basedir, '../instance'), exist_ok=True)
+    except OSError:
+        pass
+    
     return app
