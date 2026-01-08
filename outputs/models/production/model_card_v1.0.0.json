@@ -1,0 +1,44 @@
+{
+  "model_info": {
+    "name": "Exoplanet Habitability Classifier",
+    "version": "1.0.0",
+    "created_date": "20260108_104519",
+    "model_type": "Linear SVM with SMOTE",
+    "framework": "scikit-learn + imbalanced-learn"
+  },
+  "training_info": {
+    "training_samples": 3238,
+    "test_samples": 810,
+    "n_features": 6509,
+    "n_classes": 3,
+    "class_names": [
+      "Non-Habitable",
+      "Habitable",
+      "Optimistic Habitable"
+    ],
+    "random_state": 42
+  },
+  "performance_metrics": {
+    "accuracy": 0.9962962962962963,
+    "precision": 0.9967901234567901,
+    "recall": 0.9962962962962963,
+    "f1_score": 0.996501671085961,
+    "roc_auc": 0.9992067015487254
+  },
+  "pipeline_steps": [
+    {
+      "step": "SMOTE Sampling",
+      "purpose": "Handle class imbalance"
+    },
+    {
+      "step": "Linear SVM",
+      "purpose": "Classification"
+    }
+  ],
+  "usage": {
+    "input_format": "DataFrame with encoded and scaled features",
+    "output_format": "Class prediction (0, 1, or 2) and probabilities",
+    "prediction_method": "pipeline.predict(X)",
+    "probability_method": "pipeline.predict_proba(X)"
+  }
+}

@@ -1,0 +1,945 @@
+{
+  "earth": {
+    "name": "Earth",
+    "description": "Our home planet - the reference for habitability",
+    "data": {
+      "P_MASS_EST": 1.0,
+      "P_RADIUS_EST": 1.0,
+      "P_TEMP_EQUIL": 288.0,
+      "P_PERIOD": 365.25,
+      "P_FLUX": 1.0,
+      "S_MASS": 1.0,
+      "S_RADIUS": 1.0,
+      "S_TEMP": 5778.0
+    }
+  },
+  "kepler": [
+    {
+      "name": "Kepler-1259 b",
+      "description": "Temp: 1663K, Radius: 1.43R\u2295, Period: 0.7d",
+      "data": {
+        "P_MASS_EST": 2.6505029,
+        "P_RADIUS_EST": 1.43488,
+        "P_TEMP_EQUIL": 1662.9742,
+        "P_PERIOD": 0.66308526,
+        "P_FLUX": 1815.3585,
+        "S_MASS": 0.8,
+        "S_RADIUS": 0.77,
+        "S_TEMP": 5053.0
+      }
+    },
+    {
+      "name": "Kepler-1091 b",
+      "description": "Temp: 1656K, Radius: 1.46R\u2295, Period: 1.4d",
+      "data": {
+        "P_MASS_EST": 2.7211983,
+        "P_RADIUS_EST": 1.4573,
+        "P_TEMP_EQUIL": 1656.2767,
+        "P_PERIOD": 1.4347416,
+        "P_FLUX": 1786.2898,
+        "S_MASS": 1.01,
+        "S_RADIUS": 1.03,
+        "S_TEMP": 5851.0
+      }
+    },
+    {
+      "name": "Kepler-1004 b",
+      "description": "Temp: 1627K, Radius: 6.28R\u2295, Period: 5.3d",
+      "data": {
+        "P_MASS_EST": 32.477028,
+        "P_RADIUS_EST": 6.2776,
+        "P_TEMP_EQUIL": 1627.2155,
+        "P_PERIOD": 5.2878979,
+        "P_FLUX": 1664.1815,
+        "S_MASS": 1.11,
+        "S_RADIUS": 3.39,
+        "S_TEMP": 4972.0
+      }
+    },
+    {
+      "name": "Kepler-433 b",
+      "description": "Temp: 1616K, Radius: 16.25R\u2295, Period: 5.3d",
+      "data": {
+        "P_MASS_EST": 896.27497,
+        "P_RADIUS_EST": 16.2545,
+        "P_TEMP_EQUIL": 1615.8746,
+        "P_PERIOD": 5.3340838,
+        "P_FLUX": 1635.654,
+        "S_MASS": 1.46,
+        "S_RADIUS": 2.26,
+        "S_TEMP": 6360.0
+      }
+    },
+    {
+      "name": "Kepler-1016 b",
+      "description": "Temp: 1470K, Radius: 2.17R\u2295, Period: 2.0d",
+      "data": {
+        "P_MASS_EST": 5.369523,
+        "P_RADIUS_EST": 2.17474,
+        "P_TEMP_EQUIL": 1469.5138,
+        "P_PERIOD": 1.9545243,
+        "P_FLUX": 1106.917,
+        "S_MASS": 0.99,
+        "S_RADIUS": 1.0,
+        "S_TEMP": 5821.0
+      }
+    },
+    {
+      "name": "Kepler-1275 b",
+      "description": "Temp: 1451K, Radius: 1.48R\u2295, Period: 3.7d",
+      "data": {
+        "P_MASS_EST": 2.7926567,
+        "P_RADIUS_EST": 1.47972,
+        "P_TEMP_EQUIL": 1450.7998,
+        "P_PERIOD": 3.6569111,
+        "P_FLUX": 1051.5993,
+        "S_MASS": 1.23,
+        "S_RADIUS": 1.36,
+        "S_TEMP": 6296.0
+      }
+    },
+    {
+      "name": "Kepler-1066 b",
+      "description": "Temp: 1448K, Radius: 2.37R\u2295, Period: 1.9d",
+      "data": {
+        "P_MASS_EST": 6.1925912,
+        "P_RADIUS_EST": 2.36531,
+        "P_TEMP_EQUIL": 1448.1321,
+        "P_PERIOD": 1.9315598,
+        "P_FLUX": 1043.8861,
+        "S_MASS": 0.98,
+        "S_RADIUS": 0.98,
+        "S_TEMP": 5762.0
+      }
+    },
+    {
+      "name": "Kepler-1002 b",
+      "description": "Temp: 1439K, Radius: 1.72R\u2295, Period: 4.3d",
+      "data": {
+        "P_MASS_EST": 3.5881927,
+        "P_RADIUS_EST": 1.71513,
+        "P_TEMP_EQUIL": 1439.1054,
+        "P_PERIOD": 4.3364293,
+        "P_FLUX": 1018.1007,
+        "S_MASS": 1.22,
+        "S_RADIUS": 1.57,
+        "S_TEMP": 6144.0
+      }
+    },
+    {
+      "name": "Kepler-1274 b",
+      "description": "Temp: 1411K, Radius: 1.42R\u2295, Period: 7.0d",
+      "data": {
+        "P_MASS_EST": 2.6154425,
+        "P_RADIUS_EST": 1.42367,
+        "P_TEMP_EQUIL": 1410.5838,
+        "P_PERIOD": 6.981527,
+        "P_FLUX": 939.75767,
+        "S_MASS": 1.45,
+        "S_RADIUS": 2.17,
+        "S_TEMP": 6179.0
+      }
+    },
+    {
+      "name": "Kepler-959 b",
+      "description": "Temp: 1179K, Radius: 4.38R\u2295, Period: 14.8d",
+      "data": {
+        "P_MASS_EST": 17.648243,
+        "P_RADIUS_EST": 4.38311,
+        "P_TEMP_EQUIL": 1178.566,
+        "P_PERIOD": 14.800748,
+        "P_FLUX": 457.96888,
+        "S_MASS": 1.6,
+        "S_RADIUS": 2.01,
+        "S_TEMP": 7005.0
+      }
+    },
+    {
+      "name": "Kepler-923 b",
+      "description": "Temp: 1092K, Radius: 1.38R\u2295, Period: 6.9d",
+      "data": {
+        "P_MASS_EST": 2.4771268,
+        "P_RADIUS_EST": 1.37883,
+        "P_TEMP_EQUIL": 1091.5775,
+        "P_PERIOD": 6.9336648,
+        "P_FLUX": 337.00682,
+        "S_MASS": 1.11,
+        "S_RADIUS": 1.26,
+        "S_TEMP": 5988.0
+      }
+    },
+    {
+      "name": "Kepler-972 b",
+      "description": "Temp: 1090K, Radius: 4.65R\u2295, Period: 7.0d",
+      "data": {
+        "P_MASS_EST": 19.526556,
+        "P_RADIUS_EST": 4.65215,
+        "P_TEMP_EQUIL": 1090.4559,
+        "P_PERIOD": 7.0393255,
+        "P_FLUX": 335.62383,
+        "S_MASS": 1.15,
+        "S_RADIUS": 1.22,
+        "S_TEMP": 6146.0
+      }
+    },
+    {
+      "name": "Kepler-1483 b",
+      "description": "Temp: 1075K, Radius: 1.52R\u2295, Period: 9.5d",
+      "data": {
+        "P_MASS_EST": 2.9378483,
+        "P_RADIUS_EST": 1.52456,
+        "P_TEMP_EQUIL": 1074.5355,
+        "P_PERIOD": 9.5085156,
+        "P_FLUX": 316.4488,
+        "S_MASS": 1.25,
+        "S_RADIUS": 1.4,
+        "S_TEMP": 6337.0
+      }
+    },
+    {
+      "name": "Kepler-862 b",
+      "description": "Temp: 1073K, Radius: 2.21R\u2295, Period: 3.1d",
+      "data": {
+        "P_MASS_EST": 5.5112567,
+        "P_RADIUS_EST": 2.20837,
+        "P_TEMP_EQUIL": 1073.4561,
+        "P_PERIOD": 3.1486645,
+        "P_FLUX": 315.17915,
+        "S_MASS": 0.88,
+        "S_RADIUS": 0.84,
+        "S_TEMP": 5333.0
+      }
+    },
+    {
+      "name": "Kepler-527 b",
+      "description": "Temp: 982K, Radius: 2.84R\u2295, Period: 13.3d",
+      "data": {
+        "P_MASS_EST": 8.4279728,
+        "P_RADIUS_EST": 2.83613,
+        "P_TEMP_EQUIL": 982.16654,
+        "P_PERIOD": 13.285356,
+        "P_FLUX": 220.88229,
+        "S_MASS": 1.28,
+        "S_RADIUS": 1.45,
+        "S_TEMP": 6388.0
+      }
+    },
+    {
+      "name": "Kepler-677 b",
+      "description": "Temp: 958K, Radius: 5.38R\u2295, Period: 6.6d",
+      "data": {
+        "P_MASS_EST": 24.998531,
+        "P_RADIUS_EST": 5.3808,
+        "P_TEMP_EQUIL": 957.77775,
+        "P_PERIOD": 6.5753168,
+        "P_FLUX": 199.74657,
+        "S_MASS": 1.0,
+        "S_RADIUS": 0.99,
+        "S_TEMP": 5723.0
+      }
+    },
+    {
+      "name": "Kepler-791 b",
+      "description": "Temp: 956K, Radius: 3.05R\u2295, Period: 14.6d",
+      "data": {
+        "P_MASS_EST": 9.5305061,
+        "P_RADIUS_EST": 3.04912,
+        "P_TEMP_EQUIL": 956.08101,
+        "P_PERIOD": 14.553976,
+        "P_FLUX": 198.33489,
+        "S_MASS": 1.3,
+        "S_RADIUS": 1.47,
+        "S_TEMP": 6383.0
+      }
+    },
+    {
+      "name": "Kepler-100 c",
+      "description": "Temp: 945K, Radius: 2.20R\u2295, Period: 12.8d",
+      "data": {
+        "P_MASS_EST": 7.0494251,
+        "P_RADIUS_EST": 2.19716,
+        "P_TEMP_EQUIL": 945.21591,
+        "P_PERIOD": 12.8159,
+        "P_FLUX": 189.47175,
+        "S_MASS": 1.08,
+        "S_RADIUS": 1.49,
+        "S_TEMP": 5825.0
+      }
+    },
+    {
+      "name": "Kepler-897 b",
+      "description": "Temp: 932K, Radius: 2.39R\u2295, Period: 8.0d",
+      "data": {
+        "P_MASS_EST": 6.2925768,
+        "P_RADIUS_EST": 2.38773,
+        "P_TEMP_EQUIL": 931.74087,
+        "P_PERIOD": 8.0472642,
+        "P_FLUX": 178.89613,
+        "S_MASS": 1.03,
+        "S_RADIUS": 1.04,
+        "S_TEMP": 5839.0
+      }
+    },
+    {
+      "name": "Kepler-1436 b",
+      "description": "Temp: 912K, Radius: 1.31R\u2295, Period: 9.7d",
+      "data": {
+        "P_MASS_EST": 2.2754822,
+        "P_RADIUS_EST": 1.31157,
+        "P_TEMP_EQUIL": 912.1547,
+        "P_PERIOD": 9.705716,
+        "P_FLUX": 164.32149,
+        "S_MASS": 1.06,
+        "S_RADIUS": 1.09,
+        "S_TEMP": 5972.0
+      }
+    },
+    {
+      "name": "Kepler-1011 b",
+      "description": "Temp: 908K, Radius: 2.87R\u2295, Period: 5.8d",
+      "data": {
+        "P_MASS_EST": 8.5983448,
+        "P_RADIUS_EST": 2.86976,
+        "P_TEMP_EQUIL": 907.62199,
+        "P_PERIOD": 5.753222,
+        "P_FLUX": 161.07955,
+        "S_MASS": 0.91,
+        "S_RADIUS": 0.88,
+        "S_TEMP": 5416.0
+      }
+    },
+    {
+      "name": "Kepler-1182 b",
+      "description": "Temp: 850K, Radius: 2.41R\u2295, Period: 11.2d",
+      "data": {
+        "P_MASS_EST": 6.3932195,
+        "P_RADIUS_EST": 2.41015,
+        "P_TEMP_EQUIL": 850.02345,
+        "P_PERIOD": 11.173946,
+        "P_FLUX": 123.92074,
+        "S_MASS": 1.04,
+        "S_RADIUS": 1.05,
+        "S_TEMP": 5924.0
+      }
+    },
+    {
+      "name": "Kepler-758 d",
+      "description": "Temp: 834K, Radius: 2.12R\u2295, Period: 20.5d",
+      "data": {
+        "P_MASS_EST": 5.1366839,
+        "P_RADIUS_EST": 2.11869,
+        "P_TEMP_EQUIL": 833.65172,
+        "P_PERIOD": 20.49662,
+        "P_FLUX": 114.64602,
+        "S_MASS": 1.16,
+        "S_RADIUS": 1.42,
+        "S_TEMP": 6228.0
+      }
+    },
+    {
+      "name": "Kepler-1420 b",
+      "description": "Temp: 797K, Radius: 1.28R\u2295, Period: 6.7d",
+      "data": {
+        "P_MASS_EST": 2.1773119,
+        "P_RADIUS_EST": 1.27794,
+        "P_TEMP_EQUIL": 796.53859,
+        "P_PERIOD": 6.6996001,
+        "P_FLUX": 95.553729,
+        "S_MASS": 0.82,
+        "S_RADIUS": 0.79,
+        "S_TEMP": 5187.0
+      }
+    },
+    {
+      "name": "Kepler-1370 b",
+      "description": "Temp: 791K, Radius: 1.84R\u2295, Period: 20.3d",
+      "data": {
+        "P_MASS_EST": 4.0370889,
+        "P_RADIUS_EST": 1.83844,
+        "P_TEMP_EQUIL": 790.89983,
+        "P_PERIOD": 20.264168,
+        "P_FLUX": 92.876597,
+        "S_MASS": 1.19,
+        "S_RADIUS": 1.29,
+        "S_TEMP": 6202.0
+      }
+    },
+    {
+      "name": "Kepler-1610 b",
+      "description": "Temp: 781K, Radius: 1.61R\u2295, Period: 8.7d",
+      "data": {
+        "P_MASS_EST": 3.2372384,
+        "P_RADIUS_EST": 1.61424,
+        "P_TEMP_EQUIL": 781.39286,
+        "P_PERIOD": 8.7018157,
+        "P_FLUX": 88.490799,
+        "S_MASS": 0.91,
+        "S_RADIUS": 0.87,
+        "S_TEMP": 5383.0
+      }
+    },
+    {
+      "name": "Kepler-873 b",
+      "description": "Temp: 777K, Radius: 3.76R\u2295, Period: 20.6d",
+      "data": {
+        "P_MASS_EST": 13.574546,
+        "P_RADIUS_EST": 3.75535,
+        "P_TEMP_EQUIL": 777.22757,
+        "P_PERIOD": 20.553384,
+        "P_FLUX": 86.618999,
+        "S_MASS": 1.18,
+        "S_RADIUS": 1.27,
+        "S_TEMP": 6163.0
+      }
+    },
+    {
+      "name": "Kepler-805 b",
+      "description": "Temp: 766K, Radius: 2.89R\u2295, Period: 30.9d",
+      "data": {
+        "P_MASS_EST": 8.7127047,
+        "P_RADIUS_EST": 2.89218,
+        "P_TEMP_EQUIL": 766.14836,
+        "P_PERIOD": 30.863893,
+        "P_FLUX": 81.784662,
+        "S_MASS": 1.19,
+        "S_RADIUS": 1.65,
+        "S_TEMP": 6112.0
+      }
+    },
+    {
+      "name": "Kepler-627 b",
+      "description": "Temp: 688K, Radius: 3.73R\u2295, Period: 40.7d",
+      "data": {
+        "P_MASS_EST": 13.43724,
+        "P_RADIUS_EST": 3.73293,
+        "P_TEMP_EQUIL": 687.60797,
+        "P_PERIOD": 40.699444,
+        "P_FLUX": 53.062042,
+        "S_MASS": 1.3,
+        "S_RADIUS": 1.49,
+        "S_TEMP": 6424.0
+      }
+    },
+    {
+      "name": "Kepler-1001 b",
+      "description": "Temp: 680K, Radius: 3.15R\u2295, Period: 14.3d",
+      "data": {
+        "P_MASS_EST": 10.072062,
+        "P_RADIUS_EST": 3.15001,
+        "P_TEMP_EQUIL": 680.48332,
+        "P_PERIOD": 14.30512,
+        "P_FLUX": 50.896779,
+        "S_MASS": 0.9,
+        "S_RADIUS": 0.88,
+        "S_TEMP": 5491.0
+      }
+    },
+    {
+      "name": "Kepler-100 d",
+      "description": "Temp: 674K, Radius: 1.61R\u2295, Period: 35.3d",
+      "data": {
+        "P_MASS_EST": 3.0002963,
+        "P_RADIUS_EST": 1.61424,
+        "P_TEMP_EQUIL": 674.09351,
+        "P_PERIOD": 35.3331,
+        "P_FLUX": 49.011832,
+        "S_MASS": 1.08,
+        "S_RADIUS": 1.49,
+        "S_TEMP": 5825.0
+      }
+    },
+    {
+      "name": "Kepler-716 b",
+      "description": "Temp: 671K, Radius: 2.90R\u2295, Period: 10.4d",
+      "data": {
+        "P_MASS_EST": 8.7701168,
+        "P_RADIUS_EST": 2.90339,
+        "P_TEMP_EQUIL": 671.22041,
+        "P_PERIOD": 10.371685,
+        "P_FLUX": 48.181575,
+        "S_MASS": 0.83,
+        "S_RADIUS": 0.78,
+        "S_TEMP": 5099.0
+      }
+    },
+    {
+      "name": "Kepler-716 b",
+      "description": "Temp: 671K, Radius: 2.90R\u2295, Period: 10.4d",
+      "data": {
+        "P_MASS_EST": 8.7701168,
+        "P_RADIUS_EST": 2.90339,
+        "P_TEMP_EQUIL": 671.22041,
+        "P_PERIOD": 10.371685,
+        "P_FLUX": 48.181575,
+        "S_MASS": 0.83,
+        "S_RADIUS": 0.78,
+        "S_TEMP": 5099.0
+      }
+    },
+    {
+      "name": "Kepler-753 b",
+      "description": "Temp: 657K, Radius: 1.91R\u2295, Period: 5.7d",
+      "data": {
+        "P_MASS_EST": 4.2910395,
+        "P_RADIUS_EST": 1.9057,
+        "P_TEMP_EQUIL": 657.29231,
+        "P_PERIOD": 5.747725,
+        "P_FLUX": 44.305185,
+        "S_MASS": 0.68,
+        "S_RADIUS": 0.65,
+        "S_TEMP": 4346.0
+      }
+    },
+    {
+      "name": "Kepler-117 c",
+      "description": "Temp: 650K, Radius: 12.34R\u2295, Period: 50.8d",
+      "data": {
+        "P_MASS_EST": 584.80353,
+        "P_RADIUS_EST": 12.34221,
+        "P_TEMP_EQUIL": 649.51291,
+        "P_PERIOD": 50.790391,
+        "P_FLUX": 42.277715,
+        "S_MASS": 1.13,
+        "S_RADIUS": 1.61,
+        "S_TEMP": 6150.0
+      }
+    },
+    {
+      "name": "Kepler-1049 b",
+      "description": "Temp: 642K, Radius: 0.95R\u2295, Period: 3.3d",
+      "data": {
+        "P_MASS_EST": 0.81736451,
+        "P_RADIUS_EST": 0.95285,
+        "P_TEMP_EQUIL": 642.1947,
+        "P_PERIOD": 3.2734607,
+        "P_FLUX": 40.372646,
+        "S_MASS": 0.51,
+        "S_RADIUS": 0.49,
+        "S_TEMP": 3864.0
+      }
+    },
+    {
+      "name": "Kepler-781 b",
+      "description": "Temp: 629K, Radius: 2.89R\u2295, Period: 13.2d",
+      "data": {
+        "P_MASS_EST": 8.7127047,
+        "P_RADIUS_EST": 2.89218,
+        "P_TEMP_EQUIL": 629.36297,
+        "P_PERIOD": 13.214073,
+        "P_FLUX": 37.241324,
+        "S_MASS": 0.81,
+        "S_RADIUS": 0.78,
+        "S_TEMP": 5162.0
+      }
+    },
+    {
+      "name": "Kepler-1509 b",
+      "description": "Temp: 616K, Radius: 1.85R\u2295, Period: 25.4d",
+      "data": {
+        "P_MASS_EST": 4.0789714,
+        "P_RADIUS_EST": 1.84965,
+        "P_TEMP_EQUIL": 616.22199,
+        "P_PERIOD": 25.43382,
+        "P_FLUX": 34.227024,
+        "S_MASS": 1.0,
+        "S_RADIUS": 0.99,
+        "S_TEMP": 5780.0
+      }
+    },
+    {
+      "name": "Kepler-1453 b",
+      "description": "Temp: 481K, Radius: 2.67R\u2295, Period: 47.2d",
+      "data": {
+        "P_MASS_EST": 7.5972714,
+        "P_RADIUS_EST": 2.66798,
+        "P_TEMP_EQUIL": 481.47009,
+        "P_PERIOD": 47.16117,
+        "P_FLUX": 12.755504,
+        "S_MASS": 0.97,
+        "S_RADIUS": 0.94,
+        "S_TEMP": 5665.0
+      }
+    },
+    {
+      "name": "Kepler-1251 b",
+      "description": "Temp: 470K, Radius: 1.84R\u2295, Period: 45.1d",
+      "data": {
+        "P_MASS_EST": 4.0370889,
+        "P_RADIUS_EST": 1.83844,
+        "P_TEMP_EQUIL": 469.60491,
+        "P_PERIOD": 45.090464,
+        "P_FLUX": 11.543856,
+        "S_MASS": 0.92,
+        "S_RADIUS": 0.89,
+        "S_TEMP": 5545.0
+      }
+    },
+    {
+      "name": "Kepler-827 b",
+      "description": "Temp: 457K, Radius: 5.63R\u2295, Period: 51.9d",
+      "data": {
+        "P_MASS_EST": 26.97477,
+        "P_RADIUS_EST": 5.62742,
+        "P_TEMP_EQUIL": 456.85127,
+        "P_PERIOD": 51.929276,
+        "P_FLUX": 10.33998,
+        "S_MASS": 0.93,
+        "S_RADIUS": 0.91,
+        "S_TEMP": 5602.0
+      }
+    },
+    {
+      "name": "Kepler-186 d",
+      "description": "Temp: 427K, Radius: 1.40R\u2295, Period: 13.3d",
+      "data": {
+        "P_MASS_EST": 2.5458987,
+        "P_RADIUS_EST": 1.40125,
+        "P_TEMP_EQUIL": 427.07403,
+        "P_PERIOD": 13.342996,
+        "P_FLUX": 7.8964708,
+        "S_MASS": 0.54,
+        "S_RADIUS": 0.52,
+        "S_TEMP": 3755.0
+      }
+    },
+    {
+      "name": "Kepler-1489 b",
+      "description": "Temp: 393K, Radius: 1.77R\u2295, Period: 82.3d",
+      "data": {
+        "P_MASS_EST": 3.7895405,
+        "P_RADIUS_EST": 1.77118,
+        "P_TEMP_EQUIL": 393.3794,
+        "P_PERIOD": 82.294751,
+        "P_FLUX": 5.6841666,
+        "S_MASS": 0.93,
+        "S_RADIUS": 0.9,
+        "S_TEMP": 5655.0
+      }
+    },
+    {
+      "name": "Kepler-807 b",
+      "description": "Temp: 392K, Radius: 10.43R\u2295, Period: 117.9d",
+      "data": {
+        "P_MASS_EST": 76.840721,
+        "P_RADIUS_EST": 10.4253,
+        "P_TEMP_EQUIL": 392.0523,
+        "P_PERIOD": 117.93109,
+        "P_FLUX": 5.6078498,
+        "S_MASS": 1.04,
+        "S_RADIUS": 1.06,
+        "S_TEMP": 5965.0
+      }
+    },
+    {
+      "name": "Kepler-446 d",
+      "description": "Temp: 386K, Radius: 1.35R\u2295, Period: 5.1d",
+      "data": {
+        "P_MASS_EST": 2.3754251,
+        "P_RADIUS_EST": 1.3452,
+        "P_TEMP_EQUIL": 386.48745,
+        "P_PERIOD": 5.148921,
+        "P_FLUX": 5.2961705,
+        "S_MASS": 0.22,
+        "S_RADIUS": 0.24,
+        "S_TEMP": 3359.0
+      }
+    },
+    {
+      "name": "Kepler-630 b",
+      "description": "Temp: 343K, Radius: 3.18R\u2295, Period: 161.5d",
+      "data": {
+        "P_MASS_EST": 10.255306,
+        "P_RADIUS_EST": 3.18364,
+        "P_TEMP_EQUIL": 342.85074,
+        "P_PERIOD": 161.47439,
+        "P_FLUX": 3.2797498,
+        "S_MASS": 1.02,
+        "S_RADIUS": 1.04,
+        "S_TEMP": 5829.0
+      }
+    },
+    {
+      "name": "Kepler-1388 e",
+      "description": "Temp: 325K, Radius: 2.45R\u2295, Period: 37.6d",
+      "data": {
+        "P_MASS_EST": 6.5964694,
+        "P_RADIUS_EST": 2.45499,
+        "P_TEMP_EQUIL": 325.0528,
+        "P_PERIOD": 37.632708,
+        "P_FLUX": 2.6499397,
+        "S_MASS": 0.63,
+        "S_RADIUS": 0.61,
+        "S_TEMP": 4098.0
+      }
+    },
+    {
+      "name": "Kepler-1503 b",
+      "description": "Temp: 313K, Radius: 2.28R\u2295, Period: 96.2d",
+      "data": {
+        "P_MASS_EST": 5.7992597,
+        "P_RADIUS_EST": 2.27563,
+        "P_TEMP_EQUIL": 313.2605,
+        "P_PERIOD": 96.16987,
+        "P_FLUX": 2.2858246,
+        "S_MASS": 0.77,
+        "S_RADIUS": 0.74,
+        "S_TEMP": 5069.0
+      }
+    },
+    {
+      "name": "Kepler-440 b",
+      "description": "Temp: 275K, Radius: 1.91R\u2295, Period: 101.1d",
+      "data": {
+        "P_MASS_EST": 4.2910395,
+        "P_RADIUS_EST": 1.9057,
+        "P_TEMP_EQUIL": 275.12777,
+        "P_PERIOD": 101.11141,
+        "P_FLUX": 1.4900179,
+        "S_MASS": 0.57,
+        "S_RADIUS": 0.56,
+        "S_TEMP": 4134.0
+      }
+    },
+    {
+      "name": "Kepler-424 c",
+      "description": "Temp: 273K, Radius: 12.64R\u2295, Period: 223.3d",
+      "data": {
+        "P_MASS_EST": 2215.2612,
+        "P_RADIUS_EST": 12.639368,
+        "P_TEMP_EQUIL": 273.09403,
+        "P_PERIOD": 223.3,
+        "P_FLUX": 1.3202896,
+        "S_MASS": 1.01,
+        "S_RADIUS": 0.94,
+        "S_TEMP": 5460.0
+      }
+    }
+  ],
+  "test_samples": [
+    {
+      "name": "Test Sample 1 - Earth-like A",
+      "description": "Habitable Zone - Temp: 285K, Earth-like",
+      "data": {
+        "P_MASS_EST": 1.05,
+        "P_RADIUS_EST": 1.02,
+        "P_TEMP_EQUIL": 285.0,
+        "P_PERIOD": 380.0,
+        "P_FLUX": 0.95,
+        "S_MASS": 0.98,
+        "S_RADIUS": 0.97,
+        "S_TEMP": 5650.0
+      }
+    },
+    {
+      "name": "Test Sample 2 - Earth-like B",
+      "description": "Habitable Zone - Temp: 295K, Slightly larger",
+      "data": {
+        "P_MASS_EST": 1.2,
+        "P_RADIUS_EST": 1.1,
+        "P_TEMP_EQUIL": 295.0,
+        "P_PERIOD": 420.0,
+        "P_FLUX": 1.05,
+        "S_MASS": 1.02,
+        "S_RADIUS": 1.01,
+        "S_TEMP": 5800.0
+      }
+    },
+    {
+      "name": "Test Sample 3 - Earth-like C",
+      "description": "Habitable Zone - Temp: 273K, Cooler Earth",
+      "data": {
+        "P_MASS_EST": 0.95,
+        "P_RADIUS_EST": 0.98,
+        "P_TEMP_EQUIL": 273.0,
+        "P_PERIOD": 450.0,
+        "P_FLUX": 0.85,
+        "S_MASS": 0.95,
+        "S_RADIUS": 0.94,
+        "S_TEMP": 5500.0
+      }
+    },
+    {
+      "name": "Test Sample 4 - Earth-like D",
+      "description": "Habitable Zone - Temp: 305K, Warmer Earth",
+      "data": {
+        "P_MASS_EST": 1.15,
+        "P_RADIUS_EST": 1.08,
+        "P_TEMP_EQUIL": 305.0,
+        "P_PERIOD": 340.0,
+        "P_FLUX": 1.15,
+        "S_MASS": 1.05,
+        "S_RADIUS": 1.03,
+        "S_TEMP": 5900.0
+      }
+    },
+    {
+      "name": "Test Sample 5 - Earth-like E",
+      "description": "Habitable Zone - Temp: 290K, Perfect match",
+      "data": {
+        "P_MASS_EST": 1.0,
+        "P_RADIUS_EST": 1.0,
+        "P_TEMP_EQUIL": 290.0,
+        "P_PERIOD": 365.0,
+        "P_FLUX": 1.0,
+        "S_MASS": 1.0,
+        "S_RADIUS": 1.0,
+        "S_TEMP": 5778.0
+      }
+    },
+    {
+      "name": "Test Sample 6 - Non-Habitable A",
+      "description": "K2-221 b - Temp: 1309K",
+      "data": {
+        "P_MASS_EST": 3.4695604,
+        "P_RADIUS_EST": 1.6815,
+        "P_TEMP_EQUIL": 1309.2231,
+        "P_PERIOD": 2.399094,
+        "P_FLUX": 697.38892,
+        "S_MASS": 1.01,
+        "S_RADIUS": 0.95,
+        "S_TEMP": 5716.0
+      }
+    },
+    {
+      "name": "Test Sample 7 - Non-Habitable B",
+      "description": "Kepler-109 b - Temp: 1148K",
+      "data": {
+        "P_MASS_EST": 7.3005092,
+        "P_RADIUS_EST": 2.36531,
+        "P_TEMP_EQUIL": 1148.185,
+        "P_PERIOD": 6.48163,
+        "P_FLUX": 412.54172,
+        "S_MASS": 1.04,
+        "S_RADIUS": 1.32,
+        "S_TEMP": 5952.0
+      }
+    },
+    {
+      "name": "Test Sample 8 - Non-Habitable C",
+      "description": "K2-226 b - Temp: 1122K",
+      "data": {
+        "P_MASS_EST": 2.9746177,
+        "P_RADIUS_EST": 1.53577,
+        "P_TEMP_EQUIL": 1122.2314,
+        "P_PERIOD": 3.27108,
+        "P_FLUX": 376.48706,
+        "S_MASS": 0.88,
+        "S_RADIUS": 0.91,
+        "S_TEMP": 5424.0
+      }
+    },
+    {
+      "name": "Test Sample 9 - Non-Habitable D",
+      "description": "HD 142 b - Temp: 330K (Gas Giant)",
+      "data": {
+        "P_MASS_EST": 397.285,
+        "P_RADIUS_EST": 13.632125,
+        "P_TEMP_EQUIL": 329.85079,
+        "P_PERIOD": 349.7,
+        "P_FLUX": 2.8722403,
+        "S_MASS": 1.23,
+        "S_RADIUS": 1.47,
+        "S_TEMP": 6245.0
+      }
+    },
+    {
+      "name": "Test Sample 10 - Non-Habitable E",
+      "description": "HD 5583 b - Temp: 881K",
+      "data": {
+        "P_MASS_EST": 1837.0459,
+        "P_RADIUS_EST": 12.743913,
+        "P_TEMP_EQUIL": 881.35559,
+        "P_PERIOD": 139.35,
+        "P_FLUX": 143.8504,
+        "S_MASS": 1.01,
+        "S_RADIUS": 9.09,
+        "S_TEMP": 4830.0
+      }
+    },
+    {
+      "name": "Test Sample 11 - Non-Habitable F",
+      "description": "Kepler-937 c - Temp: 387K",
+      "data": {
+        "P_MASS_EST": 7.5972714,
+        "P_RADIUS_EST": 2.66798,
+        "P_TEMP_EQUIL": 387.20825,
+        "P_PERIOD": 153.34336,
+        "P_FLUX": 5.3357905,
+        "S_MASS": 1.15,
+        "S_RADIUS": 1.22,
+        "S_TEMP": 6095.0
+      }
+    },
+    {
+      "name": "Test Sample 12 - Non-Habitable G",
+      "description": "HD 113996 b - Temp: 726K",
+      "data": {
+        "P_MASS_EST": 2002.3164,
+        "P_RADIUS_EST": 12.695699,
+        "P_TEMP_EQUIL": 726.41804,
+        "P_PERIOD": 610.2,
+        "P_FLUX": 70.241139,
+        "S_MASS": 1.49,
+        "S_RADIUS": 25.11,
+        "S_TEMP": 4181.0
+      }
+    },
+    {
+      "name": "Test Sample 13 - Non-Habitable H",
+      "description": "Kepler-789 b - Temp: 909K",
+      "data": {
+        "P_MASS_EST": 5.1366839,
+        "P_RADIUS_EST": 2.11869,
+        "P_TEMP_EQUIL": 908.93854,
+        "P_PERIOD": 8.6384772,
+        "P_FLUX": 162.0162,
+        "S_MASS": 1.01,
+        "S_RADIUS": 1.02,
+        "S_TEMP": 5870.0
+      }
+    },
+    {
+      "name": "Test Sample 14 - Non-Habitable I",
+      "description": "WASP-139 b - Temp: 841K",
+      "data": {
+        "P_MASS_EST": 37.185876,
+        "P_RADIUS_EST": 8.968,
+        "P_TEMP_EQUIL": 840.73812,
+        "P_PERIOD": 5.924262,
+        "P_FLUX": 118.59417,
+        "S_MASS": 0.92,
+        "S_RADIUS": 0.8,
+        "S_TEMP": 5310.0
+      }
+    },
+    {
+      "name": "Test Sample 15 - Non-Habitable J",
+      "description": "HD 211810 b - Temp: 157K (Too Cold)",
+      "data": {
+        "P_MASS_EST": 212.94476,
+        "P_RADIUS_EST": 14.01136,
+        "P_TEMP_EQUIL": 157.15031,
+        "P_PERIOD": 1558.0,
+        "P_FLUX": 0.22571913,
+        "S_MASS": 1.03,
+        "S_RADIUS": 1.13,
+        "S_TEMP": 5652.0
+      }
+    }
+  ],
+  "metadata": {
+    "total_planets": 66,
+    "kepler_count": 50,
+    "test_samples_count": 15,
+    "required_features": [
+      "P_MASS_EST",
+      "P_RADIUS_EST",
+      "P_TEMP_EQUIL",
+      "P_PERIOD",
+      "P_FLUX",
+      "S_MASS",
+      "S_RADIUS",
+      "S_TEMPERATURE"
+    ]
+  }
+}

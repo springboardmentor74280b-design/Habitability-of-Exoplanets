@@ -1,0 +1,65 @@
+================================================================================
+FULL ML PIPELINE - COMPREHENSIVE REPORT
+================================================================================
+
+1. PIPELINE CONFIGURATION
+--------------------------------------------------------------------------------
+Sampling Strategy: SMOTE
+Model Type: Linear SVM
+Number of Features: 6509
+Training Samples: 3,238
+Test Samples: 810
+
+2. PIPELINE STEPS
+--------------------------------------------------------------------------------
+1. sampler: SMOTE
+2. classifier: SVC
+
+3. PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+Test Set Performance:
+  Accuracy:  0.9963
+  Precision: 0.9968
+  Recall:    0.9963
+  F1 Score:  0.9965
+  ROC-AUC:   0.9992
+  PR-AUC:    0.9990
+
+Cross-Validation (5-Fold):
+  Mean F1:   0.9976
+  Std F1:    0.0025
+  95% CI:    [0.9926, 1.0026]
+
+4. CONFUSION MATRIX
+--------------------------------------------------------------------------------
+True Negatives:  798
+False Positives: 1
+False Negatives: 0
+True Positives:  3
+
+5. DEPLOYMENT ARTIFACTS
+--------------------------------------------------------------------------------
+Pipeline File: /Users/adityajatling/Documents/Infosys_Exoplanet/outputs/models/pipeline/full_pipeline.pkl
+Metadata File: /Users/adityajatling/Documents/Infosys_Exoplanet/outputs/models/pipeline/pipeline_metadata.csv
+File Size: 24981.99 KB
+
+6. USAGE INSTRUCTIONS
+--------------------------------------------------------------------------------
+To use this pipeline in production:
+  1. Load pipeline: pipeline = joblib.load('full_pipeline.pkl')
+  2. Prepare input: X_new = pd.DataFrame([features])
+  3. Predict: prediction = pipeline.predict(X_new)
+  4. Get probabilities: proba = pipeline.predict_proba(X_new)
+
+7. KEY FEATURES
+--------------------------------------------------------------------------------
+✓ End-to-end preprocessing and prediction
+✓ Automatic SMOTE sampling during training
+✓ No data leakage (sampling only on training data)
+✓ Reproducible predictions
+✓ Single object for deployment
+✓ Cross-validated performance
+
+================================================================================
+END OF PIPELINE REPORT
+================================================================================

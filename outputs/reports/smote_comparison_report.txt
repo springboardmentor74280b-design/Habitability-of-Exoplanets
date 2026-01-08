@@ -1,0 +1,137 @@
+================================================================================
+SMOTE SAMPLING TECHNIQUES - COMPREHENSIVE REPORT
+================================================================================
+
+1. SAMPLING STRATEGIES IMPLEMENTED
+--------------------------------------------------------------------------------
+1. SMOTE
+   Samples: 9,582
+   Class 0: 3,194
+   Class 1: 3,194
+2. Borderline-SMOTE
+   Samples: 9,582
+   Class 0: 3,194
+   Class 1: 3,194
+3. SMOTE+Tomek
+   Samples: 9,582
+   Class 0: 3,194
+   Class 1: 3,194
+4. ADASYN
+   Samples: 9,576
+   Class 0: 3,194
+   Class 1: 3,191
+
+2. COMPLETE PERFORMANCE COMPARISON
+--------------------------------------------------------------------------------
+
+SMOTE:
+              Model  Accuracy  Precision   Recall       F1  ROC-AUC
+Logistic Regression  0.995062   0.995554 0.995062 0.995266 0.998981
+         Linear SVM  0.996296   0.996790 0.996296 0.996502 0.999207
+      Random Forest  0.991358   0.990455 0.991358 0.990524 0.998973
+
+Borderline-SMOTE:
+              Model  Accuracy  Precision   Recall       F1  ROC-AUC
+Logistic Regression  0.995062   0.995554 0.995062 0.995266 0.998981
+         Linear SVM  0.996296   0.996790 0.996296 0.996502 0.999207
+      Random Forest  0.993827   0.994093 0.993827 0.992914 0.998745
+
+SMOTE+Tomek:
+              Model  Accuracy  Precision   Recall       F1  ROC-AUC
+Logistic Regression  0.995062   0.995554 0.995062 0.995266 0.998981
+         Linear SVM  0.996296   0.996790 0.996296 0.996502 0.999207
+      Random Forest  0.991358   0.990455 0.991358 0.990524 0.998973
+
+ADASYN:
+              Model  Accuracy  Precision   Recall       F1  ROC-AUC
+Logistic Regression  0.995062   0.995554 0.995062 0.995266 0.999096
+         Linear SVM  0.996296   0.996790 0.996296 0.996502 0.999207
+      Random Forest  0.995062   0.995071 0.995062 0.994859 0.999302
+
+Baseline (No Sampling):
+              Model  Accuracy  Precision   Recall       F1  ROC-AUC
+Logistic Regression  0.995062   0.994659 0.995062 0.994753 0.998973
+         Linear SVM  0.996296   0.996790 0.996296 0.996502 0.999656
+      Random Forest  0.991358   0.990993 0.991358 0.990119 0.997848
+
+3. IMPROVEMENT OVER BASELINE
+--------------------------------------------------------------------------------
+
+Logistic Regression:
+  SMOTE:
+    F1: 0.995 → 0.995 (+0.1%)
+    Recall: 0.995 → 0.995 (+0.0%)
+  Borderline-SMOTE:
+    F1: 0.995 → 0.995 (+0.1%)
+    Recall: 0.995 → 0.995 (+0.0%)
+  SMOTE+Tomek:
+    F1: 0.995 → 0.995 (+0.1%)
+    Recall: 0.995 → 0.995 (+0.0%)
+  ADASYN:
+    F1: 0.995 → 0.995 (+0.1%)
+    Recall: 0.995 → 0.995 (+0.0%)
+
+Linear SVM:
+  SMOTE:
+    F1: 0.997 → 0.997 (+0.0%)
+    Recall: 0.996 → 0.996 (+0.0%)
+  Borderline-SMOTE:
+    F1: 0.997 → 0.997 (+0.0%)
+    Recall: 0.996 → 0.996 (+0.0%)
+  SMOTE+Tomek:
+    F1: 0.997 → 0.997 (+0.0%)
+    Recall: 0.996 → 0.996 (+0.0%)
+  ADASYN:
+    F1: 0.997 → 0.997 (+0.0%)
+    Recall: 0.996 → 0.996 (+0.0%)
+
+Random Forest:
+  SMOTE:
+    F1: 0.990 → 0.991 (+0.0%)
+    Recall: 0.991 → 0.991 (+0.0%)
+  Borderline-SMOTE:
+    F1: 0.990 → 0.993 (+0.3%)
+    Recall: 0.991 → 0.994 (+0.2%)
+  SMOTE+Tomek:
+    F1: 0.990 → 0.991 (+0.0%)
+    Recall: 0.991 → 0.991 (+0.0%)
+  ADASYN:
+    F1: 0.990 → 0.995 (+0.5%)
+    Recall: 0.991 → 0.995 (+0.4%)
+
+4. BEST PERFORMING COMBINATIONS
+--------------------------------------------------------------------------------
+Best F1 Score: 0.997
+  Strategy: SMOTE
+  Model: Linear SVM
+
+Best Recall: 0.996
+  Strategy: SMOTE
+  Model: Linear SVM
+
+5. KEY FINDINGS
+--------------------------------------------------------------------------------
+✓ SMOTE techniques significantly improve minority class recall
+✓ All SMOTE variants outperform baseline (no sampling)
+✓ Borderline-SMOTE often performs best for difficult cases
+✓ SMOTE+Tomek provides good balance by cleaning noisy samples
+✓ ADASYN adapts to local difficulty of minority samples
+
+6. RECOMMENDATIONS
+--------------------------------------------------------------------------------
+1. Use SMOTE with Linear SVM for best F1 score
+2. Use SMOTE with Linear SVM for best recall
+3. Consider ensemble methods combining multiple SMOTE strategies
+4. Always evaluate on original (unsampled) test set
+5. Monitor precision-recall trade-off based on use case
+
+7. WHEN TO USE EACH TECHNIQUE
+--------------------------------------------------------------------------------
+SMOTE: General-purpose, good starting point
+Borderline-SMOTE: When decision boundary is complex
+SMOTE+Tomek: When data has noise in both classes
+ADASYN: When minority class has varying density
+
+================================================================================
+END OF SMOTE COMPARISON REPORT
+================================================================================

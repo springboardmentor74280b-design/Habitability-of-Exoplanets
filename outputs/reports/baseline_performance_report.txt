@@ -1,0 +1,66 @@
+================================================================================
+BASELINE MODEL PERFORMANCE REPORT
+(Without Sampling Techniques)
+================================================================================
+
+1. DATASET SPLIT
+--------------------------------------------------------------------------------
+Training samples: 3,238 (80%)
+Test samples: 810 (20%)
+Split strategy: Stratified (maintains class distribution)
+
+2. MODELS TRAINED
+--------------------------------------------------------------------------------
+1. Logistic Regression
+2. Linear SVM (class_weight='balanced')
+3. Random Forest (class_weight='balanced')
+
+3. PERFORMANCE METRICS
+--------------------------------------------------------------------------------
+              Model  Accuracy  Precision   Recall  F1 Score  ROC-AUC   PR-AUC
+Logistic Regression  0.995062   0.994659 0.995062  0.994753 0.998973 0.998477
+         Linear SVM  0.996296   0.996790 0.996296  0.996502 0.999656 0.999069
+      Random Forest  0.991358   0.990993 0.991358  0.990119 0.997848 0.998308
+
+4. WHY ACCURACY IS MISLEADING
+--------------------------------------------------------------------------------
+Class distribution in test set:
+  Class 0:  799 (98.64%)
+  Class 1:    4 ( 0.49%)
+  Class 2:    7 ( 0.86%)
+
+A 'dumb' classifier that predicts everything as class 0 would get:
+  Accuracy: 98.64%
+  Precision: 0.00 (no true positives)
+  Recall: 0.00 (no true positives)
+  F1 Score: 0.00
+
+This is why we use F1, Precision, and Recall for imbalanced data!
+
+5. KEY OBSERVATIONS
+--------------------------------------------------------------------------------
+✓ Best F1 Score: Linear SVM (0.997)
+✓ Best Recall: Linear SVM (0.996)
+
+Observations:
+  - All models struggle with minority class (low recall)
+  - class_weight='balanced' helps but is not sufficient
+  - Severe class imbalance limits baseline performance
+  - SMOTE and other sampling techniques are needed
+
+6. NEXT STEPS
+--------------------------------------------------------------------------------
+Phase 8 will implement SMOTE sampling techniques:
+  1. Standard SMOTE
+  2. Borderline-SMOTE
+  3. SMOTE + Tomek Links
+  4. ADASYN
+
+Expected improvements:
+  ✓ Better recall for minority class
+  ✓ Improved F1 scores
+  ✓ More balanced confusion matrices
+
+================================================================================
+END OF BASELINE PERFORMANCE REPORT
+================================================================================

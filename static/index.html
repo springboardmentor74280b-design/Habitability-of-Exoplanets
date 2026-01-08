@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Habitability Predictor | AI-Powered Analysis</title>
+
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css?v=4.0">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header-gradient">
+        <div class="container py-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-4 fw-bold text-white mb-2">
+                        <span
+                            style="font-size: 1.2em; display: inline-block; animation: orbit 20s linear infinite;">🪐</span>
+                        Exoplanet Habitability Predictor
+                    </h1>
+                    <p class="text-white-50 mb-0">
+                        <span style="font-size: 1.1em;">🤖</span> AI-Powered Analysis using Advanced Machine Learning
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="model-badge">
+                        <div class="badge-label">⭐ Model Performance</div>
+                        <div class="badge-value" id="modelF1Score">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <!-- Hero Visual Section -->
+        <section class="text-center mb-5" style="position: relative; padding: 3rem 0;">
+            <div style="position: relative; z-index: 2;">
+                <h2 class="h3 fw-bold mb-3" style="color: #818cf8;">
+                    <span style="font-size: 1.3em;">🌌</span> Discover Habitable Worlds
+                </h2>
+                <p class="text-muted" style="max-width: 600px; margin: 0 auto;">
+                    Harness the power of AI to analyze exoplanet characteristics and determine their potential for
+                    supporting life
+                </p>
+            </div>
+            <!-- Floating Planet Decorations -->
+            <div
+                style="position: absolute; top: 0; left: 10%; width: 100px; height: 100px; opacity: 0.6; animation: floatIcon 6s ease-in-out infinite;">
+                <img src="/images/planet_earth_hero.png" alt="Earth"
+                    style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.6));">
+            </div>
+            <div
+                style="position: absolute; top: 20%; right: 15%; width: 80px; height: 80px; opacity: 0.5; animation: floatIcon 8s ease-in-out infinite 2s;">
+                <img src="/images/planet_barren_new.png" alt="Mars"
+                    style="width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 15px rgba(239, 68, 68, 0.5));">
+            </div>
+        </section>
+
+        <!-- Quick Start Section -->
+        <section class="card glass-card mb-5 particles">
+            <div class="card-body p-4">
+                <h2 class="h4 fw-bold mb-3" style="color: #818cf8;">
+                    <span style="font-size: 1.2em; animation: bounce 2s ease-in-out infinite;">🚀</span> Quick Start
+                </h2>
+                <p class="text-muted mb-3">Analyze exoplanet habitability using our state-of-the-art ML model (99.65% F1
+                    Score)</p>
+                <div class="d-flex gap-3 flex-wrap">
+                    <button class="btn btn-primary btn-lg" onclick="loadExampleData()">
+                        <span class="btn-icon">📊</span> Load Example Data
+                    </button>
+                    <button class="btn btn-outline-primary btn-lg" onclick="clearForm()">
+                        <span class="btn-icon">🔄</span> Clear Form
+                    </button>
+                    <button class="btn btn-outline-info btn-lg" onclick="showModelInfo()">
+                        <span class="btn-icon">ℹ️</span> Model Info
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Input Form Section -->
+        <section class="card glass-card mb-5">
+            <div class="card-header bg-transparent border-0 pt-4 px-4">
+                <h2 class="h4 fw-bold mb-0" style="color: #818cf8;">🌍 Enter Exoplanet Parameters</h2>
+                <p class="text-muted small mb-0">Provide key planetary and stellar characteristics</p>
+            </div>
+            <div class="card-body p-4">
+                <!-- Planet Selection Dropdown -->
+                <div class="mb-4 p-3 planet-selector-container">
+                    <label for="planetSelector" class="form-label fw-semibold mb-2">
+                        <span class="planet-icon">🪐</span> Select a Planet or Enter Custom Data
+                    </label>
+                    <select class="form-select form-select-lg planet-selector" id="planetSelector">
+                        <option value="">Custom Input (Manual Entry)</option>
+                        <option disabled>──────────────────────────</option>
+                        <optgroup label="🌍 Reference Planet" id="earthGroup">
+                            <option value="loading">Loading...</option>
+                        </optgroup>
+                        <optgroup label="🔭 Kepler Planets" id="keplerGroup">
+                            <option value="loading">Loading...</option>
+                        </optgroup>
+                        <optgroup label="🧪 Test Samples" id="testGroup">
+                            <option value="loading">Loading...</option>
+                        </optgroup>
+                    </select>
+                    <small class="text-muted d-block mt-2">
+                        <span class="selected-planet-info" id="selectedPlanetInfo"></span>
+                    </small>
+                </div>
+
+                <form id="predictionForm">
+                    <div class="row g-4">
+                        <!-- Planetary Parameters -->
+                        <div class="col-12">
+                            <h5 class="fw-semibold mb-3 text-primary" style="color: #828ef6;">Planetary Characteristics
+                            </h5>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Planet Mass ( Masses)</label>
+                            <input type="number" class="form-control form-control-lg" id="P_MASS_EST"
+                                placeholder="e.g., 1.00" step="0.01" min="0">
+                            <small class="text-muted">Estimated mass relative to Earth</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Planet Radius (Radii)</label>
+                            <input type="number" class="form-control form-control-lg" id="P_RADIUS_EST"
+                                placeholder="e.g., 1.00" step="0.01" min="0">
+                            <small class="text-muted">Estimated radius relative to Earth</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Equilibrium Temperature (K)</label>
+                            <input type="number" class="form-control form-control-lg" id="P_TEMP_EQUIL"
+                                placeholder="e.g., 288.00" step="0.01" min="0">
+                            <small class="text-muted">Surface temperature in Kelvin</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Orbital Period (Days)</label>
+                            <input type="number" class="form-control form-control-lg" id="P_PERIOD"
+                                placeholder="e.g., 365.25" step="0.01" min="0">
+                            <small class="text-muted">Time to complete one orbit</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Stellar Flux ( Flux)</label>
+                            <input type="number" class="form-control form-control-lg" id="P_FLUX"
+                                placeholder="e.g., 1.00" step="0.01" min="0">
+                            <small class="text-muted">Radiation received from star</small>
+                        </div>
+
+                        <!-- Stellar Parameters -->
+                        <div class="col-12 mt-5">
+                            <h5 class="fw-semibold mb-3 text-warning" style="color: #828ef6;">Stellar Characteristics
+                            </h5>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Star Mass (Solar Masses)</label>
+                            <input type="number" class="form-control form-control-lg" id="S_MASS"
+                                placeholder="e.g., 1.00" step="0.01" min="0">
+                            <small class="text-muted">Mass relative to our Sun</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Star Radius (Solar Radii)</label>
+                            <input type="number" class="form-control form-control-lg" id="S_RADIUS"
+                                placeholder="e.g., 1.00" step="0.01" min="0">
+                            <small class="text-muted">Radius relative to our Sun</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label fw-semibold">Star Temperature (K)</label>
+                            <input type="number" class="form-control form-control-lg" id="S_TEMP"
+                                placeholder="e.g., 5778.00" step="0.01" min="0">
+                            <small class="text-muted">Surface temperature in Kelvin</small>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 text-center">
+                        <button type="submit" class="btn btn-primary btn-lg px-5 py-3 predict-btn">
+                            <span class="btn-icon">🔮</span>
+                            <span class="btn-text">Predict Habitability</span>
+                            <span class="spinner-border spinner-border-sm ms-2 d-none" id="loadingSpinner"></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="resultsSection" class="d-none">
+            <div class="card glass-card mb-4">
+                <div class="card-body p-4">
+                    <h2 class="h4 fw-bold mb-4" style="color: #828ef6;">📊 Prediction Results</h2>
+
+                    <div class="row g-4">
+                        <!-- Main Prediction Card -->
+                        <div class="col-md-6">
+                            <div class="result-card" id="predictionCard">
+                                <div class="result-label">Habitability Classification</div>
+                                <div class="result-value" id="predictionClass">-</div>
+                                <div class="result-confidence">
+                                    <span class="confidence-label">Confidence:</span>
+                                    <span class="confidence-value" id="confidenceValue">-</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Probability Distribution -->
+                        <div class="col-md-6">
+                            <div class="chart-container">
+                                <canvas id="probabilityChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Detailed Probabilities -->
+                    <div class="row g-3 mt-4">
+                        <div class="col-md-6">
+                            <div class="prob-card prob-non-habitable">
+                                <img src="/images/planet_barren.png" alt="Non-Habitable Planet" class="planet-icon-img">
+                                <div class="prob-label">Non-Habitable</div>
+                                <div class="prob-value" id="probNonHab">-</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="prob-card prob-habitable">
+                                <img src="/images/planet_habitable.png" alt="Habitable Planet" class="planet-icon-img">
+                                <div class="prob-label">Habitable</div>
+                                <div class="prob-value" id="probHab">-</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Model Info Modal -->
+        <div class="modal fade" id="modelInfoModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content glass-card">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title fw-bold">🤖 Model Information</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" id="modelInfoContent">
+                        <div class="text-center py-5">
+                            <div class="spinner-border text-primary" role="status"></div>
+                            <p class="mt-3 text-muted">Loading model information...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-gradient py-4 mt-5">
+        <div class="container text-center text-white">
+            <p class="mb-2">
+                <span style="font-size: 1.2em; display: inline-block; animation: orbit 15s linear infinite;">🌌</span>
+                Powered by Advanced Machine Learning | Exoplanet Habitability Classification
+            </p>
+            <p class="small mb-0 opacity-75">
+                <span style="font-size: 1.1em;">⚡</span> Using Linear SVM with SMOTE | 99.65% F1 Score
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

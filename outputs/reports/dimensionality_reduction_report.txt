@@ -1,0 +1,56 @@
+================================================================================
+DIMENSIONALITY REDUCTION REPORT
+================================================================================
+
+1. PCA ANALYSIS
+--------------------------------------------------------------------------------
+Original Dimensions: 6509
+Reduced Dimensions: 2
+
+Explained Variance:
+  PC1: 25.33%
+  PC2: 13.03%
+  Total (2 components): 38.36%
+
+Components for 95% variance: 49
+
+2. t-SNE ANALYSIS
+--------------------------------------------------------------------------------
+Original Dimensions: 6509
+Reduced Dimensions: 2
+Perplexity: 30
+Iterations: 1000
+
+3. COMPARISON
+--------------------------------------------------------------------------------
+PCA (Linear):
+  ✓ Fast and deterministic
+  ✓ Preserves global structure
+  ✓ Captures 38.36% of variance in 2D
+  ✗ May miss non-linear patterns
+
+t-SNE (Non-linear):
+  ✓ Reveals clusters and local structure
+  ✓ Captures non-linear relationships
+  ✗ Slower and non-deterministic
+  ✗ Cannot transform new data
+
+4. CLASS SEPARABILITY
+--------------------------------------------------------------------------------
+Visual inspection of plots shows:
+  - Significant class overlap in both PCA and t-SNE
+  - Minority class (habitable) is scattered
+  - No clear linear or non-linear separation
+  - This confirms the difficulty of the classification task
+
+5. RECOMMENDATIONS
+--------------------------------------------------------------------------------
+1. Use PCA for dimensionality reduction before modeling (faster)
+2. Use t-SNE for exploratory visualization only
+3. Consider feature engineering to improve separability
+4. Apply SMOTE to handle class imbalance
+5. Use ensemble methods to capture complex patterns
+
+================================================================================
+END OF DIMENSIONALITY REDUCTION REPORT
+================================================================================

@@ -1,0 +1,26 @@
+Loading simplified production model...
+✓ Model loaded from: /Users/adityajatling/Documents/Infosys_Exoplanet/outputs/models/production/simplified_8feature_model.pkl
+✓ Model ready with 8 features
+================================================================================
+EXOPLANET HABITABILITY PREDICTION API
+================================================================================
+
+🚀 Starting Flask server...
+📊 Model: Exoplanet Habitability Classifier v1.0.0
+🎯 F1 Score: 0.9965
+
+📡 API Endpoints:
+  GET  /                    - Frontend UI
+  GET  /api/health          - Health check
+  GET  /api/model_info      - Model metadata
+  GET  /api/features        - Required features
+  GET  /api/example         - Example input
+  POST /api/predict         - Single prediction
+  POST /api/predict_batch   - Batch predictions
+
+🌐 Server running on: http://localhost:5050
+================================================================================
+ * Serving Flask app 'app'
+ * Debug mode: on
+Address already in use
+Port 5050 is in use by another program. Either identify and stop that program, or start the server with a different port.

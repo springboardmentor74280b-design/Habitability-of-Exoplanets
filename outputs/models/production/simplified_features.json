@@ -1,0 +1,12 @@
+{
+  "features": [
+    "P_MASS_EST",
+    "P_RADIUS_EST",
+    "P_TEMP_EQUIL",
+    "P_PERIOD",
+    "P_FLUX",
+    "S_MASS",
+    "S_RADIUS",
+    "S_TEMPERATURE"
+  ]
+}

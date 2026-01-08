@@ -1,0 +1,2 @@
+sampling_strategy,model_type,test_accuracy,test_f1,test_recall,test_precision,test_roc_auc,cv_mean_f1,cv_std_f1,training_samples,test_samples,n_features,random_state
+SMOTE,Linear SVM,0.9962962962962963,0.996501671085961,0.9962962962962963,0.9967901234567901,0.9992067015487254,0.9976309414637411,0.0025020801498612457,3238,810,6509,42
