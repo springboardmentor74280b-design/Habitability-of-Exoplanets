@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card p-5 shadow-lg text-center">
+            <h2 class="mb-4">Batch Prediction (CSV)</h2>
+            <p class="text-muted mb-4">Upload a CSV file containing exoplanet data. We'll attempt to map the columns
+                automatically.</p>
+
+            <form action="{{ url_for('main.upload') }}" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <div class="upload-area p-5 mb-4 border border-2 border-dashed border-secondary rounded" id="dropZone"
+                    style="cursor: pointer; transition: all 0.3s;">
+                    <i class="bi bi-cloud-arrow-up display-1 text-secondary mb-3"></i>
+                    <h5 class="text-light">Drag & Drop CSV here</h5>
+                    <p class="text-muted">or click to browse</p>
+                    <input type="file" name="file" id="fileInput" class="d-none" accept=".csv">
+                </div>
+
+                <h6 id="fileName" class="text-info my-3"></h6>
+
+                <button type="submit" class="btn btn-primary btn-lg" id="submitBtn" disabled>Process File</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+    const dropZone = document.getElementById('dropZone');
+    const fileInput = document.getElementById('fileInput');
+    const fileName = document.getElementById('fileName');
+    const submitBtn = document.getElementById('submitBtn');
+
+    dropZone.addEventListener('click', () => fileInput.click());
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length) {
+            fileName.innerText = fileInput.files[0].name;
+            submitBtn.disabled = false;
+        }
+    });
+
+    // Drag & Drop visual feedback
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('bg-dark');
+        dropZone.style.borderColor = '#38bdf8';
+    });
+
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('bg-dark');
+        dropZone.style.borderColor = '#6c757d';
+    });
+
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('bg-dark');
+
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            fileName.innerText = e.dataTransfer.files[0].name;
+            submitBtn.disabled = false;
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

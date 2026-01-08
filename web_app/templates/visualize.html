@@ -1,0 +1,322 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4 text-center">Model Visualizations</h2>
+
+    <div class="row g-4">
+        <!-- Confusion Matrix -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow p-3 text-center">
+                <h4 class="card-title text-info mb-3">Confusion Matrix (XGBoost)</h4>
+                <img src="{{ url_for('static', filename='images/xgboost_confusion_matrix.png') }}"
+                    class="img-fluid rounded border border-secondary" alt="Confusion Matrix">
+                <p class="card-text text-muted mt-3">
+                    Shows how well the model predicts each class. Diagonal elements represent correct predictions.
+                </p>
+            </div>
+        </div>
+
+        <!-- T-SNE Plot -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow p-3 text-center">
+                <h4 class="card-title text-info mb-3">T-SNE Cluster Visualization</h4>
+                <img src="{{ url_for('static', filename='images/tsne_plot.png') }}"
+                    class="img-fluid rounded border border-secondary" alt="T-SNE Plot">
+                <p class="card-text text-muted mt-3">
+                    2D projection of the high-dimensional planetary data. Clusters indicate similar kinds of planets.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real-time Analysis Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <hr class="border-secondary my-4">
+            <h2 class="mb-4 text-center">Real-time CSV Analysis</h2>
+            <p class="text-center text-muted col-md-8 mx-auto mb-4">
+                Upload your own exoplanet data (CSV) to instantaneously visualize the habitability distribution and
+                physical properties relative to our model's predictions.
+            </p>
+        </div>
+
+        <div class="col-md-8 mx-auto text-center mb-5">
+            <div class="input-group shadow">
+                <input type="file" class="form-control bg-dark text-light border-secondary" id="csvFile" accept=".csv">
+                <button class="btn btn-primary px-4" type="button" onclick="uploadAndAnalyze()">
+                    Analyze Data
+                </button>
+            </div>
+            <div id="loading" class="mt-3 text-info d-none">
+                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                Processing and predicting habitability...
+            </div>
+            <div id="error" class="mt-3 text-danger d-none fw-bold"></div>
+        </div>
+    </div>
+
+    <!-- Dynamic Charts Container -->
+    <div class="row g-4 d-none mb-5" id="chartsContainer">
+        <!-- Count Chart -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow p-3">
+                <h5 class="card-title text-center text-info mb-3">
+                    Habitability Predictions Count
+                    <div id="countSummary" class="d-flex justify-content-center gap-3 mt-2 small text-secondary">
+                        <!-- Counts will be inserted here -->
+                    </div>
+                </h5>
+                <div class="chart-container" style="position: relative; height:300px;">
+                    <canvas id="countChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scatter Chart -->
+        <div class="col-md-6">
+            <div class="card h-100 shadow p-3">
+                <h5 class="card-title text-center text-info mb-3">Mass vs Radius Analysis</h5>
+                <div class="chart-container" style="position: relative; height:300px;">
+                    <canvas id="scatterChart"></canvas>
+                </div>
+                <p class="small text-muted text-center mt-2">Colored by habitability class.</p>
+            </div>
+        </div>
+
+        <!-- Distance Histogram (Bar Chart in bins) -->
+        <div class="col-12">
+            <div class="card shadow p-3">
+                <h5 class="card-title text-center text-info mb-3">Distance Distribution (AU)</h5>
+                <div class="chart-container" style="position: relative; height:300px;">
+                    <canvas id="distanceChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    let countChartInstance = null;
+    let scatterChartInstance = null;
+    let distanceChartInstance = null;
+
+    async function uploadAndAnalyze() {
+        const fileInput = document.getElementById('csvFile');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+        const container = document.getElementById('chartsContainer');
+
+        if (fileInput.files.length === 0) {
+            error.textContent = "Please select a CSV file first.";
+            error.classList.remove('d-none');
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append('file', fileInput.files[0]);
+
+        // UI Reset
+        error.classList.add('d-none');
+        loading.classList.remove('d-none');
+        container.classList.add('d-none');
+
+        try {
+            const response = await fetch('/api/analyze', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errData = await response.json();
+                throw new Error(errData.error || 'Server error');
+            }
+
+            const data = await response.json();
+            renderCharts(data);
+
+            loading.classList.add('d-none');
+            container.classList.remove('d-none');
+
+            // Scroll to results
+            container.scrollIntoView({ behavior: 'smooth' });
+
+        } catch (err) {
+            loading.classList.add('d-none');
+            error.textContent = "Error: " + err.message;
+            error.classList.remove('d-none');
+        }
+    }
+
+    function renderCharts(data) {
+        // Destroy old instances
+        if (countChartInstance) countChartInstance.destroy();
+        if (scatterChartInstance) scatterChartInstance.destroy();
+        if (distanceChartInstance) distanceChartInstance.destroy();
+
+        // 1. Count Chart (Bar)
+        const ctxCount = document.getElementById('countChart').getContext('2d');
+        const counts = data.counts;
+
+        // Update Summary Text
+        const summaryDiv = document.getElementById('countSummary');
+        summaryDiv.innerHTML = `
+            <span style="color:rgba(239, 68, 68, 1)">Non-Habitable: ${counts['Non-Habitable']}</span>
+            <span style="color:rgba(234, 179, 8, 1)">Potential: ${counts['Potentially Habitable']}</span>
+            <span style="color:rgba(34, 197, 94, 1)">Very Habitable: ${counts['Very Habitable']}</span>
+        `;
+
+        countChartInstance = new Chart(ctxCount, {
+            type: 'bar',
+            data: {
+                labels: Object.keys(counts),
+                datasets: [{
+                    label: '# of Planets',
+                    data: Object.values(counts),
+                    backgroundColor: [
+                        'rgba(239, 68, 68, 0.6)', // Red for Non-Habitable
+                        'rgba(234, 179, 8, 0.6)', // Yellow for Potential
+                        'rgba(34, 197, 94, 0.6)'  // Green for Very Habitable
+                    ],
+                    borderColor: [
+                        'rgba(239, 68, 68, 1)',
+                        'rgba(234, 179, 8, 1)',
+                        'rgba(34, 197, 94, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#334155' }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // 2. Scatter Chart (Mass vs Radius)
+        if (data.scatter) {
+            const ctxScatter = document.getElementById('scatterChart').getContext('2d');
+
+            // Prepare datasets based on class
+            const scatterPoints = data.scatter.mass.map((m, i) => ({
+                x: m,
+                y: data.scatter.radius[i],
+                class: data.scatter.classes[i]
+            }));
+
+            // Group by class
+            const nonHab = scatterPoints.filter(p => p.class === 0);
+            const potHab = scatterPoints.filter(p => p.class === 1);
+            const veryHab = scatterPoints.filter(p => p.class === 2);
+
+            scatterChartInstance = new Chart(ctxScatter, {
+                type: 'scatter',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Non-Habitable',
+                            data: nonHab,
+                            backgroundColor: 'rgba(239, 68, 68, 0.6)'
+                        },
+                        {
+                            label: 'Potentially Habitable',
+                            data: potHab,
+                            backgroundColor: 'rgba(234, 179, 8, 0.6)'
+                        },
+                        {
+                            label: 'Very Habitable',
+                            data: veryHab,
+                            backgroundColor: 'rgba(34, 197, 94, 0.6)'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            type: 'logarithmic',
+                            title: { display: true, text: 'Mass (Earth Mass)', color: '#94a3b8' },
+                            grid: { color: '#334155' }
+                        },
+                        y: {
+                            type: 'logarithmic',
+                            title: { display: true, text: 'Radius (Earth Radii)', color: '#94a3b8' },
+                            grid: { color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 3. Distance Histogram
+        if (data.distance) {
+            const ctxDist = document.getElementById('distanceChart').getContext('2d');
+
+            // Simple binning logic
+            const distances = data.distance;
+            const bins = 20;
+            const maxVal = Math.max(...distances);
+            const minVal = 0;
+            const step = (maxVal - minVal) / bins;
+
+            const labels = [];
+            const freq = new Array(bins).fill(0);
+
+            for (let i = 0; i < bins; i++) {
+                labels.push(`${(i * step).toFixed(1)} - ${((i + 1) * step).toFixed(1)}`);
+            }
+
+            distances.forEach(d => {
+                let idx = Math.floor(d / step);
+                if (idx >= bins) idx = bins - 1;
+                freq[idx]++;
+            });
+
+            distanceChartInstance = new Chart(ctxDist, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Planets',
+                        data: freq,
+                        backgroundColor: 'rgba(56, 189, 248, 0.5)',
+                        borderColor: 'rgba(56, 189, 248, 1)',
+                        borderWidth: 1,
+                        barPercentage: 1.0,
+                        categoryPercentage: 1.0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: { display: true, text: 'Distance (AU)', color: '#94a3b8' },
+                            grid: { display: false }
+                        },
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#334155' }
+                        }
+                    }
+                }
+            });
+        }
+    }
+</script>
+{% endblock %}

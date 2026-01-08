@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Exoplanet Catalog</h2>
+
+<div class="card p-4 shadow-lg mb-4">
+    <div class="table-responsive">
+        <table class="table table-dark table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Status</th>
+                    <th>Zone Class</th>
+                    <th>Mass (Eu)</th>
+                    <th>Radius (Eu)</th>
+                    <th>Temp (K)</th>
+                    <th>Habitable?</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for planet in pagination.items %}
+                <tr>
+                    <td>{{ planet.P_NAME }}</td>
+                    <td>{{ planet.P_STATUS }}</td>
+                    <td>{{ planet.P_ZONE_CLASS }}</td>
+                    <td>{{ planet.P_MASS }}</td>
+                    <td>{{ planet.P_RADIUS }}</td>
+                    <td>{{ planet.P_TEMP_SURF }}</td>
+                    <td>
+                        {% if planet.P_HABITABLE == 2 %}
+                        <span class="badge bg-success">Habitable</span>
+                        {% elif planet.P_HABITABLE == 1 %}
+                        <span class="badge bg-warning text-dark">Potential</span>
+                        {% else %}
+                        <span class="badge bg-secondary">No</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <nav class="mt-4">
+        <ul class="pagination justify-content-center">
+            {% if pagination.has_prev %}
+            <li class="page-item"><a class="page-link bg-dark border-secondary text-light"
+                    href="{{ url_for('main.dataset', page=pagination.prev_num) }}">Previous</a></li>
+            {% endif %}
+
+            <li class="page-item disabled"><span class="page-link bg-dark border-secondary text-light">Page {{
+                    pagination.page }} of {{ pagination.pages }}</span></li>
+
+            {% if pagination.has_next %}
+            <li class="page-item"><a class="page-link bg-dark border-secondary text-light"
+                    href="{{ url_for('main.dataset', page=pagination.next_num) }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card p-4 shadow-lg">
+            <h2 class="text-center mb-4">Predict Habitability</h2>
+
+            <!-- Search & Autofill -->
+            <div class="mb-4 position-relative">
+                <label class="form-label text-info"><i class="bi bi-search"></i> Compare with Known Planet
+                    (Autofill)</label>
+                <input type="text" id="planetSearch" class="form-control"
+                    placeholder="Type a planet name (e.g., Kepler-186 f)..." autocomplete="off">
+                <div id="searchResults" class="list-group position-absolute w-100"
+                    style="z-index: 1000; display: none;"></div>
+            </div>
+
+            <hr class="border-secondary my-4">
+
+            <form action="{{ url_for('main.predict') }}" method="POST">
+
+                <h5 class="mb-3 text-info">Planetary Properties</h5>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label">Mass (Earth Mass)</label>
+                        <input type="number" step="any" name="P_MASS" id="P_MASS" class="form-control" required
+                            placeholder="e.g. 1.0">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Radius (Earth Radii)</label>
+                        <input type="number" step="any" name="P_RADIUS" id="P_RADIUS" class="form-control" required
+                            placeholder="e.g. 1.0">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Flux (Earth Flux)</label>
+                        <input type="number" step="any" name="P_FLUX" id="P_FLUX" class="form-control" required
+                            placeholder="e.g. 1.0">
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Orbital Period (Days)</label>
+                        <input type="number" step="any" name="P_PERIOD" id="P_PERIOD" class="form-control"
+                            placeholder="e.g. 365.25">
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">Distance to Star (AU)</label>
+                        <input type="number" step="any" name="P_SEMI_MAJOR_AXIS" id="P_SEMI_MAJOR_AXIS"
+                            class="form-control" placeholder="e.g. 1.0">
+                    </div>
+                </div>
+
+                <h5 class="mb-3 text-info">Surface Conditions</h5>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                        <label class="form-label">Surface Gravity (Earth g)</label>
+                        <input type="number" step="any" name="P_GRAVITY" id="P_GRAVITY" class="form-control"
+                            placeholder="e.g. 1.0">
+                    </div>
+                </div>
+
+                <h5 class="mb-3 text-info">Star Properties</h5>
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <label class="form-label">Star Temperature (K)</label>
+                        <input type="number" step="any" name="S_TEMPERATURE" id="S_TEMPERATURE" class="form-control"
+                            placeholder="e.g. 5778">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Star Mass (Solar Mass)</label>
+                        <input type="number" step="any" name="S_MASS" id="S_MASS" class="form-control"
+                            placeholder="e.g. 1.0">
+                    </div>
+                    <div class="col-md-4">
+                        <label class="form-label">Star Radius (Solar Radii)</label>
+                        <input type="number" step="any" name="S_RADIUS" id="S_RADIUS" class="form-control"
+                            placeholder="e.g. 1.0">
+                    </div>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Run Prediction</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const searchInput = document.getElementById('planetSearch');
+    const resultsDiv = document.getElementById('searchResults');
+
+    searchInput.addEventListener('input', async (e) => {
+        const query = e.target.value;
+        if (query.length < 2) {
+            resultsDiv.style.display = 'none';
+            return;
+        }
+
+        const res = await fetch(`/api/search_planet?q=${query}`);
+        const data = await res.json();
+
+        resultsDiv.innerHTML = '';
+        if (data.length > 0) {
+            data.forEach(planet => {
+                const item = document.createElement('a');
+                item.className = 'list-group-item list-group-item-action bg-dark text-light border-secondary';
+                item.href = '#';
+                item.innerHTML = `<strong>${planet.name}</strong> <small class='text-muted'>(Mass: ${planet.mass})</small>`;
+                item.onclick = (ev) => {
+                    ev.preventDefault();
+                    // Autofill
+                    document.getElementById('P_MASS').value = planet.mass !== null ? planet.mass : '';
+                    document.getElementById('P_RADIUS').value = planet.radius !== null ? planet.radius : '';
+                    document.getElementById('P_FLUX').value = planet.flux !== null ? planet.flux : '';
+                    document.getElementById('P_PERIOD').value = planet.period !== null ? planet.period : '';
+                    document.getElementById('P_SEMI_MAJOR_AXIS').value = planet.distance !== null ? planet.distance : '';
+                    document.getElementById('P_GRAVITY').value = planet.gravity !== null ? planet.gravity : '';
+                    document.getElementById('S_TEMPERATURE').value = planet.star_temp !== null ? planet.star_temp : '';
+                    document.getElementById('S_MASS').value = planet.star_mass !== null ? planet.star_mass : '';
+                    document.getElementById('S_RADIUS').value = planet.star_radius !== null ? planet.star_radius : '';
+
+                    resultsDiv.style.display = 'none';
+                    searchInput.value = planet.name;
+                };
+                resultsDiv.appendChild(item);
+            });
+            resultsDiv.style.display = 'block';
+        } else {
+            resultsDiv.style.display = 'none';
+        }
+    });
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+        if (e.target !== searchInput) {
+            resultsDiv.style.display = 'none';
+        }
+    });
+</script>
+{% endblock %}

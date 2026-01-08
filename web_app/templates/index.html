@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row align-items-center" style="min-height: 80vh;">
+    <div class="col-md-6 text-center text-md-start">
+        <h1 class="display-3 fw-bold mb-4">Discover New Worlds</h1>
+        <p class="lead mb-4">
+            Unlock the secrets of the cosmos. Use our advanced Machine Learning model to predict the habitability of
+            exoplanets with high accuracy.
+        </p>
+        <div class="d-flex gap-3 justify-content-center justify-content-md-start">
+            <a href="{{ url_for('main.predict') }}" class="btn btn-primary btn-lg px-5">Start Predicting</a>
+            <a href="{{ url_for('main.dataset') }}" class="btn btn-outline-light btn-lg px-4">View Data</a>
+        </div>
+    </div>
+    <div class="col-md-6 text-center">
+        <img src="{{ url_for('static', filename='images/hero_planet.png') }}" alt="Planet"
+            class="img-fluid rounded-circle shadow-lg"
+            style="box-shadow: 0 0 50px rgba(56, 189, 248, 0.3) !important; animation: rotate 60s linear infinite;">
+    </div>
+</div>
+
+<style>
+    @keyframes rotate {
+        from {
+            transform: rotate(0deg);
+        }
+
+        to {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+{% endblock %}

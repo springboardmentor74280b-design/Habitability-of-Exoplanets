@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+        <div class="card p-5 shadow-lg border-0" style="background: linear-gradient(145deg, #1e293b, #0f172a);">
+
+            <h2 class="mb-4">Prediction Result</h2>
+
+            <div class="mb-4">
+                {% if result.class == 2 %}
+                <div class="display-1 text-success">
+                    <i class="bi bi-globe-americas"></i>
+                </div>
+                {% elif result.class == 1 %}
+                <div class="display-1 text-warning">
+                    <i class="bi bi-question-circle"></i>
+                </div>
+                {% else %}
+                <div class="display-1 text-danger">
+                    <i class="bi bi-x-circle"></i>
+                </div>
+                {% endif %}
+            </div>
+
+            <h1
+                class="display-5 fw-bold 
+                {% if result.class == 2 %}text-success{% elif result.class == 1 %}text-warning{% else %}text-danger{% endif %}">
+                {{ result.label }}
+            </h1>
+
+            <p class="lead text-muted mt-3">
+                Based on the provided planetary parameters.
+            </p>
+
+            <hr class="border-secondary my-4">
+
+            <div class="d-flex justify-content-center gap-3">
+                <a href="{{ url_for('main.predict') }}" class="btn btn-outline-light">Make Another Prediction</a>
+                <a href="{{ url_for('main.index') }}" class="btn btn-primary">Back Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
