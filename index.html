@@ -1,0 +1,67 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ExoHab - Predict Habitability</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- JS -->
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🚀 ExoHab</div>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#predict">Predict</a>
+        <a href="#upload">Upload CSV</a>
+    </nav>
+</header>
+
+<main class="container">
+
+    <!-- PREDICT -->
+    <section class="card" id="predict">
+        <h2>Predict Habitability</h2>
+
+        <div class="grid">
+            <input type="number" placeholder="Mass (Earth Mass)">
+            <input type="number" placeholder="Radius (Earth Radii)">
+            <input type="number" placeholder="Flux (Earth Flux)">
+            <input type="number" placeholder="Orbital Period (Days)">
+            <input type="number" placeholder="Distance to Star (AU)">
+            <input type="number" placeholder="Surface Gravity (Earth g)">
+            <input type="number" placeholder="Star Temperature (K)">
+        </div>
+
+        <button onclick="predict()">Run Prediction</button>
+
+        <div id="result" class="result-box hidden">
+            <h3>Prediction Result</h3>
+            <p id="prediction-text"></p>
+            <button onclick="resetPrediction()">Make Another Prediction</button>
+        </div>
+    </section>
+
+    <!-- CSV UPLOAD -->
+    <section class="card" id="upload">
+        <h2>Upload CSV Dataset</h2>
+
+        <input type="file" id="csvFile" accept=".csv">
+        <button onclick="previewCSV()">Upload & Preview</button>
+
+        <div id="csv-preview"></div>
+    </section>
+
+</main>
+
+<footer>
+    <p>© 2026 ExoHab | Exoplanet Habitability Predictor</p>
+</footer>
+
+</body>
+</html>
