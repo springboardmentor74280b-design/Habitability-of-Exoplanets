@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Habitability Predictor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1> Exoplanet Habitability Predictor</h1>
+
+    <div class="input-group">
+        <label>Planet Radius (Earth radii)</label>
+        <input id="pl_rade" type="number" step="0.01" value="1.1">
+    </div>
+
+    <div class="input-group">
+        <label>Planet Mass (Earth mass)</label>
+        <input id="pl_bmasse" type="number" step="0.01" value="1.2">
+    </div>
+
+    <div class="input-group">
+        <label>Equilibrium Temperature (K)</label>
+        <input id="pl_eqt" type="number" step="0.1" value="290">
+    </div>
+
+    <div class="input-group">
+        <label>Orbital Period (days)</label>
+        <input id="pl_orbper" type="number" step="0.1" value="365">
+    </div>
+
+    <div class="input-group">
+        <label>Orbital Semi-Major Axis (AU)</label>
+        <input id="pl_orbsmax" type="number" step="0.01" value="1.0">
+    </div>
+
+    <div class="input-group">
+        <label>Stellar Temperature (K)</label>
+        <input id="st_teff" type="number" step="1" value="5778">
+    </div>
+
+    <div class="input-group">
+        <label>Distance from Earth (pc)</label>
+        <input id="sy_dist" type="number" step="0.1" value="10">
+    </div>
+
+    <button onclick="predict()">Predict Habitability</button>
+
+    <div id="result" class="result"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
