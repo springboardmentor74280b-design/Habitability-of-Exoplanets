@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Exoplanet Habitability Predictor</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Predicting the Habitability of Exoplanets</h1>
+
+    <form id="predictForm">
+      <input type="number" step="any" placeholder="Planet Radius (Earth Radius)" id="pl_rade" required>
+      <input type="number" step="any" placeholder="Planet Mass (Earth Mass)" id="pl_bmasse" required>
+      <input type="number" step="any" placeholder="Orbital Period (Days)" id="pl_orbper" required>
+      <input type="number" step="any" placeholder="Equilibrium Temperature (K)" id="pl_eqt" required>
+
+      <button type="submit">Predict Habitability</button>
+    </form>
+
+    <h2 id="result"></h2>
+  </div>
+
+  <script src="./src/main.js"></script>
+</body>
+</html>
