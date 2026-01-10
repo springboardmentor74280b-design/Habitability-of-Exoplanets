@@ -1,0 +1,43 @@
+# =========================
+# Python virtual environments (ALL cases)
+# =========================
+venv/
+.venv/
+Backend/venv/
+Backend/.venv/
+
+# =========================
+# Python cache
+# =========================
+__pycache__/
+*.py[cod]
+
+# =========================
+# Environment variables
+# =========================
+.env
+
+# =========================
+# Node / Frontend
+# =========================
+node_modules/
+dist/
+build/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# OS / IDE
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+*.csv
+data/
+datasets/
+

@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --border: 217.2 32.6% 17.5%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-space-blue text-white font-inter;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .glassmorphic {
+    background: rgba(11, 13, 23, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 242, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  }
+  
+  .glow-effect {
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.5),
+                0 0 20px rgba(0, 242, 255, 0.3),
+                0 0 30px rgba(112, 0, 255, 0.2);
+  }
+  
+  .text-glow {
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.8),
+                 0 0 20px rgba(0, 242, 255, 0.6),
+                 0 0 30px rgba(112, 0, 255, 0.4);
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .slider-thumb::-webkit-slider-thumb {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00F2FF;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.8),
+                0 0 20px rgba(0, 242, 255, 0.6);
+    transition: all 0.3s ease;
+  }
+  
+  .slider-thumb::-webkit-slider-thumb:hover {
+    background: #00F2FF;
+    box-shadow: 0 0 15px rgba(0, 242, 255, 1),
+                0 0 30px rgba(0, 242, 255, 0.8);
+    transform: scale(1.2);
+  }
+  
+  .slider-thumb::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #00F2FF;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.8),
+                0 0 20px rgba(0, 242, 255, 0.6);
+  }
+}
