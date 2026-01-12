@@ -1,10 +1,18 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:8000/api'
+const API_BASE_URL = 'http://127.0.0.1:8000'
+
+const getPrediction = async (data) => {
+    try {
+        const response = await axios.post(`${API_BASE_URL}/api/predict`, data);
+        return response.data;
+    } catch (error) {
+        console.error("Connection Error:", error);
+    }
+};
 
 /**
  * Prepares the request payload with named features.
- * The backend now accepts this format and maps internally.
  */
 function preparePayload(features) {
   return {
@@ -16,7 +24,8 @@ export async function predictHabitability(features) {
   try {
     const payload = preparePayload(features)
     
-    const response = await axios.post(`${API_BASE_URL}/predict`, payload, {
+    // FIXED: Added "/api" before "/predict" to match your app.py prefix
+    const response = await axios.post(`${API_BASE_URL}/api/predict`, payload, {
       headers: {
         'Content-Type': 'application/json',
       },
