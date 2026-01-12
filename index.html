@@ -2,210 +2,332 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Exoplanet Habitability Prediction</title>
-
+<title>Exoplanet Habitability Dashboard</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-*{box-sizing:border-box}
-body{
+body {
+    font-family: Arial, sans-serif;
     margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#e3f2fd,#fce4ec);
+    background: linear-gradient(135deg,#f0f4ff,#ffe6f0);
 }
-header{
-    background:linear-gradient(90deg,#0d47a1,#6a1b9a);
-    color:#fff;
-    padding:18px;
+header {
+    background:#0d47a1;
+    color:white;
+    padding:15px;
     text-align:center;
-    font-size:22px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
 }
-section{display:none;padding:30px}
-.active{display:block}
-
-.card{
-    background:#fff;
-    padding:22px;
+section {
+    display:none;
+    padding:30px;
+}
+.active {
+    display:block;
+}
+.card {
+    background:white;
+    padding:20px;
     border-radius:12px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-    margin-bottom:25px;
-    animation:fade 0.6s ease;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom:20px;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
-@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1}}
-
-input,button{
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+input, button {
+    padding:10px;
     width:100%;
-    padding:12px;
     margin-top:10px;
-    border-radius:8px;
+    border-radius:6px;
     border:1px solid #ccc;
-    font-size:15px;
 }
-button{
+button {
     background:#1976d2;
     color:white;
     border:none;
     cursor:pointer;
 }
-button:hover{background:#0d47a1}
-
-.back{background:#555;margin-top:10px}
-
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:20px;
+button:hover {
+    background:#0d47a1;
 }
-
-h2,h3{text-align:center;color:#0d47a1}
-
-table{
+table {
     width:100%;
     border-collapse:collapse;
 }
-th,td{
+th, td {
     padding:10px;
     border:1px solid #ddd;
     text-align:center;
 }
-th{background:#e3f2fd}
+.back {
+    background:#555;
+    color:white;
+}
+.grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
+}
 </style>
 </head>
-
 <body>
 
 <header>
-🌍 Exoplanet Habitability Prediction System
+<h1>🌍 Exoplanet Habitability Prediction System</h1>
 </header>
 
-<!-- HOME -->
+<!-- HOME PAGE -->
 <section id="home" class="active">
 <div class="card">
-<h2>🪐 Planet Input</h2>
+<h2>Enter Planet Parameters</h2>
 <input id="planet" placeholder="Planet Name">
 <input id="radius" type="number" step="0.1" placeholder="Radius (Earth units)">
 <input id="mass" type="number" step="0.1" placeholder="Mass (Earth units)">
 <input id="temp" type="number" placeholder="Surface Temperature (K)">
 <button onclick="analyze()">Analyze Habitability</button>
 </div>
+
+<div class="card">
+<h2>Or Upload CSV</h2>
+<input type="file" id="csvFile">
+<button onclick="uploadCSV()">Upload & Analyze</button>
+<p style="font-size:12px; color:#555;">CSV columns: name,radius,mass,temp</p>
+</div>
 </section>
 
-<!-- RESULT -->
+<!-- RESULT PAGE -->
 <section id="result">
 <div class="card">
-<h2>🔬 Analysis Result</h2>
+<h2>🧪 Analysis Result</h2>
 <p><b>Planet:</b> <span id="pname"></span></p>
-<p><b>Score:</b> <span id="score"></span>%</p>
+<p><b>Habitability Score:</b> <span id="score"></span>%</p>
 <p><b>Status:</b> <span id="status"></span></p>
 <button onclick="goTo('ranking')">Next → Ranking</button>
 </div>
 
 <div class="grid">
-<div class="card"><h3>Habitability Pie</h3><canvas id="pie"></canvas></div>
-<div class="card"><h3>Parameter Importance</h3><canvas id="bar"></canvas></div>
+<div class="card">
+<h3>Habitability Pie Chart</h3>
+<canvas id="pieChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Feature Contribution</h3>
+<canvas id="barChart"></canvas>
+</div>
 </div>
 
 <button class="back" onclick="goTo('home')">⬅ Back</button>
 </section>
 
-<!-- RANKING -->
+<!-- RANKING PAGE -->
 <section id="ranking">
 <div class="card">
-<h2>🏆 Ranking</h2>
-<table>
-<tr><th>Rank</th><th>Planet</th><th>Score</th></tr>
-<tr><td>1</td><td>Kepler-442b</td><td>82%</td></tr>
-<tr><td>2</td><td>Kepler-62f</td><td>76%</td></tr>
-<tr><td>3</td><td id="rankPlanet"></td><td id="rankScore"></td></tr>
+<h2>🏆 Planet Ranking</h2>
+<table id="rankingTable">
+<tr>
+<th>Rank</th>
+<th>Planet</th>
+<th>Score</th>
+</tr>
 </table>
 <button onclick="goTo('dashboard')">Next → Dashboard</button>
 </div>
 <button class="back" onclick="goTo('result')">⬅ Back</button>
 </section>
 
-<!-- DASHBOARD -->
+<!-- DASHBOARD PAGE -->
 <section id="dashboard">
 <div class="card">
 <h2>📊 Visualization Dashboard</h2>
 </div>
 
 <div class="grid">
-<div class="card"><h3>Score Distribution</h3><canvas id="line"></canvas></div>
-<div class="card"><h3>Temp vs Radius</h3><canvas id="scatter"></canvas></div>
-<div class="card"><h3>Habitable Ratio</h3><canvas id="donut"></canvas></div>
-<div class="card"><h3>Radar Comparison</h3><canvas id="radar"></canvas></div>
+<div class="card">
+<h3>Score Distribution</h3>
+<canvas id="distChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Temperature vs Radius</h3>
+<canvas id="scatterChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Planet Profile (Radar)</h3>
+<canvas id="radarChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Top Planets by Score</h3>
+<canvas id="barTopChart"></canvas>
+</div>
+
+<div class="card">
+<h3>Habitability Status Pie</h3>
+<canvas id="statusPie"></canvas>
+</div>
 </div>
 
 <button class="back" onclick="goTo('ranking')">⬅ Back</button>
 </section>
 
 <script>
-let scoreVal=0,planetName="";
+let habitScore = 0;
+let userPlanet = {name:'', radius:0, mass:0, temp:0, score:0};
+
+let planets = [
+  {name:'Kepler-442b', score:82, radius:1.34, mass:2.34, temp:295},
+  {name:'Kepler-62f', score:76, radius:1.41, mass:2.14, temp:288},
+  {name:'TRAPPIST-1e', score:69, radius:1.05, mass:0.77, temp:273},
+  {name:'Proxima-b', score:74, radius:1.12, mass:1.27, temp:293}
+];
 
 function goTo(id){
- document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
- document.getElementById(id).classList.add("active");
+    document.querySelectorAll("section").forEach(s=>s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+
+function habitabilityScore(r,m,t){
+    return Math.min(100, Math.max(30,
+        100 - Math.abs(1-r)*20 - Math.abs(1-m)*20 - Math.abs(288-t)/5
+    ));
 }
 
 function analyze(){
- planetName=planet.value||"Unknown";
- let r=+radius.value,m=+mass.value,t=+temp.value;
+    const r = Number(radius.value);
+    const m = Number(mass.value);
+    const t = Number(temp.value);
+    const name = planet.value || "User Planet";
 
- scoreVal=Math.min(100,Math.max(30,
- 100-Math.abs(1-r)*20-Math.abs(1-m)*20-Math.abs(288-t)/5));
+    habitScore = habitabilityScore(r,m,t);
 
- pname.innerText=planetName;
- score.innerText=scoreVal.toFixed(1);
- status.innerText=scoreVal>70?"Highly Habitable 🌱":
-                  scoreVal>50?"Potentially Habitable ⚠":"Not Habitable ❌";
+    userPlanet = {name, radius:r, mass:m, temp:t, score:habitScore};
+    planets.push(userPlanet);
 
- rankPlanet.innerText=planetName;
- rankScore.innerText=scoreVal.toFixed(1)+"%";
+    document.getElementById('pname').innerText = name;
+    document.getElementById('score').innerText = habitScore.toFixed(1);
+    document.getElementById('status').innerText = habitScore>70?"Highly Habitable 🌱":
+        habitScore>50?"Potentially Habitable ⚠":"Not Habitable ❌";
 
- charts();
- goTo('result');
+    updateRanking();
+    drawCharts();
+    goTo('result');
 }
 
-function charts(){
+// ---------------- CSV Upload ----------------
+function uploadCSV(){
+    const file = document.getElementById('csvFile').files[0];
+    if(!file) { alert('Select a CSV file'); return; }
 
-new Chart(pie,{type:'pie',
-data:{labels:['Habitable','Non-Habitable'],
-datasets:[{data:[scoreVal,100-scoreVal],
-backgroundColor:['#4caf50','#e53935']}]} });
+    const reader = new FileReader();
+    reader.onload = function(e){
+        const text = e.target.result;
+        const lines = text.split('\n');
+        lines.forEach((line,i)=>{
+            if(i===0) return; // skip header
+            const [name,radius,mass,temp] = line.split(',');
+            if(name){
+                const score = habitabilityScore(Number(radius),Number(mass),Number(temp));
+                planets.push({name, radius:Number(radius), mass:Number(mass), temp:Number(temp), score});
+            }
+        });
+        alert('CSV Uploaded & Planets Added!');
+        updateRanking();
+        drawCharts();
+    }
+    reader.readAsText(file);
+}
 
-new Chart(bar,{type:'bar',
-data:{labels:['Radius','Mass','Temperature'],
-datasets:[{data:[40,35,25],backgroundColor:'#1976d2'}]},
-options:{plugins:{legend:{display:false}}}
-});
+// ---------------- Update Ranking Table ----------------
+function updateRanking(){
+    const sorted = [...planets].sort((a,b)=>b.score-a.score);
+    const table = document.getElementById('rankingTable');
+    table.innerHTML = "<tr><th>Rank</th><th>Planet</th><th>Score</th></tr>";
+    sorted.forEach((p,i)=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${i+1}</td><td>${p.name}</td><td>${p.score.toFixed(1)}%</td>`;
+        table.appendChild(tr);
+    });
+}
 
-new Chart(line,{type:'line',
-data:{labels:['30','40','50','60','70','80','90'],
-datasets:[{label:'Planet Count',
-data:[1,3,5,8,6,4,2],
-borderColor:'#ff9800',fill:false}]}
-});
+// ---------------- Draw Charts ----------------
+function drawCharts(){
+    const allPlanets = [...planets];
 
-new Chart(scatter,{type:'scatter',
-data:{datasets:[{label:'Temp vs Radius',
-data:[{x:250,y:0.9},{x:280,y:1.0},{x:300,y:1.2},{x:330,y:1.4}],
-backgroundColor:'#9c27b0'}]},
-options:{scales:{x:{title:{display:true,text:'Temperature (K)'}},
-y:{title:{display:true,text:'Radius'}}}}
-});
+    // Pie Chart for Result
+    new Chart(document.getElementById('pieChart'),{
+        type:'pie',
+        data:{
+            labels:['Habitable','Non-Habitable'],
+            datasets:[{data:[userPlanet.score,100-userPlanet.score], backgroundColor:['#4caf50','#e53935']}]
+        }
+    });
 
-new Chart(donut,{type:'doughnut',
-data:{labels:['Habitable','Marginal','Not'],
-datasets:[{data:[scoreVal,100-scoreVal-10,10],
-backgroundColor:['#43a047','#fbc02d','#e53935']}]} });
+    // Feature Contribution
+    new Chart(document.getElementById('barChart'),{
+        type:'bar',
+        data:{
+            labels:['Radius','Mass','Temperature'],
+            datasets:[{label:'Impact', data:[40,35,25], backgroundColor:'#1976d2'}]
+        }
+    });
 
-new Chart(radar,{type:'radar',
-data:{labels:['Radius','Mass','Temp','Orbit','Atmosphere'],
-datasets:[{label:planetName,
-data:[70,65,60,55,50],
-backgroundColor:'rgba(33,150,243,0.3)',
-borderColor:'#1976d2'}]}
-});
+    // Line Chart Score Distribution
+    new Chart(document.getElementById('distChart'),{
+        type:'line',
+        data:{
+            labels:allPlanets.map(p=>p.name),
+            datasets:[{label:'Habitability Score', data:allPlanets.map(p=>p.score), borderColor:'#ff9800', fill:false, tension:0.3}]
+        }
+    });
+
+    // Scatter Chart Temp vs Radius
+    new Chart(document.getElementById('scatterChart'),{
+        type:'scatter',
+        data:{datasets:[{label:'Temp vs Radius', data:allPlanets.map(p=>({x:p.temp, y:p.radius, label:p.name})), backgroundColor:'#9c27b0'}]},
+        options:{plugins:{tooltip:{callbacks:{label:function(context){return context.raw.label+': ('+context.raw.x+', '+context.raw.y+')';}}}}}
+    });
+
+    // Radar Chart
+    new Chart(document.getElementById('radarChart'),{
+        type:'radar',
+        data:{
+            labels:['Radius','Mass','Temp'],
+            datasets:[{
+                label:userPlanet.name,
+                data:[userPlanet.radius*50,userPlanet.mass*50,userPlanet.temp/3],
+                backgroundColor:'rgba(33,150,243,0.4)',
+                borderColor:'#2196f3',
+                borderWidth:2
+            }]
+        },
+        options:{scale:{beginAtZero:true, max:100}}
+    });
+
+    // Top Planets Bar Chart
+    new Chart(document.getElementById('barTopChart'),{
+        type:'bar',
+        data:{
+            labels:allPlanets.sort((a,b)=>b.score-a.score).map(p=>p.name),
+            datasets:[{label:'Score', data:allPlanets.sort((a,b)=>b.score-a.score).map(p=>p.score), backgroundColor:'#ff5722'}]
+        }
+    });
+
+    // Habitability Status Pie
+    const habStatus = allPlanets.map(p=>p.score>70?'High':p.score>50?'Medium':'Low');
+    const counts = {High:0, Medium:0, Low:0};
+    habStatus.forEach(s=>counts[s]++);
+    new Chart(document.getElementById('statusPie'),{
+        type:'pie',
+        data:{
+            labels:['High','Medium','Low'],
+            datasets:[{data:[counts.High,counts.Medium,counts.Low], backgroundColor:['#4caf50','#ffeb3b','#f44336']}]
+        }
+    });
 }
 </script>
 
