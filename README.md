@@ -110,6 +110,23 @@ Identifying potentially habitable exoplanets
 Astronomical data analysis
 Machine learning academic projects
 Full-stack data science demonstration
+
+Application Output Screenshots
+🪐 Habitability Status Pie Chart
+
+This chart shows the distribution of exoplanets based on predicted habitability levels (High, Medium, Low).
+
+📊 Dashboard & Feature Visualizations
+
+This dashboard visualizes important planetary features and their influence on habitability prediction.
+
+📋 Exoplanet Ranking Table
+
+Exoplanets are ranked based on their predicted habitability scores, helping identify the most promising candidates.
+
+🔮 Habitability Prediction Result
+
+This screen displays the habitability score and status for a user-provided exoplanet input.
 👩‍💻 Author
 Rushitha Konangi
 B.Tech Final Year Student
