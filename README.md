@@ -127,6 +127,22 @@ Exoplanets are ranked based on their predicted habitability scores, helping iden
 🔮 Habitability Prediction Result
 
 This screen displays the habitability score and status for a user-provided exoplanet input.
+
+## 🚀 Deployment
+
+The project is deployed on **Render**.
+
+🔗 Live URL:
+https://habitability-of-exoplanets-2.onrender.com
+
+### Deployment Steps
+1. Pushed code to GitHub
+2. Connected GitHub repo to Render
+3. Installed dependencies using `requirements.txt`
+4. Started Flask app using Gunicorn
+5. Verified live deployment
+
+
 👩‍💻 Author
 Rushitha Konangi
 B.Tech Final Year Student
