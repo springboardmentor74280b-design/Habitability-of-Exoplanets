@@ -1,4 +1,9 @@
 # 🌍 ExoHabitAI – Exoplanet Habitability Prediction
+---
+✨ *Curious to know which planets could support life?*  
+🚀 **Visit the live project here:** 👉 https://exohabitatai.tiiny.site  
+
+---
 
 ## 📌 Project Description
 ExoHabitAI is a machine learning project that predicts whether an exoplanet is potentially habitable using its physical, orbital, and host star properties. The project analyzes large astronomical datasets to identify planets that may support life.
