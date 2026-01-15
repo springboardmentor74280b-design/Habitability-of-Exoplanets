@@ -34,5 +34,3 @@ The system accurately predicts exoplanet habitability and helps prioritize plane
 
 ---
 
-## 👩‍💻 Author
-Pooja
