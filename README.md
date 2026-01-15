@@ -33,4 +33,8 @@ To use machine learning models to classify and rank exoplanets based on their ha
 The system accurately predicts exoplanet habitability and helps prioritize planets for further scientific research.
 
 ---
+<img width="952" height="476" alt="{AE0D92B4-0058-4CE2-9BA7-F51A4E8FBCEB}" src="https://github.com/user-attachments/assets/f2b6981d-eb39-460f-b00b-65a4cc9f774b" />
+
+<img width="952" height="476" alt="{957020BC-C1FC-4339-94DE-1E6CFB59DBA0}" src="https://github.com/user-attachments/assets/522aa688-73a0-434a-b494-aa7dd7926ed8" />
+
 
