@@ -1,5 +1,5 @@
 # 🌍 ExoHabitAI – Exoplanet Habitability Prediction
----
+
 ✨ *Curious to know which planets could support life?*  
 🚀 **Visit the live project here:** 👉 https://exohabitatai.tiiny.site  
 
