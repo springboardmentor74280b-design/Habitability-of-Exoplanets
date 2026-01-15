@@ -1,12 +1,12 @@
- *EXOPLANET HABITABILITY PREDICTION SYSTEM*
+ ***EXOPLANET HABITABILITY PREDICTION SYSTEM***
 
 A machine learning-based system for predicting the habitability of exoplanets using advanced classification algorithms and data balancing techniques. This project was developed as part of the **Infosys Springboard Program**.
 
-PROJECT OVERVIEW
+**PROJECT OVERVIEW**
 
 The Exoplanet Habitability Prediction System analyzes astronomical data to classify exoplanets based on their potential habitability. The system employs multiple machine learning models, handles class imbalance using SMOTE (Synthetic Minority Over-sampling Technique), and provides predictions through a modern web interface.
 
-KEY FEATURES
+**KEY FEATURES**
 
 - **Multi-Model Classification**: Implements Logistic Regression, K-Nearest Neighbors (KNN), and XGBoost algorithms
 - **Class Imbalance Handling**: SMOTE technique for balanced training data
@@ -16,7 +16,7 @@ KEY FEATURES
 - **Interactive Frontend**: React-based user interface
 - **Data Pipeline**: Complete ML pipeline from data cleaning to model deployment
 
-TECHNOLOGY STACK
+**TECHNOLOGY STACK**
 
 ### Backend
 - **FastAPI**: High-performance web framework for building APIs
@@ -37,7 +37,7 @@ TECHNOLOGY STACK
 - **Feature Engineering**: Scaling, PCA, t-SNE
 - **Model Evaluation**: Confusion matrices, performance metrics
 
-PROJECT STRUCTURE
+**PROJECT STRUCTURE**
 
 ![Project Structure](image_8a62f4.png)
 
@@ -91,7 +91,7 @@ Exoplanet-Habitability-Prediction/
 └── README.md                              # Project documentation
 ```
 
-Installation Instructions
+**Installation Instructions**
 
 ### Prerequisites
 
