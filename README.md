@@ -1,4 +1,4 @@
-# Exoplanet Habitability Prediction System
+<img width="1200" height="1200" alt="Logistic_Regression_cm" src="https://github.com/user-attachments/assets/00d96337-9ef0-4e21-acbf-d964b83aa335" /><img width="1200" height="1200" alt="Logistic_Regression_cm" src="https://github.com/user-attachments/assets/357d0a78-622c-4d5b-8a5c-d29bd4f0fb51" /># Exoplanet Habitability Prediction System
 
 A machine learning-based system for predicting the habitability of exoplanets using advanced classification algorithms and data balancing techniques. This project was developed as part of the **Infosys Springboard Program**.
 
@@ -213,17 +213,23 @@ curl -X POST "http://localhost:8000/predict" \
 
 ### Model Performance Graphs
 <!-- Insert your model performance comparison graphs here -->
-![Model Performance](path/to/your/performance_graph.png)
+<img width="3000" height="1800" alt="model_comparison_barplot" src="https://github.com/user-attachments/assets/c919ea1c-b56c-4ec8-b9b2-f734aa9df793" />
+
 
 ### SMOTE Visualizations
 <!-- Insert your SMOTE before/after visualizations here -->
-![SMOTE Visualization](path/to/your/smote_visualization.png)
+<img width="3000" height="1200" alt="class_distribution_smote" src="https://github.com/user-attachments/assets/d64adcbd-ceef-4961-9037-33f9507f9bef" />
+
 
 ### Confusion Matrices
 
 The system generates confusion matrices for each model:
 - `Logistic_Regression_cm.png`
+  <img width="1200" height="1200" alt="Logistic_Regression_cm" src="https://github.com/user-attachments/assets/61e1c91b-d251-424a-9670-2a47d6b15c52" />
+
 - `KNN_cm.png`
+  <img width="1200" height="1200" alt="KNN_cm" src="https://github.com/user-attachments/assets/660c14e8-beb3-4d53-bc31-06dfa71da8df" />
+
 - Additional model confusion matrices in the `outputs/` directory
 
 ## Dataset
@@ -256,11 +262,11 @@ Interactive Swagger UI documentation
 
 ## Contributors
 
-- **Abirami** - Project Developer
+- ABIRAMI - Project Developer
 
 ## License
 
-This project is part of the **Infosys Springboard Program**. All rights reserved.
+This project is part of the Infosys Springboard Program. All rights reserved.
 
 ## Acknowledgments
 
@@ -268,6 +274,6 @@ This project is part of the **Infosys Springboard Program**. All rights reserved
 - The exoplanet research community for dataset availability
 - Open-source contributors of the libraries used in this project
 
----
+
 
 **Note**: This project is developed for educational purposes as part of the Infosys Springboard Program.
