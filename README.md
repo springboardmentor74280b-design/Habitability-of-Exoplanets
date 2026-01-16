@@ -191,3 +191,9 @@ Divya Vishwanath
 - Infosys Springboard for the learning opportunity
 - PHL Exoplanet Catalog for the dataset
 - scikit-learn and imbalanced-learn communities
+## 🎥 Demo & Live Deployment
+
+- **Demo Video**: https://drive.google.com/file/d/1LkS9UV28aSxNJprswAbuXdLn6jRwYDsJ/view?usp=drive_link  
+- **Live Deployed App**: https://habitability-of-exoplanets-k49h.onrender.com/
+
+ 
