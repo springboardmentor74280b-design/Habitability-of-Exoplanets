@@ -1,8 +1,7 @@
 # 🌍 ExoHabitAI – Exoplanet Habitability Prediction
 
 ✨ *Curious to know which planets could support life?*  
-🚀 **Visit the live project here:** 👉 https://exoplanetai-gy9l-git-main-poojareddy2809s-projects.vercel.app?_vercel_share=nCUASxRuEq1tUyBjlcVV7Gz6ZP79ghUX
-
+🚀 **Visit the live project here:** 👉 https://exohabitatai-git-vercel-set-up-c544f0-poojareddy2809s-projects.vercel.app?_vercel_share=7dvOAR8m1b63j8UMChtjkoGSNTWFpbsl
 ---
 
 ## 📌 Project Description
