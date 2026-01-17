@@ -9,3 +9,4 @@ plotly
 kaleido
 openpyxl
 gunicorn
+flask-cors
