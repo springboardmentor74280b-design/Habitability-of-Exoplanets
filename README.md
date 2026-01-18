@@ -1,12 +1,12 @@
-# Exoplanet Habitability Prediction System
+ ***EXOPLANET HABITABILITY PREDICTION SYSTEM***
 
 A machine learning-based system for predicting the habitability of exoplanets using advanced classification algorithms and data balancing techniques. This project was developed as part of the **Infosys Springboard Program**.
 
-## Project Overview
+**PROJECT OVERVIEW**
 
 The Exoplanet Habitability Prediction System analyzes astronomical data to classify exoplanets based on their potential habitability. The system employs multiple machine learning models, handles class imbalance using SMOTE (Synthetic Minority Over-sampling Technique), and provides predictions through a modern web interface.
 
-### Key Features
+**KEY FEATURES**
 
 - **Multi-Model Classification**: Implements Logistic Regression, K-Nearest Neighbors (KNN), and XGBoost algorithms
 - **Class Imbalance Handling**: SMOTE technique for balanced training data
@@ -16,7 +16,7 @@ The Exoplanet Habitability Prediction System analyzes astronomical data to class
 - **Interactive Frontend**: React-based user interface
 - **Data Pipeline**: Complete ML pipeline from data cleaning to model deployment
 
-## Technology Stack
+**TECHNOLOGY STACK**
 
 ### Backend
 - **FastAPI**: High-performance web framework for building APIs
@@ -37,7 +37,7 @@ The Exoplanet Habitability Prediction System analyzes astronomical data to class
 - **Feature Engineering**: Scaling, PCA, t-SNE
 - **Model Evaluation**: Confusion matrices, performance metrics
 
-## Project Structure
+**PROJECT STRUCTURE**
 
 ![Project Structure](image_8a62f4.png)
 
@@ -91,7 +91,7 @@ Exoplanet-Habitability-Prediction/
 └── README.md                              # Project documentation
 ```
 
-## Installation Instructions
+**Installation Instructions**
 
 ### Prerequisites
 
@@ -213,17 +213,23 @@ curl -X POST "http://localhost:8000/predict" \
 
 ### Model Performance Graphs
 <!-- Insert your model performance comparison graphs here -->
-![Model Performance](path/to/your/performance_graph.png)
+<img width="3000" height="1800" alt="model_comparison_barplot" src="https://github.com/user-attachments/assets/c919ea1c-b56c-4ec8-b9b2-f734aa9df793" />
+
 
 ### SMOTE Visualizations
 <!-- Insert your SMOTE before/after visualizations here -->
-![SMOTE Visualization](path/to/your/smote_visualization.png)
+<img width="3000" height="1200" alt="class_distribution_smote" src="https://github.com/user-attachments/assets/d64adcbd-ceef-4961-9037-33f9507f9bef" />
+
 
 ### Confusion Matrices
 
 The system generates confusion matrices for each model:
 - `Logistic_Regression_cm.png`
+  <img width="1200" height="1200" alt="Logistic_Regression_cm" src="https://github.com/user-attachments/assets/61e1c91b-d251-424a-9670-2a47d6b15c52" />
+
 - `KNN_cm.png`
+  <img width="1200" height="1200" alt="KNN_cm" src="https://github.com/user-attachments/assets/660c14e8-beb3-4d53-bc31-06dfa71da8df" />
+
 - Additional model confusion matrices in the `outputs/` directory
 
 ## Dataset
@@ -256,11 +262,11 @@ Interactive Swagger UI documentation
 
 ## Contributors
 
-- **Abirami** - Project Developer
+- ABIRAMI - Project Developer
 
 ## License
 
-This project is part of the **Infosys Springboard Program**. All rights reserved.
+This project is part of the Infosys Springboard Program. All rights reserved.
 
 ## Acknowledgments
 
@@ -268,6 +274,6 @@ This project is part of the **Infosys Springboard Program**. All rights reserved
 - The exoplanet research community for dataset availability
 - Open-source contributors of the libraries used in this project
 
----
+
 
 **Note**: This project is developed for educational purposes as part of the Infosys Springboard Program.
