@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Exoplanet Habitability AI 🌌</h1>
+    <p class="lead mt-3">Predict whether a planet can sustain life and explore exoplanets in our galaxy.</p>
+
+    <!-- Buttons -->
+    <div class="mt-5">
+        <a href="{{ url_for('predict_page') }}" class="btn btn-primary me-2">Predict Habitability</a>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-success me-2">View Dashboard</a>
+        <a href="{{ url_for('history') }}" class="btn btn-warning me-2">History</a>
+        <a href="{{ url_for('ranking') }}" class="btn btn-danger">Ranking</a>
+    </div>
+
+    <hr class="my-5">
+
+    <!-- About Section -->
+    <h3 class="mb-4">About Exoplanet Habitability</h3>
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-6 mb-3">
+            <p>
+                Exoplanets are planets outside our solar system. Scientists determine habitability 
+                by analyzing size, mass, temperature, orbital distance, and star conditions. Our AI predicts if a planet could potentially sustain life.
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img src="{{ url_for('static', filename='images/exoplanet_new.png') }}"
+     alt="Exoplanet Illustration">
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

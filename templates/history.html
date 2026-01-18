@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Prediction History</h2>
+
+    {% if leaderboard %}
+        <table class="table table-striped table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>#</th>
+                    <th>P Radius</th>
+                    <th>P Mass</th>
+                    <th>P Temp Equil</th>
+                    <th>P Period</th>
+                    <th>S Radius</th>
+                    <th>S Temperature</th>
+                    <th>Status</th>
+                    <th>Habitable %</th>
+                    <th>Not Habitable %</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+           <tbody>
+{% for row in leaderboard %}
+<tr>
+    <td>{{ loop.index }}</td>
+    <td>{{ row.P_RADIUS }}</td>
+    <td>{{ row.P_MASS }}</td>
+    <td>{{ row.P_TEMP_EQUIL }}</td>
+    <td>{{ row.P_PERIOD }}</td>
+    <td>{{ row.S_RADIUS }}</td>
+    <td>{{ row.S_TEMPERATURE }}</td>
+
+    <td>
+        {% if row.status == "Habitable" %}
+            <span class="badge bg-success">Habitable</span>
+        {% else %}
+            <span class="badge bg-danger">Not Habitable</span>
+        {% endif %}
+    </td>
+
+    <!-- ✅ FIXED PERCENTAGES -->
+    <td>{{ row.habitable }}%</td>
+    <td>{{ row.not_habitable }}%</td>
+
+    <td>
+        <form action="{{ url_for('delete_record', index=row.csv_index) }}" method="post">
+            <button class="btn btn-danger btn-sm">Delete</button>
+        </form>
+    </td>
+</tr>
+{% endfor %}
+</tbody>
+
+        </table>
+
+        <div class="text-center mt-3">
+            <a href="{{ url_for('download_csv') }}" class="btn btn-primary">Download CSV</a>
+        </div>
+    {% else %}
+        <p class="text-center">No prediction history available.</p>
+    {% endif %}
+</div>
+{% endblock %}

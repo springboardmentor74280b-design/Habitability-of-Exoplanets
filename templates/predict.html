@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Predict Exoplanet Habitability 🌍</h2>
+
+    <form action="/result" method="POST" class="card p-4 shadow mx-auto bg-dark text-light" style="max-width: 500px;">
+        <input type="number" step="any" name="P_RADIUS" class="form-control mb-2" placeholder="Planet Radius" required>
+        <input type="number" step="any" name="P_MASS" class="form-control mb-2" placeholder="Planet Mass" required>
+        <input type="number" step="any" name="P_TEMP_EQUIL" class="form-control mb-2" placeholder="Equilibrium Temperature" required>
+        <input type="number" step="any" name="P_PERIOD" class="form-control mb-2" placeholder="Orbital Period" required>
+        <input type="number" step="any" name="S_RADIUS" class="form-control mb-2" placeholder="Star Radius" required>
+        <input type="number" step="any" name="S_TEMPERATURE" class="form-control mb-3" placeholder="Star Temperature" required>
+
+        <button type="submit" class="btn btn-primary w-100 fw-bold">Predict Habitability</button>
+    </form>
+</div>
+
+{% endblock %}

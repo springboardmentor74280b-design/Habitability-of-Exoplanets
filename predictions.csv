@@ -1,0 +1,2 @@
+P_RADIUS,P_MASS,P_TEMP_EQUIL,P_PERIOD,S_RADIUS,S_TEMPERATURE,status,habitable,not_habitable
+1.0,1.0,288.0,365.0,1.0,5778.0,Habitable,100,0

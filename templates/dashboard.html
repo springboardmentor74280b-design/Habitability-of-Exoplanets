@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Exoplanet Habitability Dashboard 🌌</h2>
+
+    <!-- Summary Cards -->
+    <div class="row mb-4 text-center">
+        <div class="col-md-3 mb-2">
+            <div class="card p-3 shadow">
+                <h5>Total Predictions</h5>
+                <h3>{{ total_predictions }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card p-3 shadow">
+                <h5>Habitable</h5>
+                <h3>{{ total_habitable }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card p-3 shadow">
+                <h5>Not Habitable</h5>
+                <h3>{{ total_not_habitable }}</h3>
+            </div>
+        </div>
+        <div class="col-md-3 mb-2">
+            <div class="card p-3 shadow">
+                <h5>Avg Habitable %</h5>
+                <h3>{{ avg_habitable }}%</h3>
+            </div>
+        </div>
+    </div>
+
+    <!-- CSV Download Button -->
+    <div class="text-end mb-3">
+        <a href="{{ url_for('download_csv') }}" class="btn btn-primary">Download CSV</a>
+    </div>
+
+    <!-- Charts -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <h5 class="text-center mb-2">Habitable % vs Orbital Period</h5>
+            <canvas id="chartPeriod"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <h5 class="text-center mb-2">Habitable % vs Temperature</h5>
+            <canvas id="chartTemp"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <h5 class="text-center mb-2">Habitable % vs Planet Mass</h5>
+            <canvas id="chartMass"></canvas>
+        </div>
+        <div class="col-md-6 mb-4">
+            <h5 class="text-center mb-2">Habitable % vs Planet Radius</h5>
+            <canvas id="chartRadius"></canvas>
+        </div>
+    </div>
+
+    <!-- Leaderboard -->
+    <h3 class="mt-5 mb-3">Top Habitable Exoplanets</h3>
+    <div class="table-responsive shadow">
+        <table class="table table-striped table-bordered text-center align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Name</th>
+                    <th>Orbital Period</th>
+                    <th>Temperature</th>
+                    <th>Mass</th>
+                    <th>Radius</th>
+                    <th>Habitable %</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if leaderboard %}
+                    {% for planet in leaderboard %}
+                    <tr>
+                        <td>{{ planet.P_NAME }}</td>
+                        <td>{{ planet.P_PERIOD }}</td>
+                        <td>{{ planet.P_TEMP_EQUIL }}</td>
+                        <td>{{ planet.P_MASS }}</td>
+                        <td>{{ planet.P_RADIUS }}</td>
+                        <td>{{ planet.habitable }}</td>
+                    </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr>
+                        <td colspan="6" class="text-center">No data available</td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // Parse JSON arrays once
+    const orbitalPeriod = {{ orbital_period | safe }};
+    const temperature = {{ temperature | safe }};
+    const planetMass = {{ planet_mass | safe }};
+    const planetRadius = {{ planet_radius | safe }};
+    const habitable = {{ habitable | safe }};
+
+    // Prepare scatter datasets
+    const orbitalData = orbitalPeriod.map((x, i) => ({ x: x, y: habitable[i] }));
+    const tempData = temperature.map((x, i) => ({ x: x, y: habitable[i] }));
+    const massData = planetMass.map((x, i) => ({ x: x, y: habitable[i] }));
+    const radiusData = planetRadius.map((x, i) => ({ x: x, y: habitable[i] }));
+
+    // Function to create scatter chart
+    function createScatter(ctxId, label, data, color, xlabel){
+        new Chart(document.getElementById(ctxId), {
+            type: 'scatter',
+            data: { datasets:[{ label: label, data: data, backgroundColor: color }] },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: ctx => `Habitable: ${ctx.raw.y}%`
+                        }
+                    }
+                },
+                scales: {
+                    x: { title: { display: true, text: xlabel } },
+                    y: { title: { display: true, text: 'Habitable %' }, min: 0, max: 100 }
+                }
+            }
+        });
+    }
+
+    // Create all charts
+    createScatter('chartPeriod', 'Habitable % vs Orbital Period', orbitalData, 'rgba(40,167,69,0.7)', 'Orbital Period');
+    createScatter('chartTemp', 'Habitable % vs Temperature', tempData, 'rgba(255,205,57,0.7)', 'Temperature');
+    createScatter('chartMass', 'Habitable % vs Planet Mass', massData, 'rgba(23,162,184,0.7)', 'Planet Mass');
+    createScatter('chartRadius', 'Habitable % vs Planet Radius', radiusData, 'rgba(220,53,69,0.7)', 'Planet Radius');
+</script>
+
+{% endblock %}

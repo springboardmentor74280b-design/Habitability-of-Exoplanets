@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container d-flex justify-content-center mt-5">
+    <div class="card text-center shadow-lg" style="width: 600px; background-color: #1e1e2f; color: white;">
+        <div class="card-body">
+            <h2 class="card-title mb-3">Prediction Result 🌌</h2>
+            
+            <!-- Status -->
+            <h4 class="mb-4">Status: 
+                {% if status == "Habitable" %}
+                    <span class="text-success">{{ status }} ✅</span>
+                {% else %}
+                    <span class="text-danger">{{ status }} ❌</span>
+                {% endif %}
+            </h4>
+            <hr class="bg-secondary">
+
+            <!-- Chart -->
+            <h5 class="mt-3 mb-3">Habitability Chart</h5>
+            <canvas id="habitabilityChart" style="max-width: 100%; height: 200px;"></canvas>
+
+            <!-- Predict Again Button -->
+            <a href="{{ url_for('predict_page') }}" class="btn btn-primary btn-lg mt-4">Predict Another Planet</a>
+        </div>
+    </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('habitabilityChart').getContext('2d');
+    const habitabilityChart = new Chart(ctx, {
+        type: 'bar', // horizontal bar
+        data: {
+            labels: ['Habitable', 'Not Habitable'],
+            datasets: [{
+                label: 'Percentage',
+                data: [{{ habitable }}, {{ not_habitable }}],
+                backgroundColor: ['#28a745', '#dc3545'], // green & red
+                borderRadius: 8,
+                borderSkipped: false
+            }]
+        },
+        options: {
+            indexAxis: 'y', // makes it horizontal
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+                tooltip: { 
+                    callbacks: {
+                        label: function(context) {
+                            return context.parsed.x + '%';
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    max: 100,
+                    ticks: { color: 'white', stepSize: 10 },
+                    grid: { color: '#444' }
+                },
+                y: {
+                    ticks: { color: 'white' },
+                    grid: { color: '#444' }
+                }
+            }
+        }
+    });
+</script>
+
+{% endblock %}
