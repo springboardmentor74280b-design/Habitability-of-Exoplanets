@@ -7,3 +7,4 @@ joblib
 gunicorn
 
 gunicorn
+flask-cors
