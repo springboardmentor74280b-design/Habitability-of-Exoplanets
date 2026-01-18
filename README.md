@@ -121,7 +121,15 @@ Then open:
 http://127.0.0.1:5000
 ```
 
-
-
 ## Author
+HARSHITHA
 Developed as part of an academic internship / project module.
+
+## License
+This project is part of the Infosys Springboard Program. All rights reserved.
+
+## Acknowledgments
+Infosys Springboard for project guidance and support
+The exoplanet research community for dataset availability
+Open-source contributors of the libraries used in this project
+Note: This project is developed for educational purposes as part of the Infosys Springboard Program.
