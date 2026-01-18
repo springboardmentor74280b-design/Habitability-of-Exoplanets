@@ -133,21 +133,13 @@ Performance evaluation demonstrates the effectiveness of the implemented approac
 
 The results indicate successful implementation of automated habitability prediction with performance levels suitable for practical astronomical applications. Confusion matrix analysis reveals the system's ability to distinguish between different habitability classes with acceptable accuracy. The confidence scores provided by probability estimates enable astronomers to prioritize candidates based on prediction certainty. Cross-validation results demonstrate model stability and generalization capability across different data subsets.
 
-## 11. Deployment
 
-### Deployment Platform Used
-
-The system is deployed using FastAPI as the backend framework, providing high-performance API endpoints for real-time predictions. The deployment architecture supports local development environments with configuration for production scaling. CORS middleware enables cross-origin requests from the React frontend application. The API includes comprehensive documentation through automatically generated Swagger UI interfaces.
-
-### Application Workflow After Deployment
-
-The deployed system accepts HTTP POST requests containing exoplanet feature data in JSON format. Input validation using Pydantic schemas ensures data quality and type consistency. The cached model pipeline processes requests efficiently without reloading overhead. Predictions are returned with habitability class labels, confidence scores, and model identification information. The React frontend provides an intuitive interface for parameter input and result visualization.
 
 ### Real-World Usability
 
 The system's design prioritizes practical usability for astronomical research applications. The API's RESTful design enables integration with existing astronomical software and databases. Batch processing capabilities support analysis of large exoplanet catalogs. The confidence scoring system assists astronomers in prioritizing follow-up observations and research efforts. Documentation and examples facilitate adoption by the astronomical community.
 
-## 12. Conclusion
+## 11. Conclusion
 
 ### Summary of Achievements
 
@@ -157,7 +149,7 @@ This project successfully developed a comprehensive machine learning system for 
 
 The project highlighted the importance of appropriate evaluation metrics for imbalanced multiclass problems and the effectiveness of ensemble methods in astronomical applications. The integration of domain knowledge in feature selection proved crucial for model performance, while proper handling of class imbalance significantly improved minority class prediction accuracy. The modular architecture design facilitates future enhancements and integration with existing astronomical workflows.
 
-## 13. Future Scope
+## 12. Future Scope
 
 ### Possible Enhancements
 
@@ -171,7 +163,7 @@ Deep learning architectures could capture more complex feature interactions and 
 
 Cloud-based deployment would enable processing of large-scale exoplanet catalogs with distributed computing resources. Batch processing APIs could support bulk analysis of astronomical databases. Model versioning systems would facilitate continuous improvement and comparison of different algorithmic approaches. Integration with astronomical visualization tools could enhance result interpretation and scientific insight generation.
 
-## 14. References
+## 13. References
 
 1. Borucki, W. J., et al. "Kepler Planet-Detection Mission: Introduction and First Results." Science, vol. 327, no. 5968, 2010, pp. 977-980.
 
