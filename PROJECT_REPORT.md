@@ -1,4 +1,4 @@
-# Project Report: Exoplanet Habitability Prediction Using Machine Learning
+# PROJECT REPORT: EXOPLANET HABITABILITY PREDICTION USING MACHINE LEARNING
 
 ## 1. Abstract
 
