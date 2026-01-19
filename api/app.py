@@ -19,7 +19,9 @@ TOP_PLANETS_PATH = os.path.join(BASE_DIR, "data", "top_exoplanets.csv")
 model = joblib.load(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 
-features = pd.read_csv(FEATURES_PATH)["feature"].tolist()
+#features = pd.read_csv(FEATURES_PATH)["feature"].tolist()
+features = pd.read_csv(FEATURES_PATH).iloc[:, 0].tolist()
+
 top_planets = pd.read_csv(TOP_PLANETS_PATH).head(10).to_dict(orient="records")
 
 #routes
