@@ -293,4 +293,5 @@ if __name__ == '__main__':
     print("\n⚡ Starting server...")
     print("="*60 + "\n")
     
-    app.run(host=HOST, port=PORT, debug=True)
+
+    app.run(host=HOST, port=PORT, debug=False)
