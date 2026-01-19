@@ -14,7 +14,7 @@ PORT = 5000
 HOST = '0.0.0.0'
 
 # Initialize Flask
-app = Flask(__name__, static_folder='.', static_url_path='')
+app = Flask(__name__, static_folder='static', static_url_path='/static')
 
 # Allow ALL origins for development
 CORS(app, supports_credentials=True)
@@ -295,3 +295,4 @@ if __name__ == '__main__':
     
 
     app.run(host=HOST, port=PORT, debug=False)
+
