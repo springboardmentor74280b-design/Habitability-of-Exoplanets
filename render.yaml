@@ -6,7 +6,6 @@ services:
     rootDir: notebook/api
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn app:app
-    pythonVersion: 3.10.11
 
   - type: web
     name: habitability-frontend
@@ -18,4 +17,3 @@ services:
       streamlit run streamlit_app.py
       --server.port $PORT
       --server.address 0.0.0.0
-    pythonVersion: 3.10.11
