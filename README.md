@@ -129,9 +129,10 @@ Prediction Result: Displays habitability score and status for user-provided inpu
 Deployment
 The project is deployed on Render.
 
-Live URL: Exoplanet Habitability System
+Live URL: https://habitability-of-exoplanets-2.onrender.com/
 
-Video Demo: OneDrive Link
+Video Demo: https://onedrive.live.com/?qt=allmyphotos&photosData=%2Fshare%2F7455FACDCC191830%21s7ba3f36466c141838e8686b421bd15d1%3Fithint%3Dvideo%26e%3DGx7JbM%26migratedtospo%3Dtrue&cid=7455FACDCC191830&id=7455FACDCC191830%21s7ba3f36466c141838e8686b421bd15d1&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83NDU1ZmFjZGNjMTkxODMwL0lRQms4Nk43d1dhRFFZNkdoclFodlJYUkFaUUhGSDJZb3ItSVAxand4RzQzQ1dnP2U9R3g3SmJN&v=photos
+
 
 Deployment Steps:
 
