@@ -1,167 +1,165 @@
-# 🪐 Exoplanet Habitability Prediction System
+# Exoplanet Habitability Prediction System
 
-An AI-powered system that predicts and ranks the habitability of exoplanets using machine learning and a Flask-based web application.
+**Overview:**  
+An AI-powered system that predicts and ranks the habitability of exoplanets using machine learning, coupled with a Flask-based web application for interactive exploration. Developed using VS Code and hosted on GitHub for version control.
 
-The project is developed using **VS Code** and hosted on **GitHub** for version control.
 
----
+## Project Description
+The system analyzes planetary and stellar parameters to determine the potential habitability of exoplanets. It leverages real-world datasets, applies machine learning techniques, and presents results via an intuitive web interface.
 
-## Project Overview
 
-The **Exoplanet Habitability Prediction System** analyzes planetary and stellar parameters to determine whether an exoplanet can potentially support life.
-
-It uses real-world datasets, applies machine learning techniques, and displays results through a simple and interactive web interface.
-
----
-
-## 🌟 Features
-
+## Key Features
 - Machine learning–based habitability prediction  
 - Habitability score calculation and planet ranking  
 - Flask REST API backend  
 - Interactive frontend using HTML, CSS, and JavaScript  
-- Data visualization using plots and charts  
+- Data visualizations with plots and charts  
 - CSV-based dataset handling  
 
 ---
 
-## 📂 Project Structure
-
+## Project Structure
 
 Habitability-of-Exoplanets/
 │
-├── plots/                      # Visualization images generated (heatmaps, charts)
-├── static/                     # Frontend assets (CSS, JS, images)
+├── plots/ # Visualization images (heatmaps, charts)
+├── static/ # Frontend assets (CSS, JS, images)
 │
-├── app.py                      # Flask backend to run the web application
-├── index.html                  # Web UI for interacting with the model
+├── app.py # Flask backend
+├── index.html # Web interface
 │
-├── training.py                 # Model training script
-├── habitability_prediction.py  # Prediction logic (uses trained model)
-├── EXO.py                      # Data preprocessing and cleaning
-├── dashboard.py                # Visualization dashboard logic
+├── training.py # Model training
+├── habitability_prediction.py # Prediction logic
+├── EXO.py # Data preprocessing and cleaning
+├── dashboard.py # Visualization dashboard logic
 │
-├── model.pkl                   # Trained ML model (pickle file)
-├── ranked_exoplanets.csv       # Output of ranked exoplanets based on habitability
-├── exoplanet_cleaned_final.csv # Cleaned dataset ready for modeling
-├── phl_exoplanet_catalog_2019.csv # Raw dataset from PHL
+├── model.pkl # Trained ML model
+├── ranked_exoplanets.csv # Ranked exoplanets based on habitability
+├── exoplanet_cleaned_final.csv # Cleaned dataset
+├── phl_exoplanet_catalog_2019.csv # Raw dataset
 │
-├── README.md                   # Project documentation and instructions
-└── License.txt                 # License information
+├── README.md # Project documentation
+└── License.txt # License information
 
+yaml
+Copy code
 
+---
 
-
-## 📊 Dataset
-
-### Sources
+## Dataset
+**Sources:**  
 - NASA Exoplanet Archive  
 - PHL Exoplanet Catalog  
 
-### Features Used
-- Planet mass  
-- Planet radius  
-- Surface temperature  
-- Orbital period  
-- Stellar mass  
-- Stellar radius  
-- Stellar temperature  
+**Features Used:**  
+- Planet mass, radius, surface temperature, orbital period  
+- Stellar mass, radius, temperature  
 
 ---
 
-## 🧠 Machine Learning Workflow
-
-1. Data collection  
-2. Data cleaning and preprocessing  
-3. Feature engineering and normalization  
-4. Model training  
-5. Habitability prediction  
-6. Exoplanet ranking  
-7. Visualization and UI display  
+## Machine Learning Workflow
+1. Data collection and preprocessing  
+2. Feature engineering and normalization  
+3. Model training  
+4. Habitability prediction  
+5. Exoplanet ranking  
+6. Visualization and UI display  
 
 ---
 
-## 🚀 How to Run the Project
-
-### Step 1: Clone the Repository
+## How to Run
+**Step 1:** Clone the repository  
 ```bash
 git clone <repository-url>
 cd Habitability-of-Exoplanets
-Step 2: Install Dependencies
-pip install -r requirements.txt
-Step 3: Train the Model (Optional)
-python training.py
-Step 4: Run the Application
-python app.py
-Step 5: Open in Browser
-Open index.html
-OR
+Step 2: Install dependencies
 
-Visit:
-http://127.0.0.1:5000
-📡 API Endpoints
+bash
+Copy code
+pip install -r requirements.txt
+Step 3: Train the model (optional)
+
+bash
+Copy code
+python training.py
+Step 4: Run the application
+
+bash
+Copy code
+python app.py
+Step 5: Open in browser
+
+Open index.html locally
+
+Or visit the live deployment: Render App
+
+API Endpoints
 Endpoint	Method	Description
 /predict	POST	Predict habitability
 /rank	GET	Get ranked exoplanets
 /health	GET	API status check
 
-🛠️ Technologies Used
-Python
-scikit-learn, pandas, numpy
-Flask
-HTML, CSS, JavaScript, Bootstrap
+Technologies Used
+Python, scikit-learn, pandas, numpy
+
+Flask, HTML, CSS, JavaScript, Bootstrap
+
 Matplotlib, Seaborn
-Git & GitHub
-VS Code
-🎯 Applications
+
+Git & GitHub, VS Code
+
+Applications
 Identifying potentially habitable exoplanets
+
 Astronomical data analysis
-Machine learning academic projects
-Full-stack data science demonstration
 
-Application Output Screenshots
-🪐 Habitability Status Pie Chart
+Academic ML projects
 
-This chart shows the distribution of exoplanets based on predicted habitability levels (High, Medium, Low).
+Full-stack data science demonstrations
 
-📊 Dashboard & Feature Visualizations
+Application Output
+Habitability Status Pie Chart: Distribution of exoplanets by predicted habitability
 
-This dashboard visualizes important planetary features and their influence on habitability prediction.
+Dashboard & Feature Visualizations: Influence of planetary features on habitability
 
-📋 Exoplanet Ranking Table
+Exoplanet Ranking Table: Ranked exoplanets by habitability score
 
-Exoplanets are ranked based on their predicted habitability scores, helping identify the most promising candidates.
+Prediction Result: Displays habitability score and status for user-provided input
 
-🔮 Habitability Prediction Result
+Deployment
+The project is deployed on Render.
 
-This screen displays the habitability score and status for a user-provided exoplanet input.
+Live URL: Exoplanet Habitability System
 
-## 🚀 Deployment
+Video Demo: OneDrive Link
 
-The project is deployed on **Render**.
+Deployment Steps:
 
-🔗 Live URL:
-https://habitability-of-exoplanets-2.onrender.com
-Video Demo: https://onedrive.live.com/?qt=allmyphotos&photosData=%2Fshare%2F7455FACDCC191830%21s7ba3f36466c141838e8686b421bd15d1%3Fithint%3Dvideo%26e%3DGx7JbM%26migratedtospo%3Dtrue&cid=7455FACDCC191830&id=7455FACDCC191830%21s7ba3f36466c141838e8686b421bd15d1&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3YvYy83NDU1ZmFjZGNjMTkxODMwL0lRQms4Nk43d1dhRFFZNkdoclFodlJYUkFaUUhGSDJZb3ItSVAxand4RzQzQ1dnP2U9R3g3SmJN&v=photos
+Push code to GitHub
 
+Connect repository to Render
 
-### Deployment Steps
-1. Pushed code to GitHub
-2. Connected GitHub repo to Render
-3. Installed dependencies using `requirements.txt`
-4. Started Flask app using Gunicorn
-5. Verified live deployment
+Install dependencies via requirements.txt
 
+Start Flask app using Gunicorn
 
-👩‍💻 Author
+Verify live deployment
+
+Author
 Rushitha Konangi
-B.Tech Final Year Student
+B.Tech, Electronics & Communication Engineering
 Infosys Springboard Program
 
-📜 License
-This project is licensed under the terms specified in License.txt.
-🙏 Acknowledgments
-Infosys Springboard for the learning opportunity
+License
+Licensed under terms specified in License.txt.
+
+Acknowledgments
+Infosys Springboard Program
+
 NASA Exoplanet Archive
+
 PHL Exoplanet Catalog
-Open-source Python and ML community
+
+Open-source Python & ML community
+
+
