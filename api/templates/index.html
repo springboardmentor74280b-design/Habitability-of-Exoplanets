@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exoplanet Habitability App</title>
+    <style>
+        /* Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #fff;
+            background-image: url("/static/hab.png");
+
+        }
+
+        /* Fullscreen background image */
+        #home {
+            background: url('static/hab.png') no-repeat center center/cover;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            
+        }
+
+        /* Top-right links */
+        .nav-links {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+        }
+
+        .nav-links a {
+            color: #00e5ff;
+            margin-left: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .nav-links a:hover {
+            color: #ffeb3b;
+        }
+
+        h1 {
+            font-size: 48px;
+            text-shadow: 2px 2px 5px black;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 20px;
+            text-shadow: 1px 1px 4px black;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            padding: 30px;
+            min-height: 100vh;
+            background: url('static/exo.png') no-repeat center center/cover;
+           
+
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* Card styling */
+        .card {
+            background: rgba(255,255,255,0.08);
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #b2dcf2;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #00e676;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover { background: #00c853; }
+
+        #result {
+            text-align: center;
+            margin-top: 15px;
+            color: #ffeb3b;
+            font-size: 18px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #b2ebf2;
+            text-align: center;
+        }
+
+        th {
+            background: #006064;
+        }
+
+        tr:nth-child(even) { background: rgba(255,255,255,0.05); }
+
+        img { max-width: 100%; border-radius: 10px; margin-top: 15px; }
+
+        .back-btn {
+            margin-top: 20px;
+            background: #00bcd4;
+        }
+        
+    </style>
+</head>
+<body>
+
+<!-- HOME PAGE  -->
+<div id="home">
+    <div class="nav-links">
+        <a href="#" onclick="showPage('predictPage')">Prediction</a>
+        <a href="#" onclick="showPage('topFeaturesPage')">Top 10 Planets</a>
+        <a href="#" onclick="showPage('plotsPage')">Visualizations</a>
+    </div>
+    <div style="background: url('{{ url_for('static', filename='\static\hab.png') }}') no-repeat center center/cover; height: 100vh;">
+      
+    </div>
+    
+</div>
+
+<!--  PREDICTION PAGE  -->
+<div id="predictPage" class="page">
+    <div class="card">
+        <h2>Predict Habitability</h2>
+        <form id="predictForm">
+            <label>Orbital Period (Days)</label>
+            <input type="number" step="any" id="P_PERIOD" required>
+
+            <label>Planet Mass</label>
+            <input type="number" step="any" id="P_MASS" required>
+
+            <label>Planet Radius</label>
+            <input type="number" step="any" id="P_RADIUS" required>
+
+            <label>Orbital Eccentricity</label>
+            <input type="number" step="any" id="P_ECCENTRICITY" required>
+
+            <label>Equilibrium Temperature</label>
+            <input type="number" step="any" id="P_TEMP_EQUIL" required>
+
+            <label>Stellar Flux</label>
+            <input type="number" step="any" id="P_FLUX" required>
+
+            <label>Stellar Temperature</label>
+            <input type="number" step="any" id="S_TEMPERATURE" required>
+
+            <label>Stellar Metallicity</label>
+            <input type="number" step="any" id="S_METALLICITY" required>
+
+            <label>Stellar Radius</label>
+            <input type="number" step="any" id="S_RADIUS" required>
+
+            <label>Stellar Mass</label>
+            <input type="number" step="any" id="S_MASS" required>
+
+            <label>Stellar Surface Gravity (log g)</label>
+            <input type="number" step="any" id="S_LOG_G" required>
+
+            <label>Stellar Distance</label>
+            <input type="number" step="any" id="S_DISTANCE" required>
+
+            <button type="submit">Predict</button>
+        </form>
+        <h3 id="result"></h3>
+        <button class="back-btn" onclick="backHome()">Back to Home</button>
+    </div>
+</div>
+
+<!--  TOP 10 FEATURES PAGE  -->
+<div id="topFeaturesPage" class="page">
+    <div class="card">
+        <h2>Top 10 Features</h2>
+        <img src="/static/top10_planets.png" alt="Top 10 Features">
+        <button class="back-btn" onclick="backHome()">Back to Home</button>
+    </div>
+</div>
+
+<!--  PLOTS PAGE  -->
+<div id="plotsPage" class="page">
+    <div class="card">
+        <h2>Visualizations</h2>
+        <img src="/static/feature_importance.png" alt="Feature Importance">
+        <img src="/static/correlation_heatmap.png" alt="Correlation Heatmap">
+        <img src="/static/confusion_matrix.png" alt="Confusion Matrix">
+        <button class="back-btn" onclick="backHome()">Back to Home</button>
+    </div>
+</div>
+
+<script>
+function showPage(pageId) {
+    // Hide all pages
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    // Hide home
+    document.getElementById('home').style.display = 'none';
+    // Show selected page
+    document.getElementById(pageId).classList.add('active');
+}
+
+function backHome() {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('home').style.display = 'flex';
+}
+
+// Prediction form
+document.getElementById("predictForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const payload = {
+        P_PERIOD: parseFloat(document.getElementById("P_PERIOD").value),
+        P_MASS: parseFloat(document.getElementById("P_MASS").value),
+        P_RADIUS: parseFloat(document.getElementById("P_RADIUS").value),
+        P_ECCENTRICITY: parseFloat(document.getElementById("P_ECCENTRICITY").value),
+        P_TEMP_EQUIL: parseFloat(document.getElementById("P_TEMP_EQUIL").value),
+        P_FLUX: parseFloat(document.getElementById("P_FLUX").value),
+        S_TEMPERATURE: parseFloat(document.getElementById("S_TEMPERATURE").value),
+        S_METALLICITY: parseFloat(document.getElementById("S_METALLICITY").value),
+        S_RADIUS: parseFloat(document.getElementById("S_RADIUS").value),
+        S_MASS: parseFloat(document.getElementById("S_MASS").value),
+        S_LOG_G: parseFloat(document.getElementById("S_LOG_G").value),
+        S_DISTANCE: parseFloat(document.getElementById("S_DISTANCE").value)
+    };
+
+    try {
+        const res = await fetch("/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.success) {
+            let message = "";
+
+            if (data.probability >= 0.9) {
+                message = " Earth-like conditions detected. You could survive here.";
+            } 
+            else if (data.probability >= 0.6) {
+                message = " Partially habitable. Survival may be possible with support.";
+            } 
+            else {
+                message = " Harsh environment. Human survival is unlikely.";
+            }
+            document.getElementById("result").innerText =
+                "Habitability: " + data.habitability +
+                " | Probability: " + data.probability + "\n" +
+                message;
+                 
+        } else {
+            document.getElementById("result").innerText =
+                "Prediction failed: " + data.error;
+        }
+    } catch (err) {
+        document.getElementById("result").innerText = "Error: " + err;
+    }
+});
+</script>
+
+</body>
+</html>
