@@ -27,21 +27,29 @@ It uses real-world datasets, applies machine learning techniques, and displays r
 
 ## 📂 Project Structure
 
+
 Habitability-of-Exoplanets/
-├── plots/ # Visualization images
-├── static/ # Frontend files
-├── app.py # Flask backend
-├── index.html # Web UI
-├── training.py # Model training
-├── habitability_prediction.py # Prediction logic
-├── EXO.py # Data processing
-├── dashboard.py # Visualizations
-├── model.pkl # Trained model
-├── ranked_exoplanets.csv # Ranked output
-├── exoplanet_cleaned_final.csv # Cleaned dataset
-├── phl_exoplanet_catalog_2019.csv # Raw dataset
-├── README.md # Documentation
-└── License.txt # License
+│
+├── plots/                      # Visualization images generated (heatmaps, charts)
+├── static/                     # Frontend assets (CSS, JS, images)
+│
+├── app.py                      # Flask backend to run the web application
+├── index.html                  # Web UI for interacting with the model
+│
+├── training.py                 # Model training script
+├── habitability_prediction.py  # Prediction logic (uses trained model)
+├── EXO.py                      # Data preprocessing and cleaning
+├── dashboard.py                # Visualization dashboard logic
+│
+├── model.pkl                   # Trained ML model (pickle file)
+├── ranked_exoplanets.csv       # Output of ranked exoplanets based on habitability
+├── exoplanet_cleaned_final.csv # Cleaned dataset ready for modeling
+├── phl_exoplanet_catalog_2019.csv # Raw dataset from PHL
+│
+├── README.md                   # Project documentation and instructions
+└── License.txt                 # License information
+
+
 
 
 ## 📊 Dataset
