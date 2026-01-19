@@ -6,7 +6,7 @@ The project is developed using **VS Code** and hosted on **GitHub** for version 
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 The **Exoplanet Habitability Prediction System** analyzes planetary and stellar parameters to determine whether an exoplanet can potentially support life.
 
@@ -134,6 +134,7 @@ The project is deployed on **Render**.
 
 🔗 Live URL:
 https://habitability-of-exoplanets-2.onrender.com
+Video Demo: Click Here
 
 ### Deployment Steps
 1. Pushed code to GitHub
