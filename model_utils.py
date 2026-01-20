@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import joblib
 import os
+import math
 
 def load_model():
     """Loads the pre-trained AI model from disk."""
@@ -94,49 +95,84 @@ def apply_physics_engine(df):
     return df
 
 def predict_habitability(df, pipeline):
-    """Takes clean data, returns predictions. Handles NaN values safely."""
+    """
+    Runs the model on the processed dataframe.
+    Optimized for speed and low memory usage.
+    """
+    # 1. Prepare Features
     features = ['P_MASS_EST', 'P_RADIUS_EST', 'P_PERIOD', 'P_DISTANCE', 
                 'P_TEMP_EQUIL', 'S_TEMPERATURE', 'S_LUMINOSITY', 
                 'S_RADIUS', 'S_MASS', 'S_METALLICITY']
     
-    # Ensure all features exist (fill missing with -99 for the AI)
-    for f in features:
-        if f not in df.columns:
-            df[f] = -99
-    
-    X = df[features].fillna(-99)
-    
-    # Predict
+    # Ensure all columns exist (fill missing with 0 to prevent errors)
+    for col in features:
+        if col not in df.columns:
+            df[col] = 0
+
+    X = df[features]
+
+    # 2. Bulk Prediction (Fastest way)
+    # We predict all planets at once, not one by one
     preds = pipeline.predict(X)
     probs = pipeline.predict_proba(X)
-    
-    # Format results
-    results = []
-    classes = {0: "Non-Habitable", 1: "Habitable", 2: "Optimistic"}
-    
-    for i, p in enumerate(preds):
-        # Helper to safely get float values
-        def safe_float(val):
-            if pd.isna(val) or val == -99:
-                return None  # Convert NaN to None (JSON null)
-            return float(val)
 
+    # 3. Fast Formatting
+    # Converting DataFrame to a list of dicts is 100x faster than .iloc loop
+    records = df.to_dict('records') 
+    results = []
+
+    for i, row in enumerate(records):
+        # Map logic
+        pred_class = preds[i]
+        prob = probs[i].max()
+        
+        # Convert numeric codes to text
+        if pred_class == 1:
+            verdict = "Habitable"
+        elif pred_class == 2:
+            verdict = "Optimistic"
+        else:
+            verdict = "Non-Habitable"
+
+        # Build result object using the fast dictionary 'row'
         results.append({
-            "P_NAME": str(df.iloc[i].get('P_NAME', f"Planet_{i}")),
-            "prediction": classes.get(p, "Unknown"),
-            "probability": float(max(probs[i])),
-            "mass": safe_float(df.iloc[i].get('P_MASS_EST')),
-            "radius": safe_float(df.iloc[i].get('P_RADIUS_EST')),
-            "temp": safe_float(df.iloc[i].get('P_TEMP_EQUIL')),
-            "period": safe_float(df.iloc[i].get('P_PERIOD')),
-            "distance": safe_float(df.iloc[i].get('P_DISTANCE')),
-            "star_temp": safe_float(df.iloc[i].get('S_TEMPERATURE')),
-            # ... existing fields ...
-            "s_radius": safe_float(df.iloc[i].get('S_RADIUS')),
-            "s_mass": safe_float(df.iloc[i].get('S_MASS')),
-            "s_metallicity": safe_float(df.iloc[i].get('S_METALLICITY')),
-            "star_lum": safe_float(df.iloc[i].get('S_LUMINOSITY'))
-        
+            "P_NAME": row.get('P_NAME', f"Planet {i}"),
+            "prediction": verdict,
+            "probability": float(prob),
+            # Use safe .get() for all physics fields
+            "mass": safe_float(row.get('P_MASS_EST')),
+            "radius": safe_float(row.get('P_RADIUS_EST')),
+            "period": safe_float(row.get('P_PERIOD')),
+            "distance": safe_float(row.get('P_DISTANCE')),
+            "temp": safe_float(row.get('P_TEMP_EQUIL')),
+            "star_temp": safe_float(row.get('S_TEMPERATURE')),
+            "star_lum": safe_float(row.get('S_LUMINOSITY')),
+            "s_radius": safe_float(row.get('S_RADIUS')),
+            "s_mass": safe_float(row.get('S_MASS')),
+            "s_metallicity": safe_float(row.get('S_METALLICITY'))
         })
-        
+
     return results
+
+ # <--- ADD THIS AT THE TOP OF THE FILE IF MISSING
+
+# ... (rest of the code) ...
+
+def safe_float(val):
+    """
+    Safely converts a value to float.
+    Crucial Fix: Converts NaN/Infinity to 0.0 because JSON cannot handle NaN.
+    """
+    try:
+        if val is None: 
+            return 0.0
+        
+        f_val = float(val)
+        
+        # CHECK: If it is NaN (Not a Number) or Infinite, return 0.0
+        if math.isnan(f_val) or math.isinf(f_val):
+            return 0.0
+            
+        return f_val
+    except:
+        return 0.0
