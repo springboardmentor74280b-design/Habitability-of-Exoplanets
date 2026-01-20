@@ -28,6 +28,8 @@ Unlike standard black-box models, this project focuses on **Explainable AI (XAI)
 * **Data Science**: Pandas, NumPy, Scikit-Learn, Imbalanced-Learn.
 * **AI/ML**: XGBoost, SHAP.
 
+VIDEO DEMO LINK : [text](https://drive.google.com/drive/folders/1zaYkQRJkYoPbslNUh1DmqZ_rOHw94xdM?usp=drive_link)
+
 ## 📂 Project Structure
 ```text
 ==============================
