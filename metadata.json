@@ -1,0 +1,5 @@
+{
+  "name": "AstroHabit",
+  "description": "An advanced exoplanet habitability analysis platform that uses AI to predict the suitability of distant worlds for life, provides rankings of known exoplanets, and visualizes astronomical data.",
+  "requestFramePermissions": []
+}
