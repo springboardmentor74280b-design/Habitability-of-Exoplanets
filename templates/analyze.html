@@ -146,14 +146,13 @@
                                         <label class="form-label">Metallicity</label>
                                         <input type="number" step="any" class="form-control" name="S_METALLICITY">
                                     </div>
-
-                                    <div class="col-12 mt-4 text-center">
-                                        <p class="text-danger small fw-bold">
-                                            <i class="fa-solid fa-circle-exclamation me-1"></i>
-                                            NOTE: If there is an unknown value, leave it empty or type null. The Physics Engine will calculate it for you.
-                                        </p>
-                                        <button type="submit" class="btn btn-success w-100 py-2">
+                                
+                                    <div class="col-12 mt-4 text-center d-flex gap-2">
+                                        <button type="submit" class="btn btn-success flex-grow-1 py-2">
                                             <i class="fa-solid fa-microscope me-2"></i>Analyze Single Planet
+                                        </button> 
+                                        <button type="button" class="btn btn-outline-secondary px-4 py-2" onclick="clearSingleForm()">
+                                            <i class="fa-solid fa-eraser me-2"></i>Clear
                                         </button>
                                     </div>
                                 </div>
@@ -535,6 +534,37 @@ async function explainRow(index) {
     } catch (error) {
         alert("Error explaining row: " + error);
     }
+}
+
+function clearSingleForm() {
+    // 1. Reset the input fields
+    // CORRECT ID: singleForm (matches your HTML)
+    const form = document.getElementById("singleForm");
+    if (form) {
+        form.reset();
+    }
+
+    // 2. Hide the Result Card
+    // CORRECT ID: singleResult (matches your HTML)
+    const resultBox = document.getElementById("singleResult");
+    if (resultBox) {
+        resultBox.classList.add("d-none"); // Hides the box
+    }
+
+    // 3. Clear the old text/bars so it looks clean next time
+    const verdict = document.getElementById("s_verdict");
+    if(verdict) verdict.innerText = "";
+    
+    const scoreText = document.getElementById("s_score_text");
+    if(scoreText) scoreText.innerText = "";
+    
+    const scoreBar = document.getElementById("s_score_bar");
+    if(scoreBar) scoreBar.style.width = "0%";
+
+    const reasons = document.getElementById("s_reasons");
+    if(reasons) reasons.innerHTML = "";
+
+    console.log("Form and Results Cleared!");
 }
 
 // --- INITIALIZATION ---
