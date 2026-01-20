@@ -1,0 +1,688 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white border-bottom-0 pt-4 pb-0">
+                    <ul class="nav nav-tabs card-header-tabs" id="analysisTabs" role="tablist">
+                        <li class="nav-item">
+                            <button class="nav-link active fw-bold" id="bulk-tab" data-bs-toggle="tab" data-bs-target="#bulk" type="button">
+                                <i class="fa-solid fa-file-csv me-2"></i>Bulk Upload
+                            </button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link fw-bold" id="single-tab" data-bs-toggle="tab" data-bs-target="#single" type="button">
+                                <i class="fa-solid fa-planet-ringed me-2"></i>Single Planet Check
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="card-body p-4">
+                    <div class="tab-content" id="analysisTabContent">
+                        
+                        <div class="tab-pane fade show active" id="bulk" role="tabpanel">
+                            <div class="text-center py-5 border rounded bg-light mb-4">
+                                <i class="fa-solid fa-cloud-arrow-up fa-3x text-secondary mb-3"></i>
+                                <h5>Upload NASA Archive Data</h5>
+                                <p class="text-muted small">Only .csv files are supported.</p>
+                                
+                                <form id="uploadForm" enctype="multipart/form-data" class="d-inline-block">
+                                    <input type="file" class="form-control mb-3" name="file" accept=".csv" required>
+                                    <button type="submit" class="btn btn-primary w-100">
+                                        <i class="fa-solid fa-rocket me-2"></i> Run AI Analysis
+                                    </button>
+                                </form>
+                            </div>
+
+                            <div id="resultsArea" class="d-none">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="text-uppercase text-muted fw-bold small mb-0">Analysis Results</h6>
+                                    
+                                    <div class="d-flex align-items-center">
+                                        <div class="form-check form-switch me-3" data-bs-toggle="tooltip" title="Off: Fast (500 Non-Habitable planets) | On: Slow (All planets)">
+                                            <input class="form-check-input" type="checkbox" id="dataLimitSwitch">
+                                            <label class="form-check-label small fw-bold text-muted" for="dataLimitSwitch">Show All Data</label>
+                                        </div>
+
+                                        <button onclick="show3DMap()" 
+                                                class="btn btn-sm btn-outline-primary shadow-sm me-2" 
+                                                style="border-color: #6f42c1; color: #6f42c1;"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                title="Explore the galaxy in 3D! Visualizes Star Temp vs Planet Radius vs Planet Temp.">
+                                            <i class="fa-solid fa-cube me-2"></i>3D Map
+                                        </button>
+                                        
+                                        <button onclick="showUserPlots()" 
+                                                class="btn btn-sm btn-outline-primary me-2" 
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                data-bs-delay='{"show":0,"hide":50}'
+                                                title="Click to see PCA, t-SNE, and Physics Charts for this specific file">
+                                            <i class="fa-solid fa-chart-pie me-2"></i>Visual Analytics
+                                        </button>
+                                        
+                                        <button onclick="downloadCSV()" 
+                                                class="btn btn-sm btn-outline-success"
+                                                data-bs-toggle="tooltip" 
+                                                data-bs-placement="top" 
+                                                title="Download the full analysis report including Habitability Scores and physical parameters.">
+                                            <i class="fa-solid fa-download me-2"></i>Export CSV
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive bg-white border rounded" style="max-height: 500px; overflow-y: auto;">
+                                    <table class="table table-hover mb-0" id="resultsTable">
+                                        <thead class="table-light sticky-top">
+                                            <tr>
+                                                <th>Planet Name</th>
+                                                <th>Verdict</th>
+                                                <th>Confidence</th>
+                                                <th>Temp (K)</th>
+                                                <th>Radius (Eu)</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="single" role="tabpanel">
+                            <form id="singleForm">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label text-muted small fw-bold">IDENTITY</label>
+                                        <input type="text" class="form-control" name="P_NAME" placeholder="Planet Name (e.g. Earth 2.0)" required>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label class="form-label">Orbital Period (Days)</label>
+                                        <input type="number" step="any" class="form-control" name="P_PERIOD">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Distance from Star (AU)</label>
+                                        <input type="number" step="any" class="form-control" name="P_DISTANCE">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Radius (Earth Units)</label>
+                                        <input type="number" step="any" class="form-control" name="P_RADIUS_EST">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Mass (Earth Units)</label>
+                                        <input type="number" step="any" class="form-control" name="P_MASS_EST">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Equilibrium Temp (K)</label>
+                                        <input type="number" step="any" class="form-control" name="P_TEMP_EQUIL">
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <label class="form-label text-muted small fw-bold">STELLAR PARENT</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Star Temperature (K)</label>
+                                        <input type="number" step="any" class="form-control" name="S_TEMPERATURE">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Star Radius (Solar Units)</label>
+                                        <input type="number" step="any" class="form-control" name="S_RADIUS">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Star Mass (Solar Units)</label>
+                                        <input type="number" step="any" class="form-control" name="S_MASS">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Star Luminosity</label>
+                                        <input type="number" step="any" class="form-control" name="S_LUMINOSITY">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Metallicity</label>
+                                        <input type="number" step="any" class="form-control" name="S_METALLICITY">
+                                    </div>
+
+                                    <div class="col-12 mt-4 text-center">
+                                        <p class="text-danger small fw-bold">
+                                            <i class="fa-solid fa-circle-exclamation me-1"></i>
+                                            NOTE: If there is an unknown value, leave it empty or type null. The Physics Engine will calculate it for you.
+                                        </p>
+                                        <button type="submit" class="btn btn-success w-100 py-2">
+                                            <i class="fa-solid fa-microscope me-2"></i>Analyze Single Planet
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            
+                            <div id="singleResult" class="mt-4 p-4 border rounded bg-light d-none">
+                                <div class="text-center">
+                                    <h3 id="s_verdict" class="fw-bold"></h3>
+                                    
+                                    <div class="my-3">
+                                        <label class="small text-muted fw-bold">HABITABILITY SCORE</label>
+                                        <div class="progress" style="height: 25px;">
+                                            <div id="s_score_bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">
+                                                <span id="s_score_text" class="fw-bold"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                
+                                <div class="row text-muted small text-center mb-3">
+                                    <div class="col-md-3">Temp: <span id="s_temp"></span> K</div>
+                                    <div class="col-md-3">Radius: <span id="s_rad"></span> Eu</div>
+                                    <div class="col-md-3">Period: <span id="s_period"></span> Days</div>
+                                    <div class="col-md-3">Star: <span id="s_star"></span> K</div>
+                                </div>
+
+                                <div class="card border-0 shadow-sm">
+                                    <div class="card-header bg-white fw-bold text-primary">
+                                        <i class="fa-solid fa-brain me-2"></i>AI Reasoning (Why?)
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush" id="s_reasons"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="vizModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold">Dataset Analytics</h5>
+                <div class="ms-auto">
+                    <button onclick="downloadPlots()" class="btn btn-sm btn-success me-2" id="dlPlotBtn" disabled>
+                        <i class="fa-solid fa-download me-2"></i>Save Charts
+                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+            </div>
+            <div class="modal-body text-center" id="vizBody">
+                <div id="vizLoading">
+                    <i class="fa-solid fa-spinner fa-spin fa-3x text-primary"></i>
+                    <p class="mt-3">Generating plots for your uploaded data...</p>
+                </div>
+                <div id="vizContent" class="d-none">
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <h6 class="text-muted">Distribution</h6>
+                            <img id="u_pie" class="img-fluid rounded border shadow-sm">
+                        </div>
+                        <div class="col-md-8 mb-4">
+                            <h6 class="text-muted">Correlation Matrix</h6>
+                            <img id="u_corr" class="img-fluid rounded border shadow-sm">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">PCA Projection</h6>
+                            <img id="u_pca" class="img-fluid rounded border">
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">t-SNE Clusters</h6>
+                            <img id="u_tsne" class="img-fluid rounded border">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="map3DModal" tabindex="-1">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" style="height: 90vh;">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold text-primary"><i class="fa-solid fa-cube me-2"></i>3D Galactic Distribution</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-0" id="map3DContainer"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="explainModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" id="q_name">Planet Analysis</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="small text-muted fw-bold">HABITABILITY SCORE</label>
+                    <div class="progress" style="height: 25px;">
+                        <div id="q_score_bar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%">
+                            <span id="q_score_text" class="fw-bold"></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <h6 class="fw-bold text-primary mt-4"><i class="fa-solid fa-brain me-2"></i>AI Reasoning</h6>
+                <ul class="list-group list-group-flush small" id="q_reasons">
+                    <li class="list-group-item text-muted"><i class="fa-solid fa-spinner fa-spin me-2"></i>Thinking...</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// --- GLOBAL VARIABLES ---
+let currentData = []; 
+
+// 1. SHOW 3D MAP FUNCTION (UPDATED for Limit Switch)
+function show3DMap() {
+    if (!currentData || currentData.length === 0) {
+        alert("No data available. Upload a file first.");
+        return;
+    }
+    
+    // CHECK THE SWITCH
+    const showAll = document.getElementById('dataLimitSwitch').checked;
+    
+    // Show Modal
+    const modal = new bootstrap.Modal(document.getElementById('map3DModal'));
+    modal.show();
+    
+    // Wait for modal to render before drawing graph
+    setTimeout(() => {
+        // PREPARE DATA TRACES
+        const traceHabitable = { x: [], y: [], z: [], mode: 'markers', type: 'scatter3d', name: 'Habitable',
+            marker: { color: '#2ecc71', size: 5, opacity: 0.9 }, text: [] };
+            
+        const traceOptimistic = { x: [], y: [], z: [], mode: 'markers', type: 'scatter3d', name: 'Optimistic',
+            marker: { color: '#d35400', size: 4, opacity: 0.7 }, text: [] };
+            
+        const traceDead = { x: [], y: [], z: [], mode: 'markers', type: 'scatter3d', name: 'Non-Habitable',
+            marker: { color: '#95a5a6', size: 2, opacity: 0.3 }, text: [] };
+
+        // LOOP DATA
+        currentData.forEach(p => {
+            // Safety Check for numbers
+            const sTemp = p.star_temp || 0;
+            const pRad = p.radius || 0;
+            const pTemp = p.temp || 0;
+            const pName = p.P_NAME || "Unknown";
+            
+            const tooltip = `Name: ${pName}<br>Temp: ${pTemp.toFixed(1)}K<br>Radius: ${pRad.toFixed(2)}Eu<br>Star: ${sTemp.toFixed(0)}K`;
+
+            if (p.prediction === 'Habitable') {
+                traceHabitable.x.push(sTemp); traceHabitable.y.push(pRad); traceHabitable.z.push(pTemp); traceHabitable.text.push(tooltip);
+            } else if (p.prediction === 'Optimistic') {
+                traceOptimistic.x.push(sTemp); traceOptimistic.y.push(pRad); traceOptimistic.z.push(pTemp); traceOptimistic.text.push(tooltip);
+            } else {
+                // LOGIC: If ShowAll is TRUE, we add everything. If FALSE, we limit to 500.
+                if(showAll || traceDead.x.length < 500) {
+                    traceDead.x.push(sTemp); traceDead.y.push(pRad); traceDead.z.push(pTemp); traceDead.text.push(tooltip);
+                }
+            }
+        });
+
+        const layout = {
+            margin: { l: 0, r: 0, b: 0, t: 0 },
+            scene: {
+                xaxis: { title: 'Star Temp (K)' },
+                yaxis: { title: 'Planet Radius (Eu)' },
+                zaxis: { title: 'Planet Temp (K)' }
+            },
+            // NEW: Move Legend to Bottom Right
+            legend: {
+                x: 1,           // Far Right
+                y: 0,           // Bottom
+                xanchor: 'right',
+                yanchor: 'bottom',
+                bgcolor: 'rgba(255, 255, 255, 0.9)', // White background
+                bordercolor: '#ccc',
+                borderwidth: 1
+            },
+            height: window.innerHeight * 0.8
+        };
+
+        Plotly.newPlot('map3DContainer', [traceDead, traceOptimistic, traceHabitable], layout);
+    }, 500);
+}
+
+// 2. DOWNLOAD CSV FUNCTION
+function downloadCSV() {
+    if (!currentData || currentData.length === 0) {
+        alert("No data to export!");
+        return;
+    }
+    const headers = [
+        "Planet Name", "Prediction", "Probability", 
+        "Planet Mass (Eu)", "Planet Radius (Eu)", "Orbital Period (Days)", "Distance (AU)", "Equilibrium Temp (K)",
+        "Star Temp (K)", "Star Luminosity", "Star Radius (Su)", "Star Mass (Su)", "Star Metallicity"
+    ];
+    
+    const csvRows = [headers.join(",")];
+    
+    currentData.forEach(row => {
+        const val = (v) => (v === null || v === undefined) ? "" : v;
+        if (row.prediction !== "Non-Habitable") {
+            const values = [
+                `"${row.P_NAME}"`, row.prediction, (row.probability * 100).toFixed(2),
+                val(row.mass), val(row.radius), val(row.period), val(row.distance), val(row.temp),
+                val(row.star_temp), val(row.star_lum), val(row.s_radius), val(row.s_mass), val(row.s_metallicity)
+            ];
+            csvRows.push(values.join(","));
+        }
+    });
+    
+    const blob = new Blob([csvRows.join("\n")], { type: "text/csv" });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "exohab_full_report.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+}
+
+// 3. SHOW USER PLOTS (UPDATED for Pie Chart & Limit Switch)
+async function showUserPlots() {
+    if (!currentData || currentData.length === 0) {
+        alert("No data available. Upload a file first.");
+        return;
+    }
+    const modal = new bootstrap.Modal(document.getElementById('vizModal'));
+    modal.show();
+    
+    // CHECK THE SWITCH
+    const showAll = document.getElementById('dataLimitSwitch').checked;
+    // backend expects 'limit_data=True' to restrict. If switch is ON (Show All), limit is FALSE.
+    const limitSetting = !showAll; 
+
+    document.getElementById('vizLoading').classList.remove('d-none');
+    document.getElementById('vizContent').classList.add('d-none');
+    document.getElementById('dlPlotBtn').disabled = true;
+    
+    try {
+        const response = await fetch('/visualize_user_data', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            // Send Data + Limit Setting
+            body: JSON.stringify({
+                data: currentData,
+                limit: limitSetting
+            })
+        });
+        const plots = await response.json();
+        if (plots.error) throw new Error(plots.error);
+        
+        // Update Images
+        document.getElementById('u_pie').src = "data:image/png;base64," + plots.pie;
+        document.getElementById('u_corr').src = "data:image/png;base64," + plots.correlation;
+        if(plots.pca) document.getElementById('u_pca').src = "data:image/png;base64," + plots.pca;
+        if(plots.tsne) document.getElementById('u_tsne').src = "data:image/png;base64," + plots.tsne;
+        
+        document.getElementById('vizLoading').classList.add('d-none');
+        document.getElementById('vizContent').classList.remove('d-none');
+        document.getElementById('dlPlotBtn').disabled = false; 
+    } catch (error) {
+        alert("Error generating plots: " + error);
+        modal.hide();
+    }
+}
+
+// 4. DOWNLOAD PLOTS FUNCTION (Updated for Pie)
+function downloadPlots() {
+    const saveImage = (imgId, fileName) => {
+        const img = document.getElementById(imgId);
+        if (img && img.src.startsWith('data:image')) {
+            const a = document.createElement('a');
+            a.href = img.src;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
+    };
+    saveImage('u_pie', 'habitability_distribution.png');
+    setTimeout(() => saveImage('u_corr', 'my_correlation_matrix.png'), 200);
+    setTimeout(() => saveImage('u_pca', 'my_pca_plot.png'), 400);
+    setTimeout(() => saveImage('u_tsne', 'my_tsne_plot.png'), 600);
+}
+
+// 5. EXPLAIN ROW (ON-DEMAND SHAP)
+async function explainRow(index) {
+    if (!currentData || !currentData[index]) return;
+    
+    const p = currentData[index];
+    
+    // 1. Show Modal & Loading State
+    const modal = new bootstrap.Modal(document.getElementById('explainModal'));
+    modal.show();
+    document.getElementById('q_name').innerText = "Analyzing " + (p.P_NAME || "Planet");
+    document.getElementById('q_reasons').innerHTML = '<li class="list-group-item text-muted"><i class="fa-solid fa-spinner fa-spin me-2"></i>Consulting AI Physics Engine...</li>';
+    document.getElementById('q_score_bar').style.width = "0%";
+    document.getElementById('q_score_text').innerText = "";
+
+    // 2. Prepare Data (Map Bulk Keys -> Single Keys)
+    // The backend expects keys like 'P_MASS_EST', but bulk data has 'mass'.
+    const payload = {
+        P_NAME: p.P_NAME,
+        P_PERIOD: p.period,
+        P_DISTANCE: p.distance,
+        P_RADIUS_EST: p.radius,
+        P_MASS_EST: p.mass,
+        P_TEMP_EQUIL: p.temp,
+        S_TEMPERATURE: p.star_temp,
+        S_RADIUS: p.s_radius,
+        S_MASS: p.s_mass,
+        S_LUMINOSITY: p.star_lum,
+        S_METALLICITY: p.s_metallicity
+    };
+
+    try {
+        // 3. Call Existing Single Planet Endpoint
+        const response = await fetch('/predict_single', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+        });
+        const result = await response.json();
+        
+        // 4. Update Modal with Real Results
+        const score = result.score;
+        const bar = document.getElementById('q_score_bar');
+        bar.style.width = score + "%";
+        document.getElementById('q_score_text').innerText = score + "/100";
+        
+        // Color Logic
+        if(score > 80) bar.className = "progress-bar bg-success progress-bar-striped progress-bar-animated";
+        else if(score > 50) bar.className = "progress-bar bg-warning progress-bar-striped progress-bar-animated";
+        else bar.className = "progress-bar bg-secondary";
+        
+        // 5. Render Reasons
+        const reasonList = document.getElementById('q_reasons');
+        reasonList.innerHTML = ''; 
+        
+        if (result.reasons && result.reasons.length > 0) {
+            result.reasons.forEach(r => {
+                const impactVal = r.impact.toFixed(3);
+                const isPositive = r.impact > 0;
+                const icon = isPositive ? '<i class="fa-solid fa-arrow-up text-success"></i>' : '<i class="fa-solid fa-arrow-down text-danger"></i>';
+                const niceName = r.feature.replace('P_', 'Planet ').replace('S_', 'Star ').replace('_EST', '').toLowerCase();
+                
+                const li = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>${icon} <span class="fw-bold text-capitalize">${niceName}</span> <span class="text-muted small">(${r.value.toFixed(2)})</span></span>
+                    <span class="badge rounded-pill ${isPositive ? 'bg-success' : 'bg-secondary'}">${impactVal}</span>
+                </li>`;
+                reasonList.innerHTML += li;
+            });
+        } else {
+            reasonList.innerHTML = '<li class="list-group-item text-muted">No specific reasoning available.</li>';
+        }
+
+    } catch (error) {
+        alert("Error explaining row: " + error);
+    }
+}
+
+// --- INITIALIZATION ---
+document.addEventListener('DOMContentLoaded', function() {
+
+    // A. Initialize Tooltips
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+      return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+
+    // B. BULK UPLOAD HANDLER
+    document.getElementById('uploadForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const btn = this.querySelector('button');
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Processing...';
+        btn.disabled = true;
+        
+        try {
+            const response = await fetch('/predict_bulk', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.error) { alert(data.error); return; }
+
+            data.sort((a, b) => {
+                const getRank = (p) => { if (p === "Habitable") return 3; if (p === "Optimistic") return 2; return 1; };
+                const rankA = getRank(a.prediction);
+                const rankB = getRank(b.prediction);
+                if (rankA !== rankB) return rankB - rankA;
+                return b.probability - a.probability;
+            });
+
+            currentData = data; 
+            const tbody = document.querySelector('#resultsTable tbody');
+            tbody.innerHTML = ''; 
+            document.getElementById('resultsArea').classList.remove('d-none');
+            
+            let count = 0;
+            data.forEach(planet => {
+                if(planet.prediction !== "Non-Habitable") {
+                    count++;
+                    const badgeColor = planet.prediction === "Habitable" ? "bg-success" : "bg-warning text-dark";
+                    const pName = planet.P_NAME || 'Unknown';
+                    const temp = planet.temp ? planet.temp.toFixed(1) : 'N/A';
+                    const radius = planet.radius ? planet.radius.toFixed(2) : 'N/A';
+                    const prob = (planet.probability * 100).toFixed(1);
+                    const row = `<tr>
+                        <td class="fw-bold text-primary">${pName}</td>
+                        <td><span class="badge ${badgeColor}">${planet.prediction}</span></td>
+                        <td>${prob}%</td>
+                        <td>${temp}</td>
+                        <td>${radius}</td>
+                        <td>
+                            <a href="#" onclick="explainRow(${count-1}); return false;" 
+                               class="text-decoration-none fw-bold" 
+                               style="color: #0d6efd;"
+                               data-bs-toggle="tooltip" 
+                               title="Click to see AI Reasoning & Habitability Score">
+                                Why?
+                            </a>
+                        </td>
+                    </tr>`;
+                    tbody.innerHTML += row;
+                }
+            });
+            // ... inside the uploadForm listener, right after the data.forEach loop ...
+            
+            // NEW: Turn on tooltips for the new table rows
+            var newTooltips = [].slice.call(document.querySelectorAll('#resultsTable [data-bs-toggle="tooltip"]'));
+            newTooltips.map(function (el) { return new bootstrap.Tooltip(el); });
+
+            // ... (rest of the code: if(count === 0) ...)
+            if(count === 0) tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">No habitable candidates found.</td></tr>';
+        } catch (error) {
+            console.error(error);
+            alert("Error analyzing file: " + error.message);
+        } finally {
+            btn.innerHTML = '<i class="fa-solid fa-rocket me-2"></i> Run AI Analysis';
+            btn.disabled = false;
+        }
+    });
+
+    // C. SINGLE PLANET HANDLER (CORRECTED & VERIFIED)
+    document.getElementById('singleForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const jsonObject = {};
+        formData.forEach((value, key) => {
+            if(value.trim() === "" || value.toLowerCase() === "null") jsonObject[key] = null;
+            else jsonObject[key] = value;
+        });
+        
+        try {
+            const response = await fetch('/predict_single', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(jsonObject)
+            });
+            const result = await response.json();
+            
+            const resBox = document.getElementById('singleResult');
+            resBox.classList.remove('d-none');
+            
+            const vEl = document.getElementById('s_verdict');
+            vEl.innerText = result.prediction;
+            vEl.className = result.prediction === "Non-Habitable" ? "fw-bold text-secondary" : (result.prediction === "Habitable" ? "fw-bold text-success" : "fw-bold text-warning");
+            
+            // SCORE UPDATE (Fixed Logic)
+            const score = result.score;
+            const bar = document.getElementById('s_score_bar');
+            bar.style.width = score + "%";
+            document.getElementById('s_score_text').innerText = score + "/100";
+            
+            if(score > 80) bar.className = "progress-bar bg-success progress-bar-striped progress-bar-animated";
+            else if(score > 50) bar.className = "progress-bar bg-warning progress-bar-striped progress-bar-animated";
+            else bar.className = "progress-bar bg-secondary";
+
+            const fmt = (val) => val ? val.toFixed(2) : "N/A";
+            document.getElementById('s_temp').innerText = fmt(result.temp);
+            document.getElementById('s_rad').innerText = fmt(result.radius);
+            document.getElementById('s_period').innerText = fmt(result.period);
+            document.getElementById('s_star').innerText = fmt(result.star_temp);
+            
+            const reasonList = document.getElementById('s_reasons');
+            reasonList.innerHTML = ''; 
+            if (result.reasons && result.reasons.length > 0) {
+                result.reasons.forEach(r => {
+                    const impactVal = r.impact.toFixed(3);
+                    const isPositive = r.impact > 0;
+                    const icon = isPositive ? '<i class="fa-solid fa-arrow-up text-success"></i>' : '<i class="fa-solid fa-arrow-down text-danger"></i>';
+                    const niceName = r.feature.replace('P_', 'Planet ').replace('S_', 'Star ').replace('_EST', '').toLowerCase();
+                    const li = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>${icon} <span class="fw-bold text-capitalize">${niceName}</span> <span class="text-muted small">(${fmt(r.value)})</span></span>
+                        <span class="badge rounded-pill ${isPositive ? 'bg-success' : 'bg-secondary'}">Impact: ${impactVal}</span>
+                    </li>`;
+                    reasonList.innerHTML += li;
+                });
+            } else {
+                reasonList.innerHTML = '<li class="list-group-item text-muted">No specific reasoning available.</li>';
+            }
+        } catch (error) {
+            alert("Error: " + error);
+        }
+    });
+
+});
+</script>
+{% endblock %}

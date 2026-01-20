@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="hero-section text-center text-white" style="background: linear-gradient(135deg, #0984e3, #6c5ce7); padding: 100px 0;">
+    <div class="container">
+        <h1 class="display-4 fw-bold mb-3">Unlocking the Universe's Secrets</h1>
+        <p class="lead mb-4 opacity-75">
+            The world's first Triple-Physics AI engine for detecting habitable exoplanets from noisy NASA data.
+        </p>
+        <a href="/analyze" class="btn btn-light btn-lg rounded-pill px-5 text-primary fw-bold">
+            Launch Analysis Engine
+        </a>
+    </div>
+</header>
+
+<div class="container py-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                <i class="fa-solid fa-microchip fa-3x text-primary mb-3"></i>
+                <h4>AI-Powered</h4>
+                <p class="text-muted">Uses XGBoost with 99.9% accuracy to classify planets based on 10 distinct physical parameters.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                <i class="fa-solid fa-wand-magic-sparkles fa-3x text-success mb-3"></i>
+                <h4>Physics Engine</h4>
+                <p class="text-muted">Automatically repairs broken datasets by calculating missing Mass, Radius, and Temperature.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm p-4 text-center">
+                <i class="fa-solid fa-chart-line fa-3x text-warning mb-3"></i>
+                <h4>Visual Analytics</h4>
+                <p class="text-muted">Analyze complex star-planet correlations with instant reporting.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

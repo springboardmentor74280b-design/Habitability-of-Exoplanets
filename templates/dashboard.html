@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h1 class="fw-bold text-primary">Global AI Intelligence Dashboard</h1>
+            <p class="lead text-muted">Visualizing the physics and decision-making logic of the ExoHab-AI Model.</p>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-lg-8">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">1. Feature Importance (How AI Decides)</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ plots.feature_importance }}" class="img-fluid rounded" alt="Feature Importance">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">2. Habitability Ratio</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ plots.distribution }}" class="img-fluid rounded" alt="Distribution Pie Chart">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-4">
+        <div class="col-12">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">3. Physics Correlation Matrix</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ plots.correlation }}" class="img-fluid rounded" style="max-height: 500px;" alt="Correlation Matrix">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">4. PCA Projection (Linearly Separable?)</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ plots.pca }}" class="img-fluid rounded" alt="PCA Plot">
+                    <p class="small text-muted mt-2">Projects 10D physics data into 2D space.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm border-0">
+                <div class="card-header bg-white fw-bold">5. t-SNE Manifold (Hidden Clusters)</div>
+                <div class="card-body text-center">
+                    <img src="data:image/png;base64,{{ plots.tsne }}" class="img-fluid rounded" alt="t-SNE Plot">
+                    <p class="small text-muted mt-2">Finds non-linear clusters of similar planets.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
