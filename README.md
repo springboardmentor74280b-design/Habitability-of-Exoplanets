@@ -1,12 +1,5 @@
 # 🪐 ExoHab SaaS: AI-Powered Exoplanet Habitability Analyzer
 
-### 👤 Project Submission
-* **Student/Developer:** Sai
-* **Course/Program:** Electronics and Communication Engineering (ECE)
-* **Project Status:** Mission Accomplished (Phase 1 & 2 Complete)
-
----
-
 ## 📖 Project Overview
 **ExoHab** is a full-stack Machine Learning application developed to analyze astronomical data from the NASA Exoplanet Archive. It utilizes advanced algorithms to predict whether an exoplanet is potentially habitable based on its physical and stellar parameters.
 
