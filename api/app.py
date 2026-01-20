@@ -39,7 +39,9 @@ def predict():
     try:
         data = request.json
 
-        X = np.array([data[f] for f in features]).reshape(1, -1)
+        #X = np.array([data[f] for f in features]).reshape(1, -1)
+        X = np.array([float(data.get(f, 0)) for f in features]).reshape(1, -1)
+
         X_scaled = scaler.transform(X)
 
         prob = model.predict_proba(X_scaled)[0][1]
