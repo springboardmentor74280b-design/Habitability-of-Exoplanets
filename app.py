@@ -1,4 +1,3 @@
-app.py
 from flask import Flask, request, jsonify
 from xgboost import XGBClassifier
 from flask_cors import CORS
@@ -36,3 +35,4 @@ def predict():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
