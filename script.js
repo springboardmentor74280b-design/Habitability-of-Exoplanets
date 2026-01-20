@@ -1,43 +1,34 @@
-async function predict() {
-    const inputs = document.querySelectorAll("#predict input");
-    const data = {};
+function predict() {
+    const resultBox = document.getElementById("result");
+    const text = document.getElementById("prediction-text");
 
-    inputs.forEach(input => {
-        data[input.placeholder] = parseFloat(input.value);
-    });
+    // Dummy prediction logic (frontend only)
+    const outcome = Math.random() > 0.5 ? "Habitable 🌍" : "Non-Habitable ❌";
 
-    const res = await fetch("http://127.0.0.1:5000/predict", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-    });
-
-    const result = await res.json();
-    document.getElementById("prediction-text").innerText =
-        result.class_name;
-
-    document.getElementById("result").classList.remove("hidden");
+    text.innerText = outcome;
+    resultBox.classList.remove("hidden");
 }
 
-async function uploadCSV() {
-    const file = document.getElementById("csvFile").files[0];
-    const formData = new FormData();
-    formData.append("file", file);
+function resetPrediction() {
+    document.getElementById("result").classList.add("hidden");
+}
 
-    const res = await fetch("http://127.0.0.1:5000/upload", {
-        method: "POST",
-        body: formData
-    });
+function previewCSV() {
+    const fileInput = document.getElementById("csvFile");
+    const preview = document.getElementById("csv-preview");
 
-    const data = await res.json();
+    if (!fileInput.files.length) {
+        alert("Please select a CSV file");
+        return;
+    }
 
-    document.getElementById("metrics").innerHTML = `
-      Accuracy: ${data.accuracy}<br>
-      Precision: ${data.precision}<br>
-      Recall: ${data.recall}<br>
-      F1 Score: ${data.f1}
-    `;
+    const file = fileInput.files[0];
+    const reader = new FileReader();
 
-    document.getElementById("confusion").src = data.confusion_img;
-    document.getElementById("tsne").src = data.tsne_img;
+    reader.onload = function (e) {
+        const rows = e.target.result.split("\n").slice(0, 6);
+        preview.innerHTML = "<pre>" + rows.join("\n") + "</pre>";
+    };
+
+    reader.readAsText(file);
 }
