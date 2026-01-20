@@ -99,7 +99,13 @@ def predict_habitability(df, pipeline):
     Runs the model on the processed dataframe.
     Optimized for speed and low memory usage.
     """
-    # 1. Prepare Features
+    # ---------------------------------------------------------
+    # 1. RUN THE ENGINE (THIS IS THE CRITICAL FIX)
+    # This maps 'koi_prad' -> 'P_RADIUS_EST' before prediction starts
+    # ---------------------------------------------------------
+    df = apply_physics_engine(df) 
+    
+    # 2. Prepare Features
     features = ['P_MASS_EST', 'P_RADIUS_EST', 'P_PERIOD', 'P_DISTANCE', 
                 'P_TEMP_EQUIL', 'S_TEMPERATURE', 'S_LUMINOSITY', 
                 'S_RADIUS', 'S_MASS', 'S_METALLICITY']
@@ -111,18 +117,15 @@ def predict_habitability(df, pipeline):
 
     X = df[features]
 
-    # 2. Bulk Prediction (Fastest way)
-    # We predict all planets at once, not one by one
+    # 3. Bulk Prediction (Fastest way)
     preds = pipeline.predict(X)
     probs = pipeline.predict_proba(X)
 
-    # 3. Fast Formatting
-    # Converting DataFrame to a list of dicts is 100x faster than .iloc loop
+    # 4. Fast Formatting
     records = df.to_dict('records') 
     results = []
 
     for i, row in enumerate(records):
-        # Map logic
         pred_class = preds[i]
         prob = probs[i].max()
         
@@ -134,12 +137,11 @@ def predict_habitability(df, pipeline):
         else:
             verdict = "Non-Habitable"
 
-        # Build result object using the fast dictionary 'row'
+        # Build result object
         results.append({
             "P_NAME": row.get('P_NAME', f"Planet {i}"),
             "prediction": verdict,
             "probability": float(prob),
-            # Use safe .get() for all physics fields
             "mass": safe_float(row.get('P_MASS_EST')),
             "radius": safe_float(row.get('P_RADIUS_EST')),
             "period": safe_float(row.get('P_PERIOD')),
@@ -153,10 +155,6 @@ def predict_habitability(df, pipeline):
         })
 
     return results
-
- # <--- ADD THIS AT THE TOP OF THE FILE IF MISSING
-
-# ... (rest of the code) ...
 
 def safe_float(val):
     """
