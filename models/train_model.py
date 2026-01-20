@@ -7,6 +7,10 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -127,6 +131,41 @@ cm_path = os.path.join(MODEL_DIR, "confusion_matrix.png")
 plt.savefig(cm_path, dpi=150)
 plt.close()
 print(" Confusion matrix saved:", cm_path)
+
+
+# ================= OTHER MODELS CONFUSION MATRICES ================= #
+
+models = {
+    "Logistic Regression": LogisticRegression(max_iter=1000),
+    "KNN": KNeighborsClassifier(n_neighbors=7),
+    "SVM": SVC(probability=True),
+    "Random Forest": RandomForestClassifier(n_estimators=200, random_state=42)
+}
+
+for name, clf in models.items():
+    clf.fit(X_train_bal, y_train_bal)
+    y_pred_model = clf.predict(X_test_scaled)
+
+    cm = confusion_matrix(y_test, y_pred_model)
+
+    plt.figure(figsize=(6,5))
+    sns.heatmap(
+        cm, annot=True, fmt="d", cmap="Blues",
+        xticklabels=["Non-Habitable", "Habitable"],
+        yticklabels=["Non-Habitable", "Habitable"]
+    )
+    plt.xlabel("Predicted Label")
+    plt.ylabel("True Label")
+    plt.title(f"{name} Confusion Matrix")
+    plt.tight_layout()
+
+    save_path = os.path.join(MODEL_DIR, f"{name.lower().replace(' ', '_')}_cm.png")
+    plt.savefig(save_path, dpi=150)
+    plt.close()
+
+    print(f" {name} confusion matrix saved:", save_path)
+
+
 
 
 # ---------------- PCA PLOT ---------------- #

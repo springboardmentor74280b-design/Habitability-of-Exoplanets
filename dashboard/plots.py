@@ -87,7 +87,46 @@ def top_habitable_planets():
     plt.close()
     print(" Top 10 planets saved:", save_path)
     
-    
+
+
+
+# ================= UNIVARIATE PLOTS ================= #
+def univariate_plots():
+    for col in FEATURES:
+        plt.figure(figsize=(6,4))
+        sns.histplot(df[col], kde=True, bins=30, color="skyblue")
+        plt.title(f"Univariate Distribution of {col}")
+        plt.tight_layout()
+        path = os.path.join(STATIC_DIR, f"univariate_{col}.png")
+        plt.savefig(path, dpi=150)
+        plt.close()
+    print(" Univariate plots saved")
+
+
+# ================= BIVARIATE PLOTS ================= #
+def bivariate_plots():
+    for col in FEATURES:
+        plt.figure(figsize=(6,4))
+        sns.boxplot(x="P_HABITABLE", y=col, data=df, palette="Set2")
+        plt.title(f"{col} vs Habitability")
+        plt.tight_layout()
+        path = os.path.join(STATIC_DIR, f"bivariate_{col}.png")
+        plt.savefig(path, dpi=150)
+        plt.close()
+    print(" Bivariate plots saved")
+
+
+# ================= OUTLIER PLOTS (SIDE BY SIDE) ================= #
+def outlier_plots():
+    plt.figure(figsize=(18,10))
+    df[FEATURES].boxplot(rot=90)
+    plt.title("Outlier Detection using Boxplots (IQR Method)")
+    plt.tight_layout()
+    path = os.path.join(STATIC_DIR, "outliers_boxplot.png")
+    plt.savefig(path, dpi=150)
+    plt.close()
+    print(" Outlier plots saved")
+
 
 # ---------------- RUN ALL ---------------- #
 if __name__ == "__main__":
@@ -95,5 +134,8 @@ if __name__ == "__main__":
     habitability_distribution()
     correlation_heatmap()
     top_habitable_planets()
+    univariate_plots()
+    bivariate_plots()
+    outlier_plots()
     print("\n All plots generated successfully in static/ folder")
 
