@@ -29,6 +29,7 @@ Unlike standard black-box models, this project focuses on **Explainable AI (XAI)
 * **AI/ML**: XGBoost, SHAP.
 
 VIDEO DEMO LINK : [text](https://drive.google.com/drive/folders/1zaYkQRJkYoPbslNUh1DmqZ_rOHw94xdM?usp=drive_link)
+DEPLOYED EXOHABAI LINK : [text](https://exohabai.onrender.com/)
 
 ## 📂 Project Structure
 ```text
