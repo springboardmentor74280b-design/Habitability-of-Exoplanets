@@ -26,7 +26,6 @@
 - [Visualization](#visualization)  
 - [Deployment](#deployment)  
 - [Challenges Faced](#challenges-faced)  
-- [Future Work](#future-work)  
 - [References](#references)  
 
 ---
@@ -191,3 +190,4 @@ Interactive and user-friendly interface:
 3. Kepler Exoplanet Dataset: [https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset](https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset)  
 4. Chawla, N., et al., "SMOTE: Synthetic Minority Over-sampling Technique," Journal of Artificial Intelligence Research, 2002.  
 5. XGBoost Documentation: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/) 
+
