@@ -96,6 +96,20 @@
 
                         <div class="tab-pane fade" id="single" role="tabpanel">
                             <form id="singleForm">
+                                <div class="col-12 mb-4">
+                                    <label class="form-label fw-bold text-primary"><i class="fa-solid fa-bolt me-2"></i>Quick Fill (Demo Mode)</label>
+                                    <select class="form-select border-primary shadow-sm" id="planetPreset" onchange="fillPreset()">
+                                        <option value="" selected>Select a Planet...</option>
+                                        <option value="earth"> Earth (Reference - Habitable)</option>
+                                        <option value="mars"> Mars (Too Small/Cold - Non-Habitable)</option>
+                                        <option value="jupiter"> Jupiter (Gas Giant - Non-Habitable)</option>
+                                        
+                                        <option value="kepler186"> Kepler-186f (The Classic Habitable)</option>
+                                        <option value="proxima"> Proxima Centauri b (Optimistic/Borderline)</option>
+                                        <option value="trappist"> TRAPPIST-1e (High Probability)</option>
+                                        <option value="kepler452"> Kepler-452b (Optimistic Super-Earth)</option>
+                                    </select>
+                                </div>
                                 <div class="row g-3">
                                     <div class="col-12">
                                         <label class="form-label text-muted small fw-bold">IDENTITY</label>
@@ -570,6 +584,131 @@ function clearSingleForm() {
     if(reasons) reasons.innerHTML = "";
 
     console.log("Form and Results Cleared!");
+}
+
+function fillPreset() {
+    const select = document.getElementById('planetPreset');
+    const choice = select.value;
+    
+    // Extended Planet Data
+    const data = {
+        'earth': {
+            name: 'Earth (Reference)',
+            period: 365.25,
+            distance: 1.00,
+            radius: 1.00,
+            mass: 1.00,
+            temp: 255, 
+            s_temp: 5778,
+            s_rad: 1.00,
+            s_mass: 1.00,
+            s_lum: 0.0,
+            s_met: 0.0
+        },
+        'mars': {
+            name: 'Mars',
+            period: 687.0,
+            distance: 1.52,
+            radius: 0.53,
+            mass: 0.11,
+            temp: 210,
+            s_temp: 5778,
+            s_rad: 1.00,
+            s_mass: 1.00,
+            s_lum: 0.0,
+            s_met: 0.0
+        },
+        'jupiter': {
+            name: 'Jupiter',
+            period: 4333,
+            distance: 5.20,
+            radius: 11.2,
+            mass: 317.8,
+            temp: 110,
+            s_temp: 5778,
+            s_rad: 1.00,
+            s_mass: 1.00,
+            s_lum: 0.0,
+            s_met: 0.0
+        },
+        'kepler186': {
+            name: 'Kepler-186f',
+            period: 129.9,
+            distance: 0.43, 
+            radius: 1.17,
+            mass: 1.40, 
+            temp: 188, 
+            s_temp: 3755, 
+            s_rad: 0.47,
+            s_mass: 0.48,
+            s_lum: -1.26, 
+            s_met: -0.26
+        },
+        'proxima': {
+            name: 'Proxima Centauri b',
+            period: 11.2,
+            distance: 0.048, // Very close!
+            radius: 1.08,    // Earth-like size
+            mass: 1.27,
+            temp: 234,       // Similar to Earth's Eq Temp
+            s_temp: 3042,    // Red Dwarf (Cool star)
+            s_rad: 0.14,
+            s_mass: 0.12,
+            s_lum: -2.9,     // Very dim
+            s_met: 0.2
+        },
+        'trappist': {
+            name: 'TRAPPIST-1e',
+            period: 6.1,
+            distance: 0.028, 
+            radius: 0.92,    // Slightly smaller than Earth
+            mass: 0.69,
+            temp: 251,       // Almost exactly Earth's Eq Temp
+            s_temp: 2566,    // Ultra-cool dwarf
+            s_rad: 0.12,
+            s_mass: 0.09,
+            s_lum: -3.2,
+            s_met: 0.04
+        },
+        'kepler452': {
+            name: 'Kepler-452b',
+            period: 384.8,
+            distance: 1.04,  // Almost exactly 1 AU
+            radius: 1.63,    // Super Earth
+            mass: 3.29,      // Heavy gravity
+            temp: 265,       // Slightly hotter than Earth
+            s_temp: 5757,    // G-type star (Like Sun)
+            s_rad: 1.11,
+            s_mass: 1.04,
+            s_lum: 0.2,      // Brighter than Sun
+            s_met: 0.21
+        }
+    };
+
+    const p = data[choice];
+
+    if (p) {
+        // Helper to set value by Name attribute
+        const setVal = (name, val) => {
+            const el = document.getElementsByName(name)[0];
+            if(el) el.value = val;
+        };
+
+        setVal('P_NAME', p.name);
+        setVal('P_PERIOD', p.period);
+        setVal('P_DISTANCE', p.distance);
+        setVal('P_RADIUS_EST', p.radius);
+        setVal('P_MASS_EST', p.mass);
+        setVal('P_TEMP_EQUIL', p.temp);
+        
+        setVal('S_TEMPERATURE', p.s_temp);
+        setVal('S_RADIUS', p.s_rad);
+        setVal('S_MASS', p.s_mass);
+        setVal('S_LUMINOSITY', p.s_lum);
+        setVal('S_METALLICITY', p.s_met);
+        
+        console.log("Auto-filled form with: " + p.name);
+    }
 }
 
 // --- INITIALIZATION ---
