@@ -46,7 +46,7 @@ Follow these steps to run ExoHab locally:
 
 **1. Clone the Repository**
 ```bash
-git clone [https://github.com/springboardmentor74280b-design/Habitability-of-Exoplanets/tree/maneeswara_venkata_sai](https://github.com/springboardmentor74280b-design/Habitability-of-Exoplanets/tree/maneeswara_venkata_sai) 
+git clone https://github.com/springboardmentor74280b-design/Habitability-of-Exoplanets/tree/maneeswara_venkata_sai
 
 cd exo_hab-ai
 
@@ -147,6 +147,3 @@ exo_hab-ai/
 * **Procedural Planet Generation:** Using Three.js to render planet textures based on atmospheric composition.
 * **User Accounts:** Implementing Google OAuth for saving personalized analysis reports.
 
-```
-
-```
