@@ -30,6 +30,20 @@ To generate a prediction, the model requires the following 9 attributes:
 8.  **S_TEMPERATURE:** Stellar Temperature (Kelvin)
 9.  **S_LUMINOSITY:** Stellar Luminosity (Solar Luminosity)
 
+## 📂 Project Structure
+```text
+ExoHabitAI/
+├── app.py                 # Main Flask application
+├── exo_model.pkl          # Trained ML Model
+├── requirements.txt       # Python dependencies
+├── Procfile               # Deployment command
+├── static/
+│   ├── style.css          # Stylesheet
+│   ├── script.js          # Charting & logic
+│   └── bg.png             # Background image
+└── templates/
+    └── index.html         # Frontend HTML
+```
 
 ## ⚙️ Installation & Setup
 
@@ -60,26 +74,5 @@ To generate a prediction, the model requires the following 9 attributes:
     The app will start at `http://localhost:5000`.
 
 ## ☁️ Deployment
+Project is deployed on Render.
 
-This project includes a `Procfile` configured for Gunicorn.
-
-**Steps for Render.com:**
-1.  Push your code to a GitHub repository.
-2.  Go to Render and create a new **Web Service**.
-3.  Connect your repository.
-4.  Render will automatically detect the `requirements.txt` and `Procfile`.
-5.  Click **Deploy**.
-
-## 📂 Project Structure
-```text
-ExoHabitAI/
-├── app.py                 # Main Flask application
-├── exo_model.pkl          # Trained ML Model
-├── requirements.txt       # Python dependencies
-├── Procfile               # Deployment command
-├── static/
-│   ├── style.css          # Stylesheet
-│   ├── script.js          # Charting & logic
-│   └── bg.png             # Background image
-└── templates/
-    └── index.html         # Frontend HTML
