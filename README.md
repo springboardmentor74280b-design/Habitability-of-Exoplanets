@@ -41,14 +41,22 @@ Unlike standard "black-box" models, this project focuses on **Explainable AI (XA
 | **AI / ML**      | XGBoost, SHAP, Joblib |
 | **Deployment**   | Render / Gunicorn |
 
-### ⚙️ Installation & Setup
+### ⚡ Quick Start (Automated Setup)
+For a hassle-free installation, we have included an automated installation script. This will handle cloning, virtual environment creation, and dependency installation for you.
+
+1. **Download** the `installer.py` file to your desired folder.
+2. **Run the script:**
+   ```bash
+   python installer.py
+
+### ⚙️ Manual Installation & Setup
 Follow these steps to run ExoHab locally:
 
 **1. Clone the Repository**
 ```bash
-git clone https://github.com/springboardmentor74280b-design/Habitability-of-Exoplanets/tree/maneeswara_venkata_sai
+git clone -b maneeswara_venkata_sai https://github.com/springboardmentor74280b-design/Habitability-of-Exoplanets.git
 
-cd exo_hab-ai
+cd Habitability-of-Exoplanets
 
 ```
 
