@@ -147,7 +147,7 @@ Interactive and user-friendly interface:
 ---
 
 ## 🔗 Backend API
-- Implemented using **Flask** 
+- Implemented using **Flask**   
 
 ---
 
@@ -155,13 +155,17 @@ Interactive and user-friendly interface:
 - Confusion matrices for all models  
 - PCA and t-SNE 2D projections  
 
-**Plots:**  
+<details>
+<summary>View Plots</summary>
+
 ![Balanced RF Confusion Matrix](balanced_rf_confusion_matrix.png)  
 ![PCA 2D with SMOTE](pca_2d_smote.png)  
 ![SVM Confusion Matrix](svm_confusion_matrix.png)  
 ![t-SNE 2D with SMOTE](tsne_2d_smote.png)  
 ![XGBoost Confusion Matrix](xgboost_confusion_matrix.png)  
 ![XGBoost SMOTE Confusion Matrix](xgboost_smote_confusion_matrix.png)  
+
+</details>
 
 ---
 
@@ -186,5 +190,4 @@ Interactive and user-friendly interface:
 2. NASA Exoplanet Archive: [https://exoplanetarchive.ipac.caltech.edu/](https://exoplanetarchive.ipac.caltech.edu/)  
 3. Kepler Exoplanet Dataset: [https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset](https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset)  
 4. Chawla, N., et al., "SMOTE: Synthetic Minority Over-sampling Technique," Journal of Artificial Intelligence Research, 2002.  
-5. XGBoost Documentation: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/)  
-6. Exoplanet ML Review: [https://www.kdnuggets.com/2020/01/exoplanet-hunting-machine-learning.html](https://www.kdnuggets.com/2020/01/exoplanet-hunting-machine-learning.html)  
+5. XGBoost Documentation: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/) 
