@@ -6,27 +6,16 @@
 ![Netlify](https://img.shields.io/badge/Netlify-Frontend-green)
 ![Render](https://img.shields.io/badge/Render-Backend-red)
 
-**Author:** Mohite Swaraj Sanjay  
-**Email:** swarajmohite16@gmail.com  
-**Live Demo:** [https://exoplanet-swaraj.netlify.app](https://exoplanet-swaraj.netlify.app)  
+- **Author:** Mohite Swaraj Sanjay  
+- **Email:** swarajmohite16@gmail.com  
+- **Live Demo:** [https://exoplanet-swaraj.netlify.app](https://exoplanet-swaraj.netlify.app)
 
 ---
+  
+- **Project Report:** [Swaraj_Infosys_Report.pdf](./Swaraj_Infosys_Report.pdf)
+- **Project Presentation (PPT):** [Swaraj_Infosys_PPT.pdf](./Swaraj_Infosys_PPT.pdf)
+- **Project Learning Document:** [Project learning document.pdf](./Project%20learning%20document.pdf)
 
-## 📋 Table of Contents
-- [Project Overview](#project-overview)  
-- [Motivation](#motivation)  
-- [Tech Stack](#tech-stack)  
-- [Datasets](#datasets)  
-- [Features](#features)  
-- [Methodology](#methodology)  
-- [Machine Learning Models](#machine-learning-models)  
-- [Handling Imbalanced Data](#handling-imbalanced-data)  
-- [Frontend UI](#frontend-ui)  
-- [Backend API](#backend-api)  
-- [Visualization](#visualization)  
-- [Deployment](#deployment)  
-- [Challenges Faced](#challenges-faced)  
-- [References](#references)  
 
 ---
 
@@ -190,4 +179,5 @@ Interactive and user-friendly interface:
 3. Kepler Exoplanet Dataset: [https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset](https://www.kaggle.com/datasets/gauravkumar2525/kepler-exoplanet-dataset)  
 4. Chawla, N., et al., "SMOTE: Synthetic Minority Over-sampling Technique," Journal of Artificial Intelligence Research, 2002.  
 5. XGBoost Documentation: [https://xgboost.readthedocs.io/](https://xgboost.readthedocs.io/) 
+
 
