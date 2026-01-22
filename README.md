@@ -3,7 +3,8 @@
 ✨ *Curious to know which planets could support life?*  
 🚀 **Visit the live project here:** 👉 https://exohabitatai-git-vercel-set-up-c544f0-poojareddy2809s-projects.vercel.app?_vercel_share=7dvOAR8m1b63j8UMChtjkoGSNTWFpbsl
 ---
-
+understand project with ppt : https://prezi.com/view/Coz72fVcAv9XmvFEBNlU/
+---
 ## 📌 Project Description
 ExoHabitAI is a machine learning project that predicts whether an exoplanet is potentially habitable using its physical, orbital, and host star properties. The project analyzes large astronomical datasets to identify planets that may support life.
 
