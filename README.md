@@ -187,6 +187,31 @@ habitability/
 
 ---
 
+## 🔧 Installation and Setup
+
+Follow the steps below to set up and run the project locally
+
+---
+
+### 1️⃣ Clone the Repository
+### 2️⃣ Create and Activate Virtual Environment
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+py models/preprocessing.py
+py models/feature_engineering.py
+py models/prepare_ml_data.py
+py models/train_model.py
+py dashboard/dashboard.py
+py dashboard/plots.py
+py -m api.app
+```
+### Render App Link:
+https://habitability-of-exoplanets-62ko.onrender.com/#
+
+
+
 ## 👨‍🏫 Internship Details
 - **Program:** Infosys Springboard Internship  
 - **Mentor:** Bhanu Prakash Sir  
@@ -207,6 +232,10 @@ habitability/
 - Integration with live NASA Exoplanet Archive
 - Improved visualization dashboard
 - Mobile-responsive UI
+
+---
+## Contributor:
+Middepaka Megha Chandrika
 
 ---
 
