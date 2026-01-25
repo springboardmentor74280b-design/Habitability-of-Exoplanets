@@ -1,4 +1,4 @@
-# 🌍 Exoplanet Habitability Prediction using XGBoost
+# 🌍 Exoplanet Habitability Prediction using Machine Learning
 
 ## 📌 Project Overview
 This project predicts the **habitability of exoplanets** using machine learning techniques by analyzing planetary and stellar characteristics. Since the original dataset does not contain a predefined *habitability* label, a **custom habitability target variable was engineered** based on scientifically relevant planetary features.
