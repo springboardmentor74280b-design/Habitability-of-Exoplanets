@@ -146,7 +146,8 @@ https://habitability-of-exoplanets-2.onrender.com/
 
 Video Demo
 
-https://onedrive.live.com/?qt=allmyphotos&photosData=%2Fshare%2F7455FACDCC191830%21s7ba3f36466c141838e8686b421bd15d1%3Fithint%3Dvideo%26e%3DGx7JbM
+https://drive.google.com/file/d/1xSef4R7Tmefq47l8qmDitQPlWcYB2J10/view
+
 
 Deployment Steps
 
